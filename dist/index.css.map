@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/index.css"],
+  "sourcesContent": [".swiper-button-prev::after,\n.swiper-button-next::after {\n  content: none !important; /* D\u00E9sactive les fl\u00E8ches */\n  margin: none !important;\n}\n\n/* swiper linear loop */\n.swiper .swiper-wrapper {\n  transition-timing-function: linear;\n  margin:0!important;\n}\n"],
+  "mappings": ";AAAA,CAAC,kBAAkB;AACnB,CAAC,kBAAkB;AACjB,WAAS;AACT,UAAQ;AACV;AAGA,CAAC,OAAO,CAAC;AACP,8BAA4B;AAC5B,UAAO;AACT;",
+  "names": []
+}

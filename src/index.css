@@ -1,0 +1,11 @@
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  content: none !important; /* Désactive les flèches */
+  margin: none !important;
+}
+
+/* swiper linear loop */
+.swiper .swiper-wrapper {
+  transition-timing-function: linear;
+  margin: 0 !important;
+}
