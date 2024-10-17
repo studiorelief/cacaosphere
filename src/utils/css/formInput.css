@@ -1,0 +1,14 @@
+.w-input:focus,
+.w-select:focus {
+  border-color: var(--border-color--border-primary);
+}
+
+.form_input:hover + .form_label {
+  color: var(--text-color--text-secondary);
+}
+
+.form_input + .form_label.is-active {
+  transform: translate(-0.5rem, -1.5rem);
+  font-size: 0.75rem;
+  color: var(--text-color--text-primary);
+}

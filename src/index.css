@@ -1,3 +1,39 @@
+@import './utils/css/cardsTeam.css';
+@import './utils/css/formInput.css';
+
+/*
+! Navbar
+*/
+
+@container (max-width: 82.5rem) {
+  .nav_desktop {
+    display: none;
+  }
+  .nav_mobile {
+    display: block;
+  }
+}
+
+.nav_dropdown:hover .nav_dropdown-icon-wrapper {
+  transform: rotate(180deg);
+}
+
+/*
+! Button
+*/
+
+.button.is-text:hover {
+  color: var(--text-color--text-secondary);
+}
+
+.button.is-text:hover .icon-1x1-small {
+  transform: translateX(0.25rem);
+}
+
+/*
+! slider 
+*/
+
 .swiper-button-prev::after,
 .swiper-button-next::after {
   content: none !important; /* Désactive les flèches */
@@ -8,4 +44,25 @@
 .swiper .swiper-wrapper {
   transition-timing-function: linear;
   margin: 0 !important;
+}
+
+/*
+! Catalogue
+*/
+
+/* Remove box-shadow bleu */
+.w-checkbox-input--inputType-custom.w--redirected-focus {
+  box-shadow: none !important;
+}
+
+/*
+! Quick fix
+*/
+
+.w-richtext em {
+  background-color: red;
+}
+
+.fil-ariane_link w--current {
+  color: var(--text-color--text-alternate) !important;
 }

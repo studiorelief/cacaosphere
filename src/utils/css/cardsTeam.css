@@ -1,0 +1,35 @@
+/*
+! Cards Team
+*/
+
+.team-cards_content-hover {
+  opacity: 0;
+  transition: all 0.2s ease-out;
+}
+
+#team-cards_line-h {
+  transition: opacity 0.2s ease-out;
+}
+
+/* hover state */
+
+.team-cards_component:hover .team-cards_content-hover {
+  opacity: 1;
+  height: 5rem;
+}
+
+.team-cards_component:hover #team-cards_line-h {
+  opacity: 0;
+}
+
+.team-cards_component:hover .team-cards_profil-pic {
+  -webkit-mask-image: url(https://cdn.prod.website-files.com/66e04155269edc7816a48e13/6706aab9aa16b3a46ede3922_shape-mask-alternate.svg);
+  -webkit-mask-size: 20rem;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: top;
+  -webkit-mask-position: 1.5rem 1.5rem;
+  mask-image: url(https://cdn.prod.website-files.com/66e04155269edc7816a48e13/6706aab9aa16b3a46ede3922_shape-mask-alternate.svg);
+  mask-size: 20rem;
+  mask-repeat: no-repeat;
+  mask-position: 1.5rem 1.5rem;
+}
