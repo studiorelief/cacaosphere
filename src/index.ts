@@ -5,13 +5,17 @@ import { catalogueCat } from '$utils/catalogue/catalogueFilter';
 import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
+import { showSiret } from '$utils/contact/formInput';
 import { loadScript } from '$utils/global/loadScript';
 import {
+  swiperBlogAutres,
+  swiperChronologie,
   swiperHpPicture,
   swiperHpTestimonial,
   swiperProduitsAutres,
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
+
 window.Webflow ||= [];
 window.Webflow.push(() => {
   /* global */
@@ -32,6 +36,8 @@ window.Webflow.push(() => {
 
   swiperHpPicture();
   swiperHpTestimonial();
+  swiperBlogAutres();
+  swiperChronologie();
 
   /* contact form */
   formInputLabels();
@@ -50,5 +56,9 @@ window.Webflow.push(() => {
   if (window.location.pathname.startsWith('/catalogue-produit')) {
     swiperProduitsAutres();
     swiperProduitsCarousel();
+  }
+
+  if (window.location.pathname === '/contact') {
+    showSiret();
   }
 });
