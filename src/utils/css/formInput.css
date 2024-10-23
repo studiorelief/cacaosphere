@@ -12,3 +12,32 @@
   font-size: 0.75rem;
   color: var(--text-color--text-primary);
 }
+
+/* ! SIRET Trigger */
+
+/* custom radio button */
+.form_radio:hover .form_radio-icon {
+  border-color: var(--border-color--border-brand);
+  background-color: var(--background-color--background-white);
+}
+
+.form_radio:hover .form_radio-icon.w--redirected-checked {
+  border-color: var(--background-color--background-primary);
+  background-color: var(--background-color--background-brand);
+}
+
+/* custom checkbox */
+
+.fs_checkbox-1_field:hover .fs_checkbox-1_button {
+  border-color: var(--border-color--border-brand);
+  background-color: var(--background-color--background-white);
+}
+
+.fs_checkbox-1_field.is-active-inputactive:hover > .fs_checkbox-1_button {
+  border-color: var(--background-color--background-primary);
+  background-color: var(--background-color--background-brand);
+}
+
+.fs_checkbox-1_field.is-active-inputactive {
+  background-color: var(--background-color--background-white);
+}

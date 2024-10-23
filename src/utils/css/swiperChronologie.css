@@ -1,0 +1,18 @@
+.swiper.is-chronologie,
+.swiper-wrapper.swiper.is-chronologie {
+  overflow: visible;
+}
+
+.a-propos_chronologie_navigation.is-left.swiper-button-disabled,
+.a-propos_chronologie_navigation.is-right.swiper-button-disabled {
+  opacity: 0.5;
+}
+
+.swiper-slide.is-chronologie .a-propos_chronologie_icon {
+  scale: 1;
+  transition: scale 0.2s ease-out;
+}
+
+.swiper-slide.is-chronologie:hover .a-propos_chronologie_icon {
+  scale: 1.5;
+}

@@ -33,3 +33,30 @@ export function formInputLabels() {
     });
   });
 }
+
+export function showSiret() {
+  const siretTriggers = document.querySelectorAll('#project_siret-on, #sample_siret-on');
+  const siretContainers = document.querySelectorAll('#project_siret-input, #sample_siret-input');
+
+  siretTriggers.forEach((siretTrigger, index) => {
+    const siretContainer = siretContainers[index];
+
+    if (siretTrigger && siretContainer) {
+      const { parentElement } = siretTrigger;
+
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            if (parentElement?.classList.contains('is-active-inputactive')) {
+              (siretContainer as HTMLElement).style.display = 'flex';
+            } else {
+              (siretContainer as HTMLElement).style.display = 'none';
+            }
+          }
+        });
+      });
+
+      observer.observe(parentElement as Node, { attributes: true });
+    }
+  });
+}

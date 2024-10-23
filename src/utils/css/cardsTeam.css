@@ -13,9 +13,16 @@
 
 /* hover state */
 
+.team-cards_component .team-cards_content-main {
+  transition: transform 0.2s ease-out;
+}
+
 .team-cards_component:hover .team-cards_content-hover {
   opacity: 1;
-  height: 5rem;
+}
+
+.team-cards_component:hover .team-cards_content-main {
+  transform: translateY(-5rem);
 }
 
 .team-cards_component:hover #team-cards_line-h {
