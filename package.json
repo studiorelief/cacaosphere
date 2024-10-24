@@ -54,8 +54,10 @@
   },
   "dependencies": {
     "@finsweet/ts-utils": "^0.40.0",
+    "@types/mapbox-gl": "^3.4.0",
     "gsap": "^3.12.5",
     "jquery": "^3.7.1",
+    "mapbox-gl": "^3.7.0",
     "swiper": "^11.1.14"
   },
   "engines": {

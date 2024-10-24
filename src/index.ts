@@ -15,6 +15,7 @@ import {
   swiperProduitsAutres,
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
+import { initializeMap } from '$utils/map/map';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -38,6 +39,9 @@ window.Webflow.push(() => {
   swiperHpTestimonial();
   swiperBlogAutres();
   swiperChronologie();
+
+  /* map */
+  initializeMap();
 
   /* contact form */
   formInputLabels();
