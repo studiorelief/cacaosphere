@@ -68,3 +68,13 @@
 .fil-ariane_link w--current {
   color: var(--text-color--text-alternate) !important;
 }
+
+/*
+! Terroir Small card | EJ
+*/
+
+@media (max-width: 1326px) and (min-width: 992px) {
+  .hp_terroirs_small-card {
+    width: 42.5rem;
+  }
+}
