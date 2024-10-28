@@ -6,6 +6,7 @@ import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
 import { showSiret } from '$utils/contact/formInput';
+import { setupBlogCardHoverEffect } from '$utils/global/gsap';
 import { loadScript } from '$utils/global/loadScript';
 import {
   swiperBlogAutres,
@@ -39,6 +40,9 @@ window.Webflow.push(() => {
   swiperHpTestimonial();
   swiperBlogAutres();
   swiperChronologie();
+
+  /* gsap */
+  setupBlogCardHoverEffect();
 
   /* map */
   initializeMap();

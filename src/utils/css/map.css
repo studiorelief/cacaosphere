@@ -1,3 +1,6 @@
+/*
+! Icons | EJ
+*/
 .star {
   background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22 fill=%22none%22%3E%3Cpath d=%22M0.17621 19.7478C0.334799 22.2773 0.770919 27.6525 0.969156 30.0238L1.76211 30.8143C3.348 30.8143 9.8898 32 16.0351 32C22.1805 32 27.1364 30.0238 29.7134 26.0715C32.2905 22.1192 32.0923 14.2146 31.894 12.0408C31.7355 10.3018 31.1672 3.93858 30.9029 0.97434C30.4403 0.974341 27.5328 0.81625 19.6034 0.18388C9.69156 -0.606583 5.72683 1.17196 2.55505 5.12427C-0.616735 9.07658 -0.0220263 16.586 0.17621 19.7478Z%22 fill=%22%2392348E%22/%3E%3Cpath d=%22M16 24V8%22 stroke=%22%23FFFAF7%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M8 16L24 16%22 stroke=%22%23FFFAF7%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/%3E%3C/svg%3E');
   background-size: cover;
@@ -16,6 +19,10 @@
   cursor: pointer;
 }
 
+/*
+! Popup | EJ
+*/
+
 .map_popup_describe-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -33,4 +40,28 @@
   border-bottom-right-radius: 1.5rem;
   border-top-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
+}
+
+/*
+! Responsive | EJ
+*/
+
+@media screen and (max-width: 800px) {
+  .map_left-col {
+    width: 30%;
+  }
+
+  .map_right-col {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 992px) {
+  .map_left-col {
+    width: 20%;
+  }
+
+  .map_right-col {
+    width: 80%;
+  }
 }
