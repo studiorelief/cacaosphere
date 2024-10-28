@@ -96,6 +96,22 @@
   border-top-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
 }
+@media screen and (max-width: 800px) {
+  .map_left-col {
+    width: 30%;
+  }
+  .map_right-col {
+    width: 70%;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 992px) {
+  .map_left-col {
+    width: 20%;
+  }
+  .map_right-col {
+    width: 80%;
+  }
+}
 
 /* src/utils/css/swiperChronologie.css */
 .swiper.is-chronologie,
@@ -149,6 +165,11 @@
 }
 .fil-ariane_link w--current {
   color: var(--text-color--text-alternate) !important;
+}
+@media (max-width: 1326px) and (min-width: 992px) {
+  .hp_terroirs_small-card {
+    width: 42.5rem;
+  }
 }
 
 /* node_modules/.pnpm/swiper@11.1.14/node_modules/swiper/swiper-bundle.css */
