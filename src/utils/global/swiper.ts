@@ -30,8 +30,8 @@ export function swiperHpTestimonial() {
       forceToAxis: true,
     },
     navigation: {
-      nextEl: '.swiper-btn-next',
-      prevEl: '.swiper-btn-prev',
+      nextEl: '.hp-testimonials_btn-next',
+      prevEl: '.hp-testimonials_btn-prev',
     },
   });
 }
