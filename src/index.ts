@@ -17,6 +17,7 @@ import {
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
 import { initializeMap } from '$utils/map/map';
+import { initBlogSections, mirrorBlogSearch } from '$utils/ressources/blog';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -45,7 +46,13 @@ window.Webflow.push(() => {
   setupBlogCardHoverEffect();
 
   /* map */
-  initializeMap();
+  if (window.location.href.includes('cooperatives')) {
+    initializeMap();
+  }
+
+  /* blog */
+  initBlogSections();
+  mirrorBlogSearch();
 
   /* contact form */
   formInputLabels();

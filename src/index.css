@@ -78,3 +78,13 @@
     width: 42.5rem;
   }
 }
+/*
+! HomePage Testimonial | EJ
+*/
+
+.swiper.is-hp-testimonials {
+  overflow: visible !important;
+}
+.swiper-slide.is-hp-testimonials {
+  margin-right: 250px !important;
+}
