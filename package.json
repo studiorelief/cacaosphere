@@ -41,6 +41,7 @@
     "@finsweet/tsconfig": "^1.3.4",
     "@playwright/test": "^1.42.1",
     "@types/jquery": "^3.5.30",
+    "@types/mapbox-gl": "^3.4.0",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "cross-env": "^7.0.3",
@@ -54,7 +55,6 @@
   },
   "dependencies": {
     "@finsweet/ts-utils": "^0.40.0",
-    "@types/mapbox-gl": "^3.4.0",
     "gsap": "^3.12.5",
     "jquery": "^3.7.1",
     "mapbox-gl": "^3.7.0",

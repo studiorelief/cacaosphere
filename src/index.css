@@ -88,3 +88,29 @@
 .swiper-slide.is-hp-testimonials {
   margin-right: 250px !important;
 }
+
+/*
+! Blog - Search bar | EJ
+*/
+/* Styles au hover */
+.header_v3_blog-field:hover {
+  box-shadow: 0px 0px 0px 1px rgba(204, 94, 86, 0.5); /* Box shadow au hover */
+}
+
+.header_v3_blog-field:hover::placeholder {
+  color: #9d362f; /* Couleur du placeholder au hover */
+}
+
+/* Styles au focus */
+.header_v3_blog-field:focus {
+  box-shadow: 0px 0px 0px 2px rgba(204, 94, 86, 0.5); /* Box shadow au focus */
+}
+
+.header_v3_blog-field:focus::placeholder {
+  color: #cc5e56; /* Couleur du placeholder au focus */
+}
+
+/* Style pour le placeholder avec un poids de 500 */
+.header_v3_blog-field.placeholder-active {
+  font-weight: 500; /* Poids de police modifié lorsque l'utilisateur saisit */
+}
