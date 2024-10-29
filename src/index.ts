@@ -6,7 +6,12 @@ import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
 import { showSiret } from '$utils/contact/formInput';
-import { setupBlogCardHoverEffect } from '$utils/global/gsap';
+import {
+  animateBigCardRessource,
+  animateLastNewsCard,
+  animateSmallCardRessource,
+  animateSpecialSelectCard,
+} from '$utils/global/gsap';
 import { loadScript } from '$utils/global/loadScript';
 import {
   swiperBlogAutres,
@@ -17,7 +22,12 @@ import {
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
 import { initializeMap } from '$utils/map/map';
-import { initBlogSections, mirrorBlogSearch } from '$utils/ressources/blog';
+import {
+  checkURLParameter,
+  initBlogSections,
+  mirrorBlogSearch,
+  searchBarPlaceholderStyling,
+} from '$utils/ressources/blog';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -43,7 +53,10 @@ window.Webflow.push(() => {
   swiperChronologie();
 
   /* gsap */
-  setupBlogCardHoverEffect();
+  animateBigCardRessource();
+  animateSmallCardRessource();
+  animateLastNewsCard();
+  animateSpecialSelectCard();
 
   /* map */
   if (window.location.href.includes('cooperatives')) {
@@ -53,6 +66,8 @@ window.Webflow.push(() => {
   /* blog */
   initBlogSections();
   mirrorBlogSearch();
+  checkURLParameter();
+  searchBarPlaceholderStyling();
 
   /* contact form */
   formInputLabels();
