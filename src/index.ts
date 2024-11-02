@@ -6,12 +6,6 @@ import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
 import { showSiret } from '$utils/contact/formInput';
-import {
-  animateBigCardRessource,
-  animateLastNewsCard,
-  animateSmallCardRessource,
-  animateSpecialSelectCard,
-} from '$utils/global/gsap';
 import { loadScript } from '$utils/global/loadScript';
 import {
   swiperBlogAutres,
@@ -23,11 +17,20 @@ import {
 } from '$utils/global/swiper';
 import { initializeMap } from '$utils/map/map';
 import {
+  animateBigCardRessource,
+  animateLastNewsCard,
+  animateSmallCardRessource,
+  animateSpecialSelectCard,
   checkURLParameter,
   initBlogSections,
   mirrorBlogSearch,
   searchBarPlaceholderStyling,
 } from '$utils/ressources/blog';
+import {
+  animateHubActionCardHover,
+  setupTestimonialToggle,
+  toggleTestimonialVisibility,
+} from '$utils/ressources/hub';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -63,6 +66,12 @@ window.Webflow.push(() => {
     initializeMap();
   }
 
+  /* map */
+  if (window.location.href.includes('hub')) {
+    animateHubActionCardHover();
+    setupTestimonialToggle();
+    toggleTestimonialVisibility();
+  }
   /* blog */
   initBlogSections();
   mirrorBlogSearch();
