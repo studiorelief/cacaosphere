@@ -7,6 +7,7 @@ import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
 import { showSiret } from '$utils/contact/formInput';
 import { loadScript } from '$utils/global/loadScript';
+import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils/global/navbar';
 import {
   swiperBlogAutres,
   swiperChronologie,
@@ -50,6 +51,14 @@ window.Webflow.push(() => {
     }, 250),
   ]);
 
+  /* navbar */
+  if (window.innerWidth > 992) {
+    navScroll();
+    setCurrentDropdownState();
+    setCurrentRowFromURL();
+  }
+
+  /* swiper */
   swiperHpPicture();
   swiperHpTestimonial();
   swiperBlogAutres();

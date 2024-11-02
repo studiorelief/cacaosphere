@@ -16,6 +16,10 @@
   }
 }
 
+.nav_link-wrapper.is-toggle.is-current {
+  color: var(--text-color--text-brand);
+}
+
 .nav_dropdown:hover .nav_dropdown-icon-wrapper {
   transform: rotate(180deg);
 }
@@ -113,4 +117,14 @@
 /* Style pour le placeholder avec un poids de 500 */
 .header_v3_blog-field.placeholder-active {
   font-weight: 500; /* Poids de police modifié lorsque l'utilisateur saisit */
+}
+
+/* 
+! Header Responsive 
+*/
+
+@media (min-width: 2000px) {
+  .section_header_v2 .header_v2_background-wrapper {
+    margin-right: 25%;
+  }
 }
