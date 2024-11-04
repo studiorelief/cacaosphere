@@ -28,7 +28,14 @@ import {
   searchBarPlaceholderStyling,
 } from '$utils/ressources/blog';
 import {
+  filterFAQCategories,
+  linkCategoryAnimations,
+  mirrorFaqSearch,
+} from '$utils/ressources/faq';
+import {
   animateHubActionCardHover,
+  animateHubGalerieCardHover,
+  applyMarginToHubGalerie,
   setupTestimonialToggle,
   toggleTestimonialVisibility,
 } from '$utils/ressources/hub';
@@ -75,12 +82,22 @@ window.Webflow.push(() => {
     initializeMap();
   }
 
-  /* map */
+  /* hub */
   if (window.location.href.includes('hub')) {
     animateHubActionCardHover();
     setupTestimonialToggle();
     toggleTestimonialVisibility();
+    animateHubGalerieCardHover();
+    applyMarginToHubGalerie();
   }
+
+  /* faq */
+  if (window.location.href.includes('faq')) {
+    filterFAQCategories();
+    mirrorFaqSearch();
+    linkCategoryAnimations();
+  }
+
   /* blog */
   initBlogSections();
   mirrorBlogSearch();

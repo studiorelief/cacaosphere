@@ -101,5 +101,48 @@ export function toggleTestimonialVisibility() {
   });
 }
 
-// Appelle la fonction lorsque le DOM est complètement chargé
-document.addEventListener('DOMContentLoaded', toggleTestimonialVisibility);
+// Fonction pour gérer l'animation de hover sur .hub_galerie_card
+export const animateHubGalerieCardHover = (): void => {
+  // Sélectionne toutes les cartes de la galerie
+  const cards = document.querySelectorAll('.hub_galerie_card');
+
+  // Applique les animations de hover et mouseleave à chaque carte
+  cards.forEach((card) => {
+    const textContent = card.querySelector<HTMLElement>('.hub_galerie_text-content');
+
+    // Vérifie si l'élément de texte existe dans la carte avant de continuer
+    if (textContent) {
+      // Définit l'animation pour le hover
+      card.addEventListener('mouseenter', () => {
+        gsap.to(textContent, {
+          top: '0rem', // Position finale au hover
+          backgroundColor: 'rgba(90, 31, 27, 0.8)', // Couleur de fond avec 80% d'opacité
+          duration: 0.5, // Durée de la transition
+          ease: 'power3.out', // Effet de fluidité
+        });
+      });
+
+      // Définit l'animation pour le mouseleave
+      card.addEventListener('mouseleave', () => {
+        gsap.to(textContent, {
+          top: '15rem', // Position initiale au mouseleave
+          backgroundColor: 'transparent', // Couleur de fond initiale
+          duration: 0.5, // Durée de la transition
+          ease: 'power3.out', // Effet de fluidité
+        });
+      });
+    }
+  });
+};
+
+export function applyMarginToHubGalerie() {
+  // Sélectionne tous les éléments avec la classe '.hub_galerie_card'
+  const cards = document.querySelectorAll('.hub_galerie_card');
+
+  // Applique un margin-top de 2.5rem à chaque deuxième élément
+  cards.forEach((card, index) => {
+    if (index % 2 === 0) {
+      (card as HTMLElement).style.marginTop = '2.5rem';
+    }
+  });
+}
