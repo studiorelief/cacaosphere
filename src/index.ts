@@ -6,12 +6,6 @@ import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
 import { showSiret } from '$utils/contact/formInput';
-import {
-  animateBigCardRessource,
-  animateLastNewsCard,
-  animateSmallCardRessource,
-  animateSpecialSelectCard,
-} from '$utils/global/gsap';
 import { loadScript } from '$utils/global/loadScript';
 import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils/global/navbar';
 import {
@@ -24,11 +18,27 @@ import {
 } from '$utils/global/swiper';
 import { initializeMap } from '$utils/map/map';
 import {
+  animateBigCardRessource,
+  animateLastNewsCard,
+  animateSmallCardRessource,
+  animateSpecialSelectCard,
   checkURLParameter,
   initBlogSections,
   mirrorBlogSearch,
   searchBarPlaceholderStyling,
 } from '$utils/ressources/blog';
+import {
+  filterFAQCategories,
+  linkCategoryAnimations,
+  mirrorFaqSearch,
+} from '$utils/ressources/faq';
+import {
+  animateHubActionCardHover,
+  animateHubGalerieCardHover,
+  applyMarginToHubGalerie,
+  setupTestimonialToggle,
+  toggleTestimonialVisibility,
+} from '$utils/ressources/hub';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -70,6 +80,22 @@ window.Webflow.push(() => {
   /* map */
   if (window.location.href.includes('cooperatives')) {
     initializeMap();
+  }
+
+  /* hub */
+  if (window.location.href.includes('hub')) {
+    animateHubActionCardHover();
+    setupTestimonialToggle();
+    toggleTestimonialVisibility();
+    animateHubGalerieCardHover();
+    applyMarginToHubGalerie();
+  }
+
+  /* faq */
+  if (window.location.href.includes('faq')) {
+    filterFAQCategories();
+    mirrorFaqSearch();
+    linkCategoryAnimations();
   }
 
   /* blog */
