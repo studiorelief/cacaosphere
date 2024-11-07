@@ -24,6 +24,10 @@
   transform: rotate(180deg);
 }
 
+.nav_link-wrapper.is-toggle.is-current {
+  color: var(--text-color--text-brand);
+}
+
 /*
 ! Button
 */
@@ -50,6 +54,13 @@
 .swiper .swiper-wrapper {
   transition-timing-function: linear;
   margin: 0 !important;
+}
+
+/* swiper swiperProduitsAutres */
+.produit_m-categorie_swiper-btn-next.swiper-button-disabled,
+.produit_m-categorie_swiper-btn-prev.swiper-button-disabled {
+  opacity: 0.1;
+  pointer-events: none;
 }
 
 /*

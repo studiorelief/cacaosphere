@@ -47,17 +47,21 @@ document.addEventListener('change', (event) => {
 export function catalogueFilterCount() {
   // Function to count and update for a specific attribute
   function countAndUpdate(attribute: string) {
+    const collectionList = document.querySelector('.catalogue_content_collection-list.is-filter');
+    if (!collectionList) return;
+
     const labelElements = document.querySelectorAll(`[filter-count-label="${attribute}"]`);
 
     labelElements.forEach((labelElement) => {
       const labelText = labelElement.textContent?.trim();
 
       if (labelText) {
-        const elements = document.querySelectorAll(`[filter-count="${attribute}"]`);
+        const elements = collectionList.querySelectorAll(`[filter-count="${attribute}"]`);
 
         let count = 0;
         elements.forEach((element) => {
           if (element.textContent && element.textContent.trim() === labelText) {
+            // si erreur dans le count check ici
             count += 1;
           }
         });
