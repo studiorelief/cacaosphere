@@ -9,12 +9,13 @@ export function swiperHpPicture() {
     slidesPerView: 1,
     speed: 400,
     loop: true,
-    mousewheel: {
-      forceToAxis: true,
-    },
+    autoHeight: true,
+    // mousewheel: {
+    //   forceToAxis: true,
+    // },
     navigation: {
-      nextEl: '.hp-slider-picture_button-next',
-      prevEl: '.hp-slider-picture_button-prev',
+      nextEl: '.hp_slider-picture_button-next',
+      prevEl: '.hp_slider-picture_button-prev',
     },
   });
 }
@@ -30,8 +31,8 @@ export function swiperHpTestimonial() {
       forceToAxis: true,
     },
     navigation: {
-      nextEl: '.hp-testimonials_btn-next',
-      prevEl: '.hp-testimonials_btn-prev',
+      nextEl: '.hp_testimonials_btn-next',
+      prevEl: '.hp_testimonials_btn-prev',
     },
   });
 }
@@ -59,14 +60,15 @@ export function swiperProduitsCarousel() {
     slidesPerView: 1,
     spaceBetween: 32,
     speed: 400,
+    loop: true,
     effect: 'fade',
     mousewheel: {
       forceToAxis: true,
     },
-    // navigation: {
-    //   nextEl: '.swiper-btn-next',
-    //   prevEl: '.swiper-btn-prev',
-    // },
+    navigation: {
+      nextEl: '.produit_hero_swiper-btn-next',
+      prevEl: '.produit_hero_swiper-btn-prev',
+    },
   });
 }
 
@@ -76,15 +78,15 @@ export function swiperProduitsAutres() {
     slidesPerView: 3,
     spaceBetween: 32,
     speed: 400,
-    loop: true,
+    loop: false,
     effect: 'slide',
     mousewheel: {
       forceToAxis: true,
     },
-    // navigation: {
-    //   nextEl: '.swiper-btn-next',
-    //   prevEl: '.swiper-btn-prev',
-    // },
+    navigation: {
+      nextEl: '.produit_m-categorie_swiper-btn-prev',
+      prevEl: '.produit_m-categorie_swiper-btn-next',
+    },
   });
 }
 

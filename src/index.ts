@@ -2,6 +2,7 @@ import './index.css';
 
 import { catalogueFilterCount, updateCatalogueCount } from '$utils/catalogue/catalogueCount';
 import { catalogueCat } from '$utils/catalogue/catalogueFilter';
+import { catalogueLoader } from '$utils/catalogue/catalogueLoader';
 import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
@@ -11,12 +12,14 @@ import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils
 import {
   swiperBlogAutres,
   swiperChronologie,
-  swiperHpPicture,
+  // swiperHpPicture,
   swiperHpTestimonial,
   swiperProduitsAutres,
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
 import { initializeMap } from '$utils/map/map';
+import { catalogueFormTrigger } from '$utils/produits/catalogueFormTrigger';
+import { catalogueSameCat } from '$utils/produits/catalogueSameCat';
 import {
   animateBigCardRessource,
   animateLastNewsCard,
@@ -66,7 +69,10 @@ window.Webflow.push(() => {
   }
 
   /* swiper */
-  swiperHpPicture();
+  /*
+    TODO: A reactiver car crée issue côté CMS si section empty
+    */
+  // swiperHpPicture();
   swiperHpTestimonial();
   swiperBlogAutres();
   swiperChronologie();
@@ -76,6 +82,11 @@ window.Webflow.push(() => {
   animateSmallCardRessource();
   animateLastNewsCard();
   animateSpecialSelectCard();
+
+  /* cache 
+  -> produit to contact form
+  */
+  catalogueFormTrigger();
 
   /* map */
   if (window.location.href.includes('cooperatives')) {
@@ -109,18 +120,45 @@ window.Webflow.push(() => {
 
   /* Catalogue */
   if (window.location.pathname === '/catalogue') {
+    // main category logic
     catalogueCat();
-    updateCatalogueCount();
+    // quick fix
     fixCatalogueCategoriesText();
-    setTimeout(() => {
+    hideEmptyLabelsContainer();
+    // filter system
+    /*
+    TODO: réduire le load jQuery des nested collection 
+    */
+    // Wait for jQuery to load nested collections
+    const loadPromise = new Promise((resolve) => {
+      setTimeout(resolve, 3500);
+    });
+
+    loadPromise.then(() => {
       catalogueFilterCount();
-      hideEmptyLabelsContainer();
-    }, 3500);
+      updateCatalogueCount();
+      catalogueLoader();
+    });
+    // setTimeout(() => {
+    //   catalogueFilterCount();
+    //   updateCatalogueCount();
+    //   catalogueLoader();
+    // }, 3500);
   }
 
   if (window.location.pathname.startsWith('/catalogue-produit')) {
+    /*
+    TODO: recheck this logic -> remove setTimeout
+    ?: Local code break on other pages than noir 65 -> alert for checking -> Trouver la source -> Sûrement swiper & nb item mais pourquoi ?
+    */
+
+    catalogueSameCat();
+    // alert('test');
+    // OK
     swiperProduitsAutres();
     swiperProduitsCarousel();
+    fixCatalogueCategoriesText();
+    hideEmptyLabelsContainer();
   }
 
   if (window.location.pathname === '/contact') {
