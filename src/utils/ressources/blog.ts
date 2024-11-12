@@ -7,9 +7,10 @@ gsap.registerPlugin(ScrollTrigger);
 export function checkURLParameter() {
   const sectionState1 = document.querySelector<HTMLElement>('.section_state1');
   const sectionState2 = document.querySelector<HTMLElement>('.section_state2');
+  const sectionGuideEtude = document.querySelector<HTMLElement>('.section_blog_guide');
   const sectionState3 = document.querySelector<HTMLElement>('.section_state3');
 
-  if (!sectionState1 || !sectionState2 || !sectionState3) {
+  if (!sectionState1 || !sectionState2 || !sectionState3 || !sectionGuideEtude) {
     return;
   }
 
@@ -17,6 +18,7 @@ export function checkURLParameter() {
   if (urlParams.has('tous-les-articles')) {
     sectionState1.style.display = 'none';
     sectionState2.style.display = 'block';
+    sectionGuideEtude.style.display = 'none';
     sectionState3.style.display = 'none';
   }
 }
@@ -99,28 +101,27 @@ export function searchBarPlaceholderStyling() {
 
 //Big card ressources
 export function animateBigCardRessource() {
-  // Sélectionne l'élément à animer
   const element = document.querySelector('.ressources_bc-top-row');
 
   if (element) {
-    // Applique un border-radius initial
+    // Apply an initial border-radius
     gsap.set(element, {
-      borderRadius: '0.5rem 5rem 0.5rem 5rem', // Exemple de valeur (modifie-la selon le screen)
+      borderRadius: '0.5rem 5rem 0.5rem 5rem',
     });
 
-    // Animation au hover pour inverser le border-radius
+    // Hover animation to invert the border-radius
     element.addEventListener('mouseenter', () => {
       gsap.to(element, {
         duration: 0.3, // Durée de l'animation
-        borderRadius: '5rem 0.5rem 5rem 0.5rem', // Valeur inversée
-        ease: 'power2.out', // Type d'animation
+        borderRadius: '5rem 0.5rem 5rem 0.5rem', // Inverted value
+        ease: 'power2.out',
       });
     });
 
     element.addEventListener('mouseleave', () => {
       gsap.to(element, {
         duration: 0.3,
-        borderRadius: '0.5rem 5rem 0.5rem 5rem', // Retour à la valeur initiale
+        borderRadius: '0.5rem 5rem 0.5rem 5rem', // Return to initial value
         ease: 'power2.out',
       });
     });
@@ -129,7 +130,6 @@ export function animateBigCardRessource() {
 
 //small card ressources
 export function animateSmallCardRessource() {
-  // Sélectionne tous les conteneurs
   const elements = document.querySelectorAll('.hp_blog_sc-img-container');
 
   elements.forEach((element) => {
@@ -137,14 +137,14 @@ export function animateSmallCardRessource() {
     const hoverImage = element.querySelector('.hp_blog_sc-img-hover');
 
     if (frontImage && hoverImage) {
-      // Applique un border-radius initial et l’opacité initiale
+      // Applies an initial border-radius and initial opacity
       gsap.set(element, {
         borderRadius: '0.5rem 2.5rem 0.5rem 2.5rem',
       });
       gsap.set(frontImage, { opacity: 1 });
       gsap.set(hoverImage, { opacity: 0, position: 'absolute', top: 0, left: 0 });
 
-      // Animation au hover pour inverser le border-radius et changer l'opacité
+      // Hover animation to invert the border-radius and change the opacity
       element.addEventListener('mouseenter', () => {
         gsap.to(element, {
           duration: 0.3,
@@ -170,55 +170,51 @@ export function animateSmallCardRessource() {
 
 // Last news card
 export function animateLastNewsCard() {
-  // Sélection de tous les éléments à animer
   const elements = document.querySelectorAll('.blog_last-posts_img-wrapper');
 
   elements.forEach((element) => {
-    // Sélection de l'overlay
+    // Overlay selection
     const overlay = element.querySelector('.blog_last-posts_overlay');
-
-    // Applique un border-radius initial et enlève tout filtre
     gsap.set(element, {
       borderRadius: '2.5rem 0.5rem 2.5rem 0.5rem',
-      borderColor: '#f4dddc', // Couleur de bordure initiale
-      borderWidth: '1px', // Assurez-vous que la bordure est visible
-      borderStyle: 'solid', // Assurez-vous que la bordure est de type solide
+      borderColor: '#f4dddc',
+      borderWidth: '1px', // Make sure the border is visible
+      borderStyle: 'solid', // Make sure the border is solid type
     });
 
-    // Assure que l'overlay est caché au départ
+    // Make sure the overlay is hidden initially
     if (overlay) {
       gsap.set(overlay, { opacity: 0 });
     }
 
-    // Animation au hover pour inverser le border-radius et appliquer l'opacité de l'overlay
+    // Hover animation to invert the border-radius and apply the overlay opacity
     element.addEventListener('mouseenter', () => {
       gsap.to(element, {
-        duration: 0.3, // Durée de l'animation
-        borderRadius: '0.5rem 2.5rem 0.5rem 2.5rem', // Border-radius inversé
-        borderColor: '#5a1f1b', // Couleur de bordure au survol
+        duration: 0.3,
+        borderRadius: '0.5rem 2.5rem 0.5rem 2.5rem',
         ease: 'power2.out',
       });
       if (overlay) {
         gsap.to(overlay, {
           duration: 0.3,
-          opacity: 0.2, // Opacité à 20%
+          opacity: 0.2,
           ease: 'power2.out',
         });
       }
     });
 
-    // Retour à l'état initial lorsque le survol cesse
+    // Return to initial state when hovering stops
     element.addEventListener('mouseleave', () => {
       gsap.to(element, {
         duration: 0.3,
         borderRadius: '2.5rem 0.5rem 2.5rem 0.5rem',
-        borderColor: '#f4dddc', // Couleur de bordure initiale
+        borderColor: '#f4dddc',
         ease: 'power2.out',
       });
       if (overlay) {
         gsap.to(overlay, {
           duration: 0.3,
-          opacity: 0, // Retour à l'opacité 0%
+          opacity: 0,
           ease: 'power2.out',
         });
       }
@@ -228,36 +224,67 @@ export function animateLastNewsCard() {
 
 // Special Select Card
 export function animateSpecialSelectCard() {
-  // Sélection de tous les éléments à animer
   const elements = document.querySelectorAll('.blog_last-posts_selection-img-wrapper');
 
   elements.forEach((element) => {
-    // Applique un border-radius initial et enlève tout filtre
+    // Custom border style
     gsap.set(element, {
       borderRadius: '1rem 0.25rem 1rem 0.25rem',
-      borderColor: '#f4dddc', // Couleur de bordure initiale
-      borderWidth: '1px', // Assurez-vous que la bordure est visible
-      borderStyle: 'solid', // Assurez-vous que la bordure est de type solide
+      borderColor: '#f4dddc',
+      borderWidth: '1px',
+      borderStyle: 'solid', // Make sure the border is solid type
     });
 
-    // Animation au hover pour inverser le border-radius et appliquer l'opacité de l'overlay
+    // Hover animation to invert the border-radius and apply the overlay opacity
     element.addEventListener('mouseenter', () => {
       gsap.to(element, {
-        duration: 0.3, // Durée de l'animation
-        borderRadius: '0.25rem 1rem 0.25rem 1rem', // Border-radius inversé
-        borderColor: '#5a1f1b', // Couleur de bordure au survol
+        duration: 0.3,
+        borderRadius: '0.25rem 1rem 0.25rem 1rem',
+        borderColor: '#5a1f1b',
         ease: 'power2.out',
       });
     });
 
-    // Retour à l'état initial lorsque le survol cesse
+    // Return to initial state when hovering stops
     element.addEventListener('mouseleave', () => {
       gsap.to(element, {
         duration: 0.3,
         borderRadius: '1rem 0.25rem 1rem 0.25rem',
-        borderColor: '#f4dddc', // Couleur de bordure initiale
+        borderColor: '#f4dddc',
         ease: 'power2.out',
       });
     });
   });
+}
+
+// Show 'Guide & Études de cas' when user comes from hub page
+export function handleGuideFilter() {
+  if (window.location.href.includes('?category=Guide')) {
+    // Gestion des sections
+    const sectionState1 = document.querySelector('.section_state1') as HTMLElement;
+    const sectionState2 = document.querySelector('.section_state2') as HTMLElement;
+    const sectionsBlogMenu = document.querySelectorAll('.section_blog_menu');
+    const sectionAllArticles = document.querySelector('.section_blog_all-articles') as HTMLElement;
+    const sectionGuideEtude = document.querySelector('.section_blog_guide') as HTMLElement;
+    const sectionState3 = document.querySelector('.section_state3') as HTMLElement;
+
+    if (
+      sectionState1 &&
+      sectionState2 &&
+      sectionState3 &&
+      sectionsBlogMenu &&
+      sectionAllArticles &&
+      sectionGuideEtude
+    ) {
+      sectionState1.style.display = 'none';
+      sectionState2.style.display = 'block';
+      // Utiliser forEach pour appliquer le style à tous les éléments avec la même classe
+      sectionsBlogMenu.forEach((menu) => {
+        (menu as HTMLElement).style.display = 'none';
+      });
+      sectionAllArticles.style.display = 'none';
+      sectionGuideEtude.style.display = 'block';
+      sectionState3.style.display = 'none';
+    }
+  }
 }

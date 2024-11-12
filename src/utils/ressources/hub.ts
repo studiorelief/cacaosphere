@@ -1,22 +1,49 @@
 import { gsap } from 'gsap';
 
-export function animateHubActionCardHover() {
-  // Sélection de tous les éléments à animer
+// Show more items in Collection List
+export function showMoreItems(type: 'testimonial' | 'galerie' | 'download' | 'action') {
+  const toggleButton = document.getElementById(`hub-show-${type}`) as HTMLElement;
+  const wrapper = document.querySelector<HTMLElement>(`.hub_${type}_list-wrapper2`);
+
+  if (!toggleButton || !wrapper) return;
+
+  let isVisible = false;
+  const originalText = toggleButton.textContent || ''; // Save initial button text
+
+  // Définir le texte "voir moins" en fonction du type
+  const getLessText = (itemType: typeof type): string => {
+    const texts = {
+      testimonial: 'Voir moins de témoignages',
+      galerie: 'Voir moins de réalisations',
+      download: 'Voir moins de téléchargements',
+      action: 'Voir moins de vidéos',
+    };
+    return texts[itemType];
+  };
+
+  toggleButton.addEventListener('click', () => {
+    isVisible = !isVisible;
+    wrapper.style.display = isVisible ? 'block' : 'none';
+
+    // Change text based on view state and type
+    toggleButton.textContent = isVisible ? getLessText(type) : originalText;
+  });
+}
+// Hover animation on ACTION CARD
+export function hoverOnActionCard() {
   const cards = document.querySelectorAll('.hub_action_card');
 
   cards.forEach((card) => {
-    // Récupère les éléments enfants nécessaires
     const overlay = card.querySelector('.hub_action_overlay') as HTMLElement;
     const textContent = card.querySelector('.hub_action_text-content') as HTMLElement;
 
-    // Vérifie si les éléments existent avant d'ajouter les événements
+    // Checks if elements exist before adding events
     if (overlay && textContent) {
-      // Ajoute un écouteur pour l'événement "mouseenter" (au survol)
       card.addEventListener('mouseenter', () => {
-        // Fait apparaître l'overlay
+        // for the overlay to appear
         overlay.style.opacity = '80%';
 
-        // Anime le texte pour le faire glisser vers le haut
+        // Animate text to slide up
         gsap.to(textContent, {
           duration: 0.3,
           bottom: '-2rem',
@@ -24,12 +51,11 @@ export function animateHubActionCardHover() {
         });
       });
 
-      // Ajoute un écouteur pour l'événement "mouseleave" (quand le survol cesse)
+      // Return initial appearance
       card.addEventListener('mouseleave', () => {
-        // Cache l'overlay
+        // Hide the overlay
         overlay.style.opacity = '0%';
-
-        // Anime le texte pour le remettre dans sa position initiale
+        //Return to initial position
         gsap.to(textContent, {
           duration: 0.3,
           bottom: '-9.1rem',
@@ -40,7 +66,8 @@ export function animateHubActionCardHover() {
   });
 }
 
-export function setupTestimonialToggle() {
+// Shows the text of the testimonial card
+export function showContentTestimonialCard() {
   const moreWrappers = document.querySelectorAll<HTMLElement>('.hub_testimonial_logo-more-wrapper');
   const lessWrappers = document.querySelectorAll<HTMLElement>(
     '.hub_testimonial_hover-less-logo-wrapper'
@@ -57,10 +84,10 @@ export function setupTestimonialToggle() {
 
       frontCard.style.opacity = '0';
       hoverCard.style.opacity = '1';
-      hoverCard.style.zIndex = '1'; // Mettre le z-index à 1 pour s'assurer qu'il est au-dessus
+      hoverCard.style.zIndex = '1'; // Set the z-index to 1 to ensure it is above
 
       setTimeout(() => {
-        frontCard.classList.add('hidden'); // Ajouter la classe cachée après l'animation
+        frontCard.classList.add('hidden'); // Add hidden class after animation
       }, 300);
     });
   });
@@ -73,8 +100,7 @@ export function setupTestimonialToggle() {
       frontCard.classList.remove('hidden');
       frontCard.style.opacity = '1';
       hoverCard.style.opacity = '0';
-      hoverCard.style.zIndex = '-1'; // Remettre le z-index à -1 pour le cacher
-
+      hoverCard.style.zIndex = '-1'; // Reset the z-index to -1 to hide it
       setTimeout(() => {
         hoverCard.style.transition = 'opacity 0.3s ease';
         hoverCard.style.opacity = '0'; // Ou le régler à 0 directement
@@ -83,66 +109,92 @@ export function setupTestimonialToggle() {
   });
 }
 
-export function toggleTestimonialVisibility() {
-  const toggleButton = document.getElementById('hub-show-testimonial') as HTMLElement;
-  const testimonialWrapper = document.querySelector<HTMLElement>('.hub_testimonial_list-wrapper2');
-
-  if (!toggleButton || !testimonialWrapper) return;
-
-  let isVisible = false;
-  const originalText = toggleButton.textContent || ''; // Sauvegarder le texte original
-
-  toggleButton.addEventListener('click', () => {
-    isVisible = !isVisible;
-    testimonialWrapper.style.display = isVisible ? 'block' : 'none';
-
-    // Modifier le texte en fonction de l'état d'affichage
-    toggleButton.textContent = isVisible ? 'Voir moins de témoignages' : originalText;
-  });
-}
-
-// Fonction pour gérer l'animation de hover sur .hub_galerie_card
+// Hover on Hub card
 export const animateHubGalerieCardHover = (): void => {
-  // Sélectionne toutes les cartes de la galerie
   const cards = document.querySelectorAll('.hub_galerie_card');
 
-  // Applique les animations de hover et mouseleave à chaque carte
+  // Applies hover and mouseleave animations to each card
   cards.forEach((card) => {
     const textContent = card.querySelector<HTMLElement>('.hub_galerie_text-content');
 
-    // Vérifie si l'élément de texte existe dans la carte avant de continuer
+    // Checks if the text element exists before continuing
     if (textContent) {
-      // Définit l'animation pour le hover
+      // Set hover animation
       card.addEventListener('mouseenter', () => {
         gsap.to(textContent, {
-          top: '0rem', // Position finale au hover
-          backgroundColor: 'rgba(90, 31, 27, 0.8)', // Couleur de fond avec 80% d'opacité
-          duration: 0.5, // Durée de la transition
-          ease: 'power3.out', // Effet de fluidité
+          top: '0rem', /// Final Position hover
+          backgroundColor: 'rgba(90, 31, 27, 0.8)', // background with 80% opacity
+          duration: 0.5,
+          ease: 'power3.out',
         });
       });
 
-      // Définit l'animation pour le mouseleave
+      // Sets the animation for the mouseleave
       card.addEventListener('mouseleave', () => {
         gsap.to(textContent, {
-          top: '15rem', // Position initiale au mouseleave
-          backgroundColor: 'transparent', // Couleur de fond initiale
-          duration: 0.5, // Durée de la transition
-          ease: 'power3.out', // Effet de fluidité
+          top: '15rem', // Initial position at mouseleave
+          backgroundColor: 'transparent', // Initial background-color
+          duration: 0.5,
+          ease: 'power3.out',
         });
       });
     }
   });
 };
 
+//Apply margin at HUB GALERY
 export function applyMarginToHubGalerie() {
-  // Sélectionne tous les éléments avec la classe '.hub_galerie_card'
   const cards = document.querySelectorAll('.hub_galerie_card');
 
-  // Applique un margin-top de 2.5rem à chaque deuxième élément
+  // Applies a margin-top of 2.5rem to every second element
   cards.forEach((card, index) => {
     if (index % 2 === 0) {
       (card as HTMLElement).style.marginTop = '2.5rem';
     }
   });
 }
+
+// Hover on DOWNLOAD CARD
+export const animateDownloadCardHover = (): void => {
+  const cards = document.querySelectorAll('.hub_donwload_card');
+
+  // Applies hover and mouseleave animations to each map
+  cards.forEach((card) => {
+    const textContent = card.querySelector<HTMLElement>('.hub_download_bottom-content');
+    const logoWrapper = card.querySelector<HTMLElement>('.hub_donwload_logo-wrapper.is-visible');
+
+    // Checks if the text element exists before continuing
+    if (textContent && logoWrapper) {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(textContent, {
+          top: '0rem', // Final Position hover
+          backgroundColor: 'rgba(90, 31, 27, 0.8)', // background with 80% opacity
+          duration: 0.5,
+          ease: 'power3.out',
+        });
+
+        // Hide the logo
+        gsap.to(logoWrapper, {
+          display: 'none',
+          duration: 0,
+        });
+      });
+
+      // Sets the animation for the mouseleave
+      card.addEventListener('mouseleave', () => {
+        gsap.to(textContent, {
+          top: '17rem', // Initial position at mouseleave
+          backgroundColor: 'transparent', // Initial background color
+          duration: 0.5,
+          ease: 'power3.out',
+        });
+
+        // Show the logo
+        gsap.to(logoWrapper, {
+          display: 'block',
+          duration: 0,
+        });
+      });
+    }
+  });
+};

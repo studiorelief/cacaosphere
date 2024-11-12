@@ -26,21 +26,23 @@ import {
   animateSmallCardRessource,
   animateSpecialSelectCard,
   checkURLParameter,
+  handleGuideFilter,
   initBlogSections,
   mirrorBlogSearch,
   searchBarPlaceholderStyling,
 } from '$utils/ressources/blog';
 import {
   filterFAQCategories,
-  linkCategoryAnimations,
+  linkFaqCategoryAnimations,
   mirrorFaqSearch,
 } from '$utils/ressources/faq';
 import {
-  animateHubActionCardHover,
+  animateDownloadCardHover,
   animateHubGalerieCardHover,
   applyMarginToHubGalerie,
-  setupTestimonialToggle,
-  toggleTestimonialVisibility,
+  hoverOnActionCard,
+  showContentTestimonialCard,
+  showMoreItems,
 } from '$utils/ressources/hub';
 
 window.Webflow ||= [];
@@ -95,18 +97,22 @@ window.Webflow.push(() => {
 
   /* hub */
   if (window.location.href.includes('hub')) {
-    animateHubActionCardHover();
-    setupTestimonialToggle();
-    toggleTestimonialVisibility();
+    hoverOnActionCard();
+    showContentTestimonialCard();
     animateHubGalerieCardHover();
     applyMarginToHubGalerie();
+    animateDownloadCardHover();
+    // Fusion des appels showMoreItems
+    ['testimonial', 'galerie', 'download', 'action'].forEach((type) =>
+      showMoreItems(type as 'testimonial' | 'galerie' | 'download' | 'action')
+    );
   }
 
   /* faq */
   if (window.location.href.includes('faq')) {
     filterFAQCategories();
     mirrorFaqSearch();
-    linkCategoryAnimations();
+    linkFaqCategoryAnimations();
   }
 
   /* blog */
@@ -114,6 +120,7 @@ window.Webflow.push(() => {
   mirrorBlogSearch();
   checkURLParameter();
   searchBarPlaceholderStyling();
+  handleGuideFilter();
 
   /* contact form */
   formInputLabels();
