@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
 export function filterFAQCategories() {
   // Sélectionnez l'élément de saisie et les éléments à masquer
   const inputField = document.querySelector<HTMLInputElement>('.header_v3_blog-field');
@@ -58,7 +59,7 @@ export function mirrorFaqSearch() {
 }
 
 //Function to see the progress in FAQ Categories
-export function linkCategoryAnimations() {
+export function linkFaqCategoryAnimations() {
   const linksAndTriggers = [
     { link: '#link-cat1', trigger: '#faq-cat1', icon: '.faq_cat-row:nth-child(1) .faq_cat-icon' },
     { link: '#link-cat2', trigger: '#faq-cat2', icon: '.faq_cat-row:nth-child(2) .faq_cat-icon' },
