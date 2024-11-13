@@ -12,7 +12,8 @@ import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils
 import {
   swiperBlogAutres,
   swiperChronologie,
-  // swiperHpPicture,
+  swiperCoopHero,
+  swiperHpPicture,
   swiperHpTestimonial,
   swiperProduitsAutres,
   swiperProduitsCarousel,
@@ -70,14 +71,11 @@ window.Webflow.push(() => {
     setCurrentRowFromURL();
   }
 
-  /* swiper */
-  /*
-    TODO: A reactiver car crée issue côté CMS si section empty
-    */
-  // swiperHpPicture();
+  swiperHpPicture();
   swiperHpTestimonial();
   swiperBlogAutres();
   swiperChronologie();
+  swiperCoopHero();
 
   /* gsap */
   animateBigCardRessource();

@@ -9,7 +9,7 @@ export function swiperHpPicture() {
     slidesPerView: 1,
     speed: 400,
     loop: true,
-    autoHeight: true,
+
     // mousewheel: {
     //   forceToAxis: true,
     // },
@@ -110,6 +110,29 @@ export function swiperChronologie() {
     navigation: {
       nextEl: '.a-propos_chronologie_navigation.is-right',
       prevEl: '.a-propos_chronologie_navigation.is-left',
+    },
+  });
+}
+
+export function swiperCoopHero() {
+  new Swiper('.swiper.is-coop-hero', {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    autoplay: {
+      delay: 3000, // Ajouter un délai
+      disableOnInteraction: false, // Continuer l'autoplay après interaction
+    },
+    speed: 400,
+    loop: true,
+    navigation: {
+      nextEl: '.coop_hero_button.is-next',
+      prevEl: '.coop_hero_button.is-prev',
+    },
+    pagination: {
+      el: '.coop_hero_pagination',
+      clickable: true,
+      bulletClass: 'swiper-pagination-bullet',
+      bulletActiveClass: 'swiper-pagination-bullet-active',
     },
   });
 }
