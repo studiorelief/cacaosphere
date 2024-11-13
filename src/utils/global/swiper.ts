@@ -3,21 +3,42 @@ import 'swiper/css/bundle';
 // @ts-expect-error : swiper bundle root
 import Swiper from 'swiper/bundle';
 
+// export function swiperHpPicture() {
+//   new Swiper('.swiper.is-hp-slider-picture', {
+//     direction: 'horizontal',
+//     slidesPerView: 1,
+//     speed: 400,
+//     loop: true,
+//     autoHeight: true,
+//     // mousewheel: {
+//     //   forceToAxis: true,
+//     // },
+//     navigation: {
+//       nextEl: '.hp_slider-picture_button-next',
+//       prevEl: '.hp_slider-picture_button-prev',
+//     },
+//   });
+// }
+
 export function swiperHpPicture() {
-  new Swiper('.swiper.is-hp-slider-picture', {
-    direction: 'horizontal',
-    slidesPerView: 1,
-    speed: 400,
-    loop: true,
-    autoHeight: true,
-    // mousewheel: {
-    //   forceToAxis: true,
-    // },
-    navigation: {
-      nextEl: '.hp_slider-picture_button-next',
-      prevEl: '.hp_slider-picture_button-prev',
-    },
-  });
+  const swiperElement = document.querySelector('.swiper.is-hp-slider-picture');
+
+  if (swiperElement) {
+    new Swiper('.swiper.is-hp-slider-picture', {
+      direction: 'horizontal',
+      slidesPerView: 1,
+      speed: 400,
+      loop: true,
+      autoHeight: true,
+      // mousewheel: {
+      //   forceToAxis: true,
+      // },
+      navigation: {
+        nextEl: '.hp_slider-picture_button-next',
+        prevEl: '.hp_slider-picture_button-prev',
+      },
+    });
+  }
 }
 
 export function swiperHpTestimonial() {
