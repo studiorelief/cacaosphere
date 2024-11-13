@@ -12,14 +12,17 @@ import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils
 import {
   swiperBlogAutres,
   swiperChronologie,
+  swiperHpPicture,
   // swiperHpPicture,
   swiperHpTestimonial,
   swiperProduitsAutres,
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
+import { hideSectionIfCmsEmpty } from '$utils/global/tricks';
 import { initializeMap } from '$utils/map/map';
 import { catalogueFormTrigger } from '$utils/produits/catalogueFormTrigger';
 import { catalogueSameCat } from '$utils/produits/catalogueSameCat';
+import { hideEmptyWrapper } from '$utils/produits/produitQuickFix';
 import {
   animateBigCardRessource,
   animateLastNewsCard,
@@ -90,6 +93,10 @@ window.Webflow.push(() => {
   */
   catalogueFormTrigger();
 
+  /* tricks */
+  hideSectionIfCmsEmpty();
+  hideEmptyWrapper();
+
   /* map */
   if (window.location.href.includes('cooperatives')) {
     initializeMap();
@@ -157,11 +164,15 @@ window.Webflow.push(() => {
     /*
     TODO: recheck this logic -> remove setTimeout
     ?: Local code break on other pages than noir 65 -> alert for checking -> Trouver la source -> Sûrement swiper & nb item mais pourquoi ?
+    * DONE - 13.11.24
     */
 
     catalogueSameCat();
-    // alert('test');
-    // OK
+    if (
+      (document.querySelector('.section_hp_slider-picture') as HTMLElement).style.display !== 'none'
+    ) {
+      swiperHpPicture();
+    }
     swiperProduitsAutres();
     swiperProduitsCarousel();
     fixCatalogueCategoriesText();
