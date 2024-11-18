@@ -4,18 +4,14 @@ import 'swiper/css/bundle';
 import Swiper from 'swiper/bundle';
 
 export function swiperHpPicture() {
-  new Swiper('.swiper.is-hp-slider-picture', {
+  new Swiper('.swiper.is-slider-picture', {
     direction: 'horizontal',
     slidesPerView: 1,
     speed: 400,
     loop: true,
-
-    // mousewheel: {
-    //   forceToAxis: true,
-    // },
     navigation: {
-      nextEl: '.hp_slider-picture_button-next',
-      prevEl: '.hp_slider-picture_button-prev',
+      nextEl: '.slider-picture_button-next',
+      prevEl: '.slider-picture_button-prev',
     },
   });
 }
@@ -130,6 +126,29 @@ export function swiperCoopHero() {
     },
     pagination: {
       el: '.coop_hero_pagination',
+      clickable: true,
+      bulletClass: 'swiper-pagination-bullet',
+      bulletActiveClass: 'swiper-pagination-bullet-active',
+    },
+  });
+}
+
+export function swiperLastPosts() {
+  new Swiper('.swiper.is-post', {
+    direction: 'horizontal',
+    slidesPerView: 3,
+    autoplay: {
+      delay: 3000, // Ajouter un délai
+      disableOnInteraction: false, // Continuer l'autoplay après interaction
+    },
+    speed: 400,
+    loop: true,
+    navigation: {
+      nextEl: '.article_last-posts_btn-next',
+      prevEl: '.article_last-posts_btn-prev',
+    },
+    pagination: {
+      el: '.article_last-posts_pagination',
       clickable: true,
       bulletClass: 'swiper-pagination-bullet',
       bulletActiveClass: 'swiper-pagination-bullet-active',

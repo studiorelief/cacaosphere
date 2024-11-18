@@ -83,12 +83,32 @@
 .coop_hero_pagination .swiper-pagination-bullet {
   background-color: white !important;
   opacity: 1;
+  border:#42612d 1px solid;
 }
 
 .coop_hero_pagination .swiper-pagination-bullet-active {
   background-color: #42612d !important;
+  width:1.25rem !important;
+  height: 0.5rem !important;
+  border-radius: 0.25rem;
+  border:#42612d 1px solid;
 }
 
+
+/* Bullet Pagination Lasts Posts*/
+.article_last-posts_pagination .swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 1;
+  border:#42612d 1px solid;
+}
+
+.article_last-posts_pagination .swiper-pagination-bullet-active {
+  background-color: #42612d !important;
+  width:1.25rem !important;
+  height: 0.5rem !important;
+  border-radius: 0.25rem;
+  border:#42612d 1px solid;
+}
 /*
 ! Catalogue
 */
