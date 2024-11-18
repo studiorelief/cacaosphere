@@ -288,3 +288,34 @@ export function handleGuideFilter() {
     }
   }
 }
+
+export function observeTocLinks() {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.target instanceof HTMLElement) {
+        if (mutation.target.matches('[fs-toc-element="link"].w--current')) {
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <g clip-path="url(#clip0_2387_2341)">
+              <path d="M7.42179 0.189242C7.67405 0.208795 7.92601 0.230771 8.1774 0.256517C8.153 0.260093 7.93519 0.246207 8.07987 0.264084C8.02129 0.263611 7.858 0.245045 7.80416 0.233561L7.84377 0.243852C7.67098 0.215777 7.54985 0.2307 7.66279 0.246434L7.64801 0.245237C7.48864 0.216462 7.32898 0.190109 7.16876 0.164292C7.34636 0.174349 7.30435 0.188563 7.51775 0.205647C7.45073 0.199716 7.43135 0.192553 7.42179 0.189242Z" fill="#42612D"/>
+              <!-- Ajoutez ici le reste de votre SVG -->
+            </g>
+            <defs>
+              <clipPath id="clip0_2387_2341">
+                <rect width="12" height="12" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>`;
+
+          if (!mutation.target.querySelector('svg')) {
+            mutation.target.insertAdjacentHTML('beforeend', svg);
+          }
+        }
+      }
+    });
+  });
+
+  const links = document.querySelectorAll('[fs-toc-element="link"]');
+  links.forEach((link) => {
+    observer.observe(link, { attributes: true });
+  });
+}

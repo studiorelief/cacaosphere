@@ -4,24 +4,16 @@ import 'swiper/css/bundle';
 import Swiper from 'swiper/bundle';
 
 export function swiperHpPicture() {
-  const swiperElement = document.querySelector('.swiper.is-hp-slider-picture');
-
-  if (swiperElement) {
-    new Swiper('.swiper.is-hp-slider-picture', {
-      direction: 'horizontal',
-      slidesPerView: 1,
-      speed: 400,
-      loop: true,
-      autoHeight: true,
-      // mousewheel: {
-      //   forceToAxis: true,
-      // },
-      navigation: {
-        nextEl: '.hp_slider-picture_button-next',
-        prevEl: '.hp_slider-picture_button-prev',
-      },
-    });
-  }
+  new Swiper('.swiper.is-slider-picture', {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    speed: 400,
+    loop: true,
+    navigation: {
+      nextEl: '.slider-picture_button-next',
+      prevEl: '.slider-picture_button-prev',
+    },
+  });
 }
 
 export function swiperHpTestimonial() {
@@ -114,6 +106,52 @@ export function swiperChronologie() {
     navigation: {
       nextEl: '.a-propos_chronologie_navigation.is-right',
       prevEl: '.a-propos_chronologie_navigation.is-left',
+    },
+  });
+}
+
+export function swiperCoopHero() {
+  new Swiper('.swiper.is-coop-hero', {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    autoplay: {
+      delay: 3000, // Ajouter un délai
+      disableOnInteraction: false, // Continuer l'autoplay après interaction
+    },
+    speed: 400,
+    loop: true,
+    navigation: {
+      nextEl: '.coop_hero_button.is-next',
+      prevEl: '.coop_hero_button.is-prev',
+    },
+    pagination: {
+      el: '.coop_hero_pagination',
+      clickable: true,
+      bulletClass: 'swiper-pagination-bullet',
+      bulletActiveClass: 'swiper-pagination-bullet-active',
+    },
+  });
+}
+
+export function swiperLastPosts() {
+  new Swiper('.swiper.is-post', {
+    direction: 'horizontal',
+    slidesPerView: 3,
+    autoplay: {
+      delay: 3000, // Ajouter un délai
+      disableOnInteraction: false, // Continuer l'autoplay après interaction
+    },
+    speed: 400,
+    loop: true,
+    navigation: {
+      nextEl: '.article_last-posts_btn-next',
+      prevEl: '.article_last-posts_btn-prev',
+    },
+    pagination: {
+      el: '.article_last-posts_pagination',
+      clickable: true,
+      bulletClass: 'swiper-pagination-bullet',
+      bulletActiveClass: 'swiper-pagination-bullet-active',
     },
   });
 }

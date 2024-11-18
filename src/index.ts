@@ -12,13 +12,21 @@ import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils
 import {
   swiperBlogAutres,
   swiperChronologie,
+  swiperCoopHero,
   swiperHpPicture,
   // swiperHpPicture,
   swiperHpTestimonial,
+  swiperLastPosts,
   swiperProduitsAutres,
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
 import { hideSectionIfCmsEmpty } from '$utils/global/tricks';
+import {
+  initProductsHover,
+  initSmallTerroirsHover,
+  initTerroirsHover,
+  ressourcesHover,
+} from '$utils/home/home';
 import { initializeMap } from '$utils/map/map';
 import { catalogueFormTrigger } from '$utils/produits/catalogueFormTrigger';
 import { catalogueSameCat } from '$utils/produits/catalogueSameCat';
@@ -32,6 +40,7 @@ import {
   handleGuideFilter,
   initBlogSections,
   mirrorBlogSearch,
+  observeTocLinks,
   searchBarPlaceholderStyling,
 } from '$utils/ressources/blog';
 import {
@@ -73,14 +82,11 @@ window.Webflow.push(() => {
     setCurrentRowFromURL();
   }
 
-  /* swiper */
-  /*
-    TODO: A reactiver car crée issue côté CMS si section empty
-    */
-  // swiperHpPicture();
+  swiperHpPicture();
   swiperHpTestimonial();
   swiperBlogAutres();
   swiperChronologie();
+  swiperCoopHero();
 
   /* gsap */
   animateBigCardRessource();
@@ -92,6 +98,13 @@ window.Webflow.push(() => {
   -> produit to contact form
   */
   catalogueFormTrigger();
+  /* homepage */
+  if (window.location.pathname === '/') {
+    ressourcesHover();
+    initTerroirsHover();
+    initSmallTerroirsHover();
+    initProductsHover();
+  }
 
   /* tricks */
   hideSectionIfCmsEmpty();
@@ -128,6 +141,8 @@ window.Webflow.push(() => {
   checkURLParameter();
   searchBarPlaceholderStyling();
   handleGuideFilter();
+  swiperLastPosts();
+  observeTocLinks();
 
   /* contact form */
   formInputLabels();

@@ -63,6 +63,51 @@
   pointer-events: none;
 }
 
+/* problème sur coop page - A VOIR */
+.swiper-button-lock {
+  display: block !important;
+  display: flex !important;
+  justify-content: center;
+}
+
+/* Coop hero slider pagination position */
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 1rem !important;
+  left: 50% !important;
+}
+
+/* Bullet Pagination Coopératives hero*/
+.coop_hero_pagination .swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 1;
+  border: #42612d 1px solid;
+}
+
+.coop_hero_pagination .swiper-pagination-bullet-active {
+  background-color: #42612d !important;
+  width: 1.25rem !important;
+  height: 0.5rem !important;
+  border-radius: 0.25rem;
+  border: #42612d 1px solid;
+}
+
+/* Bullet Pagination Lasts Posts*/
+.article_last-posts_pagination .swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 1;
+  border: #42612d 1px solid;
+}
+
+.article_last-posts_pagination .swiper-pagination-bullet-active {
+  background-color: #42612d !important;
+  width: 1.25rem !important;
+  height: 0.5rem !important;
+  border-radius: 0.25rem;
+  border: #42612d 1px solid;
+}
 /*
 ! Catalogue
 */
