@@ -16,7 +16,6 @@ import {
   swiperCoopHero,
   swiperCoopProduct,
   swiperHpPicture,
-  // swiperHpPicture,
   swiperHpTestimonial,
   swiperLastPosts,
   swiperProduitsAutres,
@@ -38,6 +37,7 @@ import {
   animateLastNewsCard,
   animateSmallCardRessource,
   animateSpecialSelectCard,
+  blogMenuVisibility,
   checkURLParameter,
   handleGuideFilter,
   initBlogSections,
@@ -145,6 +145,9 @@ window.Webflow.push(() => {
   handleGuideFilter();
   swiperLastPosts();
   observeTocLinks();
+  if (window.location.pathname.includes('/blog')) {
+    blogMenuVisibility();
+  }
 
   /* contact form */
   formInputLabels();

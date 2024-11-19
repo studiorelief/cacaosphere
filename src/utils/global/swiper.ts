@@ -19,9 +19,8 @@ export function swiperHpPicture() {
 export function swiperHpTestimonial() {
   new Swiper('.swiper.is-hp-testimonials', {
     direction: 'horizontal',
-    slidesPerView: 2,
-    spaceBetween: 80,
-    speed: 400,
+    slidesPerView: 1,
+    speed: 800,
     loop: true,
     mousewheel: {
       forceToAxis: true,
@@ -30,13 +29,21 @@ export function swiperHpTestimonial() {
       nextEl: '.hp_testimonials_btn-next',
       prevEl: '.hp_testimonials_btn-prev',
     },
+    breakpoints: {
+      // When the screen width is greater than 480px
+      480: {
+        slidesPerView: 2,
+        centerSlide: true,
+        spaceBetween: 5 * 16,
+      },
+    },
   });
 }
 
 export function swiperBlogAutres() {
   new Swiper('.swiper.is-blog', {
     direction: 'horizontal',
-    slidesPerView: 3,
+    slidesPerView: 1,
     spaceBetween: 3.5 * 16,
     speed: 400,
     loop: true,
@@ -44,8 +51,14 @@ export function swiperBlogAutres() {
       forceToAxis: true,
     },
     navigation: {
-      nextEl: '.hp-slider-picture_button-next',
-      prevEl: '.hp-slider-picture_button-prev',
+      nextEl: '.hp_blog_btn-next',
+      prevEl: '.hp_blog_btn-prev',
+    },
+    breakpoints: {
+      // When the screen width is greater than 480px
+      480: {
+        slidesPerView: 3,
+      },
     },
   });
 }

@@ -47,7 +47,7 @@ export function initTerroirsHover(): void {
       ) as HTMLElement;
 
       if (title) {
-        title.style.transform = 'translateY(-6rem)';
+        title.style.transform = 'translateY(-2rem)';
         title.style.transition = 'transform 0.3s ease-out';
       }
 
