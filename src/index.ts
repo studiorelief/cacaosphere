@@ -3,6 +3,7 @@ import './index.css';
 import { catalogueFilterCount, updateCatalogueCount } from '$utils/catalogue/catalogueCount';
 import { catalogueCat } from '$utils/catalogue/catalogueFilter';
 import { catalogueLoader } from '$utils/catalogue/catalogueLoader';
+import { catalogueOpenFilter } from '$utils/catalogue/catalogueMobile';
 import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels } from '$utils/contact/formInput';
@@ -13,6 +14,7 @@ import {
   swiperBlogAutres,
   swiperChronologie,
   swiperCoopHero,
+  swiperCoopProduct,
   swiperHpPicture,
   // swiperHpPicture,
   swiperHpTestimonial,
@@ -72,7 +74,7 @@ window.Webflow.push(() => {
     loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js'),
     setTimeout(() => {
       loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js');
-    }, 250),
+    }, 4000),
   ]);
 
   /* navbar */
@@ -150,29 +152,39 @@ window.Webflow.push(() => {
   /* Catalogue */
   if (window.location.pathname === '/catalogue') {
     // main category logic
+
     catalogueCat();
+
+    // mobile filter
+    if (window.innerWidth < 991) {
+      catalogueOpenFilter();
+    }
+
     // quick fix
     fixCatalogueCategoriesText();
     hideEmptyLabelsContainer();
     // filter system
     /*
     TODO: réduire le load jQuery des nested collection 
+    TODO: setTimout ne marche pas toujours -> Souvent au second load -> Prévoir pass - Check le setTimout du script attribut en // 
     */
     // Wait for jQuery to load nested collections
-    const loadPromise = new Promise((resolve) => {
-      setTimeout(resolve, 3500);
-    });
+    // const loadPromise = new Promise((resolve) => {
+    //   setTimeout(resolve, 3500);
+    // });
 
-    loadPromise.then(() => {
-      catalogueFilterCount();
-      updateCatalogueCount();
-      catalogueLoader();
-    });
-    // setTimeout(() => {
+    // loadPromise.then(() => {
     //   catalogueFilterCount();
     //   updateCatalogueCount();
     //   catalogueLoader();
-    // }, 3500);
+    // });
+    setTimeout(() => {
+      catalogueFilterCount();
+      updateCatalogueCount();
+      if (window.innerWidth > 991) {
+        catalogueLoader();
+      }
+    }, 3500);
   }
 
   if (window.location.pathname.startsWith('/catalogue-produit')) {
@@ -184,9 +196,10 @@ window.Webflow.push(() => {
 
     catalogueSameCat();
     if (
-      (document.querySelector('.section_hp_slider-picture') as HTMLElement).style.display !== 'none'
+      (document.querySelector('.section_produit_slider-coop') as HTMLElement).style.display !==
+      'none'
     ) {
-      swiperHpPicture();
+      swiperCoopProduct();
     }
     swiperProduitsAutres();
     swiperProduitsCarousel();
