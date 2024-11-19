@@ -83,6 +83,20 @@ export function swiperProduitsAutres() {
       nextEl: '.produit_m-categorie_swiper-btn-prev',
       prevEl: '.produit_m-categorie_swiper-btn-next',
     },
+    breakpoints: {
+      320: {
+        slidesPerView: 'auto',
+        spaceBetween: 16,
+      },
+      568: {
+        slidesPerView: 2,
+        spaceBetween: 32,
+      },
+      991: {
+        slidesPerView: 3,
+        spaceBetween: 32,
+      },
+    },
   });
 }
 
@@ -154,4 +168,27 @@ export function swiperLastPosts() {
       bulletActiveClass: 'swiper-pagination-bullet-active',
     },
   });
+}
+
+/* produits */
+
+export function swiperCoopProduct() {
+  const swiperElement = document.querySelector('.swiper.is-slider-coop');
+
+  if (swiperElement) {
+    new Swiper('.swiper.is-slider-coop', {
+      direction: 'horizontal',
+      slidesPerView: 1,
+      speed: 400,
+      loop: true,
+      autoHeight: true,
+      // mousewheel: {
+      //   forceToAxis: true,
+      // },
+      navigation: {
+        nextEl: '.slider-coop_button-next',
+        prevEl: '.slider-coop_button-prev',
+      },
+    });
+  }
 }
