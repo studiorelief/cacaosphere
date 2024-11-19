@@ -319,3 +319,19 @@ export function observeTocLinks() {
     observer.observe(link, { attributes: true });
   });
 }
+
+export function blogMenuVisibility() {
+  const blogMenus = document.querySelectorAll('.section_blog_menu'); // Sélectionne tous les éléments
+
+  if (window.innerWidth < 750) {
+    // Cache tous les éléments si la largeur de l'écran est inférieure à 750px
+    blogMenus.forEach((blogMenu) => {
+      (blogMenu as HTMLElement).style.display = 'none'; // Type assertion
+    });
+  } else {
+    // Affiche tous les éléments si la largeur de l'écran est supérieure ou égale à 750px
+    blogMenus.forEach((blogMenu) => {
+      (blogMenu as HTMLElement).style.display = 'block'; // ou 'flex', selon votre besoin
+    });
+  }
+}
