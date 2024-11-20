@@ -1,8 +1,8 @@
 import './index.css';
 
-import { catalogueFilterCount, updateCatalogueCount } from '$utils/catalogue/catalogueCount';
+import { catalogueFilterCount /* , updateCatalogueCount */ } from '$utils/catalogue/catalogueCount';
 import { catalogueCat } from '$utils/catalogue/catalogueFilter';
-import { catalogueLoader } from '$utils/catalogue/catalogueLoader';
+// import { catalogueLoader } from '$utils/catalogue/catalogueLoader';
 import { catalogueOpenFilter } from '$utils/catalogue/catalogueMobile';
 import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
 import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
@@ -63,10 +63,12 @@ window.Webflow ||= [];
 window.Webflow.push(() => {
   /* global */
   Promise.all([
-    loadScript(
-      'https://cdn.jsdelivr.net/npm/@finsweet/attributes-scrolldisable@1/scrolldisable.js'
-    ),
+    // window.innerWidth < 991 &&
+    //   loadScript(
+    //     'https://cdn.jsdelivr.net/npm/@finsweet/attributes-scrolldisable@1/scrolldisable.js'
+    //   ),
     loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsload@1/cmsload.js'),
+    loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsnest@1/cmsnest.js'),
     loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-selectcustom@1/selectcustom.js'),
     loadScript('https://cdn.jsdelivr.net/npm/@finsweet/cookie-consent@1/fs-cc.js'),
     loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-accordion@1/accordion.js'),
@@ -74,7 +76,7 @@ window.Webflow.push(() => {
     loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js'),
     setTimeout(() => {
       loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js');
-    }, 4000),
+    }, 500),
   ]);
 
   /* navbar */
@@ -166,27 +168,18 @@ window.Webflow.push(() => {
     // quick fix
     fixCatalogueCategoriesText();
     hideEmptyLabelsContainer();
+
     // filter system
     /*
     TODO: réduire le load jQuery des nested collection 
     TODO: setTimout ne marche pas toujours -> Souvent au second load -> Prévoir pass - Check le setTimout du script attribut en // 
     */
-    // Wait for jQuery to load nested collections
-    // const loadPromise = new Promise((resolve) => {
-    //   setTimeout(resolve, 3500);
-    // });
-
-    // loadPromise.then(() => {
-    //   catalogueFilterCount();
-    //   updateCatalogueCount();
-    //   catalogueLoader();
-    // });
     setTimeout(() => {
       catalogueFilterCount();
-      updateCatalogueCount();
-      if (window.innerWidth > 991) {
-        catalogueLoader();
-      }
+      // updateCatalogueCount();
+      // if (window.innerWidth > 991) {
+      //   catalogueLoader();
+      // }
     }, 3500);
   }
 
