@@ -1,0 +1,44 @@
+/*
+! HomePage Testimonial | EJ
+*/
+
+.swiper.is-hp-testimonials {
+  overflow: visible !important;
+}
+
+@media (min-width: 767px) {
+  .swiper-slide.is-hp-testimonials {
+    width: 49.5rem !important;
+  }
+}
+
+/* 
+  ! Home Slider Picture | EJ
+  */
+.cont.hp_slider-picture_title-image {
+  display: -webkit-box; /* Utilisation du modèle de boîte flexible pour WebKit */
+  display: box; /* Pour les navigateurs qui supportent box */
+  display: flex; /* Utilisation de flexbox comme alternative */
+  -webkit-box-orient: vertical; /* Orientation verticale des éléments enfants */
+  -webkit-line-clamp: 2; /* Limite le texte à 2 lignes pour WebKit */
+  line-clamp: 2; /* Propriété standard (non encore largement supportée) */
+}
+
+/*
+! Terroir Small card | EJ
+*/
+
+@media (max-width: 1326px) and (min-width: 992px) {
+  .hp_terroirs_small-card {
+    width: 42.5rem;
+  }
+}
+
+/* 
+! Home - MEDIA QUERY | EJ
+*/
+@media (max-width: 1326px) and (min-width: 992px) {
+  .hp_terroirs_right-collection-list .hp.w-dyn-item {
+    width: 100% !important; /* Définit la largeur à 100% */
+  }
+}

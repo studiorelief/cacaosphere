@@ -171,8 +171,8 @@ export function swiperLastPosts() {
     speed: 400,
     loop: true,
     navigation: {
-      nextEl: '.article_last-posts_btn-next',
-      prevEl: '.article_last-posts_btn-prev',
+      nextEl: '.hp_testimonials_btn-next',
+      prevEl: '.hp_testimonials_btn-prev',
     },
     pagination: {
       el: '.article_last-posts_pagination',

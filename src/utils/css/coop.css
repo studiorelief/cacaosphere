@@ -1,0 +1,5 @@
+@media (max-width: 838px) and (min-width: 768px) {
+  .hp_blog_collection-item {
+    width: 100% !important;
+  }
+}
