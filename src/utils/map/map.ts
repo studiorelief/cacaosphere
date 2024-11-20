@@ -18,7 +18,7 @@ export function initializeMap() {
   let currentMarker: HTMLElement | undefined;
   let currentItem: HTMLElement | undefined;
 
-  const items = document.querySelectorAll('.map-coop_list') as NodeListOf<HTMLElement>;
+  const items = document.querySelectorAll('.map-coop_item') as NodeListOf<HTMLElement>;
 
   items.forEach((cmsItem) => {
     const lat = (cmsItem.querySelector('.map-coop_item-lat') as HTMLElement)?.innerText ?? '';
