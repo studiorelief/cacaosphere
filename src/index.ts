@@ -17,6 +17,7 @@ import {
   swiperCoopProduct,
   swiperHpPicture,
   swiperHpTestimonial,
+  swiperHubTestimonial,
   swiperLastPosts,
   swiperProduitsAutres,
   swiperProduitsCarousel,
@@ -85,12 +86,22 @@ window.Webflow.push(() => {
     setCurrentDropdownState();
     setCurrentRowFromURL();
   }
-
+  /* swiper */
+  swiperChronologie();
+  //Home
   swiperHpPicture();
   swiperHpTestimonial();
+  //Blog
   swiperBlogAutres();
-  swiperChronologie();
+  //coop
   swiperCoopHero();
+  // Hub
+  swiperHubTestimonial(
+    '.swiper.is-mobile-hub-page.is-testimonial',
+    '.coop_hero_pagination.is-testi'
+  );
+  swiperHubTestimonial('.swiper.is-mobile-hub-page.is-guide', '.coop_hero_pagination.is-guide');
+  swiperHubTestimonial('.swiper.is-mobile-hub-page.is-action', '.coop_hero_pagination.is-action');
 
   /* gsap */
   animateBigCardRessource();
