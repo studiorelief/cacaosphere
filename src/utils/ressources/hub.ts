@@ -29,41 +29,69 @@ export function showMoreItems(type: 'testimonial' | 'galerie' | 'download' | 'ac
     toggleButton.textContent = isVisible ? getLessText(type) : originalText;
   });
 }
+
 // Hover animation on ACTION CARD
 export function hoverOnActionCard() {
   const cards = document.querySelectorAll('.hub_action_card');
 
-  cards.forEach((card) => {
-    const overlay = card.querySelector('.hub_action_overlay') as HTMLElement;
-    const textContent = card.querySelector('.hub_action_text-content') as HTMLElement;
+  // Fonction pour ajouter les événements de survol
+  const addHoverEvents = () => {
+    cards.forEach((card) => {
+      const overlay = card.querySelector('.hub_action_overlay') as HTMLElement;
+      const textContent = card.querySelector('.hub_action_text-content') as HTMLElement;
 
-    // Checks if elements exist before adding events
-    if (overlay && textContent) {
-      card.addEventListener('mouseenter', () => {
-        // for the overlay to appear
-        overlay.style.opacity = '80%';
+      // Vérifie si les éléments existent avant d'ajouter des événements
+      if (overlay && textContent) {
+        card.addEventListener('mouseenter', () => {
+          // Pour que l'overlay apparaisse
+          overlay.style.opacity = '80%';
 
-        // Animate text to slide up
-        gsap.to(textContent, {
-          duration: 0.3,
-          bottom: '-2rem',
-          ease: 'power3.out',
+          // Animer le texte pour qu'il glisse vers le haut
+          gsap.to(textContent, {
+            duration: 0.3,
+            bottom: '-2rem',
+            ease: 'power3.out',
+          });
         });
-      });
 
-      // Return initial appearance
-      card.addEventListener('mouseleave', () => {
-        // Hide the overlay
-        overlay.style.opacity = '0%';
-        //Return to initial position
-        gsap.to(textContent, {
-          duration: 0.3,
-          bottom: '-9.1rem',
-          ease: 'power3.out',
+        // Retour à l'apparence initiale
+        card.addEventListener('mouseleave', () => {
+          // Masquer l'overlay
+          overlay.style.opacity = '0%';
+          // Retour à la position initiale
+          gsap.to(textContent, {
+            duration: 0.3,
+            bottom: '-9.1rem',
+            ease: 'power3.out',
+          });
         });
+      }
+    });
+  };
+
+  // Fonction pour vérifier la taille de l'écran
+  const checkScreenSize = () => {
+    if (window.innerWidth > 768) {
+      addHoverEvents(); // Ajoute les événements si la largeur est supérieure à 768px
+    } else {
+      // Si la largeur est inférieure ou égale à 768px, retire les événements
+      cards.forEach((card) => {
+        const overlay = card.querySelector('.hub_action_overlay') as HTMLElement;
+        const textContent = card.querySelector('.hub_action_text-content') as HTMLElement;
+
+        if (overlay && textContent) {
+          card.removeEventListener('mouseenter', () => {});
+          card.removeEventListener('mouseleave', () => {});
+        }
       });
     }
-  });
+  };
+
+  // Vérifie la taille de l'écran au chargement
+  checkScreenSize();
+
+  // Ajoute un écouteur d'événements pour les changements de taille de la fenêtre
+  window.addEventListener('resize', checkScreenSize);
 }
 
 // Shows the text of the testimonial card
