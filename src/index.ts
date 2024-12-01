@@ -17,7 +17,7 @@ import {
   swiperCoopProduct,
   swiperHpPicture,
   swiperHpTestimonial,
-  swiperHubTestimonial,
+  swiperHubMobile,
   swiperLastPosts,
   swiperProduitsAutres,
   swiperProduitsCarousel,
@@ -96,12 +96,10 @@ window.Webflow.push(() => {
   //coop
   swiperCoopHero();
   // Hub
-  swiperHubTestimonial(
-    '.swiper.is-mobile-hub-page.is-testimonial',
-    '.coop_hero_pagination.is-testi'
-  );
-  swiperHubTestimonial('.swiper.is-mobile-hub-page.is-guide', '.coop_hero_pagination.is-guide');
-  swiperHubTestimonial('.swiper.is-mobile-hub-page.is-action', '.coop_hero_pagination.is-action');
+  swiperHubMobile('.swiper.is-mobile-hub-page.is-testimonial', '.coop_hero_pagination.is-testi');
+  swiperHubMobile('.swiper.is-mobile-hub-page.is-guide', '.coop_hero_pagination.is-guide');
+  swiperHubMobile('.swiper.is-mobile-hub-page.is-action', '.coop_hero_pagination.is-action');
+  swiperHubMobile('.swiper.is-mobile-hub-page.is-download', '.coop_hero_pagination.is-download');
 
   /* gsap */
   animateBigCardRessource();
@@ -119,6 +117,9 @@ window.Webflow.push(() => {
     initTerroirsHover();
     initSmallTerroirsHover();
     initProductsHover();
+    hoverOnActionCard();
+    animateDownloadCardHover();
+    animateHubGalerieCardHover();
   }
 
   /* tricks */

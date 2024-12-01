@@ -23,7 +23,7 @@ export const ressourcesHover = (): void => {
       // Sets the animation for the mouseleave
       card.addEventListener('mouseleave', () => {
         gsap.to(textContent, {
-          top: '19rem', // Initial position at mouseleave
+          top: '17rem', // Initial position at mouseleave
           backgroundColor: 'transparent', // Initial background-color
           duration: 0.5,
           ease: 'power3.out',
@@ -124,50 +124,52 @@ export function initSmallTerroirsHover(): void {
 }
 
 export function initProductsHover(): void {
-  document.querySelectorAll('.hp_products_card').forEach((card) => {
-    const handleHover = (isEntering: boolean) => {
-      const selectors = {
-        overlay: '.hp_products_card-overlay',
-        description: '.hp_products_card-text-description',
-        link: '.hp_products_card-link',
-        title: '.hp_products_card-title',
+  document.querySelectorAll('.hp_products_card.is-desktop').forEach((card) => {
+    // Vérifier la largeur de l'écran
+    if (window.innerWidth > 991) {
+      const handleHover = (isEntering: boolean) => {
+        const selectors = {
+          overlay: '.hp_products_card-overlay',
+          description: '.hp_products_card-text-description',
+          link: '.hp_products_card-link',
+          title: '.hp_products_card-title',
+        };
+
+        Object.entries(selectors).forEach(([key, selector]) => {
+          const element = card.querySelector(selector) as HTMLElement;
+          if (!element) return;
+
+          type StylesType = {
+            opacity?: string;
+            transition: string;
+            transform?: string;
+          };
+
+          // Styles de base
+          const baseStyles: StylesType = {
+            transition: 'all 0.3s ease-out',
+          };
+
+          // Ajouter opacity pour tous sauf le titre
+          if (key !== 'title') {
+            baseStyles.opacity = isEntering ? '1' : '0';
+          }
+
+          // Ajouter transform uniquement pour le titre
+          if (key === 'title') {
+            baseStyles.transform = `translateY(${isEntering ? '-0.2rem' : '0'})`;
+          }
+
+          Object.assign(element.style, baseStyles);
+
+          // Gestion spéciale pour description et link
+          if (key === 'description' || key === 'link') {
+            element.style.display = isEntering ? 'block' : 'none';
+          }
+        });
       };
-
-      Object.entries(selectors).forEach(([key, selector]) => {
-        const element = card.querySelector(selector) as HTMLElement;
-        if (!element) return;
-
-        type StylesType = {
-          opacity?: string;
-          transition: string;
-          transform?: string;
-        };
-
-        // Styles de base
-        const baseStyles: StylesType = {
-          transition: 'all 0.3s ease-out',
-        };
-
-        // Ajouter opacity pour tous sauf le titre
-        if (key !== 'title') {
-          baseStyles.opacity = isEntering ? '1' : '0';
-        }
-
-        // Ajouter transform uniquement pour le titre
-        if (key === 'title') {
-          baseStyles.transform = `translateY(${isEntering ? '-0.2rem' : '0'})`;
-        }
-
-        Object.assign(element.style, baseStyles);
-
-        // Gestion spéciale pour description et link
-        if (key === 'description' || key === 'link') {
-          element.style.display = isEntering ? 'block' : 'none';
-        }
-      });
-    };
-
-    card.addEventListener('mouseenter', () => handleHover(true));
-    card.addEventListener('mouseleave', () => handleHover(false));
+      card.addEventListener('mouseenter', () => handleHover(true));
+      card.addEventListener('mouseleave', () => handleHover(false));
+    }
   });
 }
