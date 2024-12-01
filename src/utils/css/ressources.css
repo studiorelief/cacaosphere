@@ -60,3 +60,32 @@
     width: 100%;
   }
 }
+
+/* 
+! HUB - MEDIA QUERY | EJ
+*/
+
+@media (max-width: 390px) {
+  .hub_galerie_grid {
+    grid-template-columns: 1fr; /* Une seule colonne */
+    gap: 0 !important;
+  }
+}
+
+@media (max-width: 1300px) and (min-width: 992px) {
+  .hub_testimonial_grid {
+    grid-template-columns: repeat(1, 1fr); /* 2 at 1 col */
+  }
+  .hub_guide_grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* 3 at 2 col */
+  }
+  .hp_blog_small-card.is-coop {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  .hub_download_grid {
+    grid-template-columns: repeat(3, 1fr); /* 4 at 3 col */
+  }
+}

@@ -207,14 +207,13 @@ export function swiperCoopProduct() {
 }
 
 /* Testimonial Hub - Mobile */
-export function swiperHubTestimonial(selector: string, paginationSelector: string) {
+export function swiperHubMobile(selector: string, paginationSelector: string) {
   new Swiper(selector, {
     direction: 'horizontal',
     slidesPerView: 1,
-    spaceBetween: 16,
+    /*spaceBetween: 24,*/
     speed: 400,
     loop: true,
-
     pagination: {
       /*el: `${selector} .swiper-pagination`, // Utilise le sélecteur pour la pagination*/
       el: paginationSelector,

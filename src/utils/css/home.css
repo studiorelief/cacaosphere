@@ -1,4 +1,19 @@
 /*
+! Product Card | EJ
+*/
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  .hp_products_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 945px) and (min-width: 768px) {
+  .hp_products_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/*
 ! HomePage Testimonial | EJ
 */
 
