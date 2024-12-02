@@ -56,6 +56,17 @@
   }
 }
 
+@media screen and (max-width: 991px) {
+  .star {
+    width: 2rem;
+    height: 2rem;
+  }
+  .star.show {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
 @media screen and (min-width: 800px) and (max-width: 992px) {
   .map_left-col {
     width: 20%;

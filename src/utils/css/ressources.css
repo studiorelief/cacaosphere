@@ -34,6 +34,7 @@
   }
   .ressources_bc-top-row {
     height: 16.875rem;
+    border-radius: 2.5rem 0.5rem !important ;
   }
   .blog_a-la-une_cards-container {
     flex-direction: row;
@@ -59,6 +60,18 @@
     justify-content: space-between;
     width: 100%;
   }
+}
+
+/* 
+! HUB | EJ
+*/
+
+.hp_blog_sc_descriptive-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* Propriété standard pour anticiper la compatibilité future */
+  overflow: hidden;
 }
 
 /* 
