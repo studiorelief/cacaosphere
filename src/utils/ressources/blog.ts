@@ -100,7 +100,7 @@ export function searchBarPlaceholderStyling() {
 }
 
 //Big card ressources
-export function animateBigCardRessource() {
+/*export function animateBigCardRessource() {
   const element = document.querySelector('.ressources_bc-top-row');
 
   if (element) {
@@ -255,7 +255,7 @@ export function animateSpecialSelectCard() {
       });
     });
   });
-}
+}*/
 
 // Show 'Guide & Études de cas' when user comes from hub page
 export function handleGuideFilter() {
@@ -335,3 +335,273 @@ export function blogMenuVisibility() {
     });
   }
 }
+
+// Big card ressources
+export const animateBigCardRessource = (): void => {
+  const element = document.querySelector('.ressources_bc-top-row');
+
+  // Fonction pour ajouter les événements d'animation
+  const addHoverEvents = () => {
+    if (element) {
+      // Appliquer l'état initial uniquement si la taille d'écran est > 991px
+      gsap.set(element, { borderRadius: '0.5rem 5rem 0.5rem 5rem' });
+
+      element.addEventListener('mouseenter', handleMouseEnter);
+      element.addEventListener('mouseleave', handleMouseLeave);
+    }
+  };
+
+  // Fonction pour retirer les événements d'animation
+  const removeHoverEvents = () => {
+    if (element) {
+      element.removeEventListener('mouseenter', handleMouseEnter);
+      element.removeEventListener('mouseleave', handleMouseLeave);
+      gsap.set(element, { clearProps: 'all' }); // Nettoyer les styles si taille d'écran <= 991px
+    }
+  };
+
+  // Gestionnaire pour l'événement mouseenter
+  const handleMouseEnter = () => {
+    if (element) {
+      gsap.to(element, {
+        duration: 0.3,
+        borderRadius: '5rem 0.5rem 5rem 0.5rem',
+        ease: 'power2.out',
+      });
+    }
+  };
+
+  // Gestionnaire pour l'événement mouseleave
+  const handleMouseLeave = () => {
+    if (element) {
+      gsap.to(element, {
+        duration: 0.3,
+        borderRadius: '0.5rem 5rem 0.5rem 5rem',
+        ease: 'power2.out',
+      });
+    }
+  };
+
+  // Fonction pour vérifier la taille d'écran
+  const checkScreenSize = () => {
+    if (window.innerWidth > 991) {
+      addHoverEvents(); // Appliquer état initial et événements si écran > 991px
+    } else {
+      removeHoverEvents(); // Supprimer les animations et styles si écran ≤ 991px
+    }
+  };
+
+  // Initialisation au chargement
+  checkScreenSize();
+
+  // Ajoute un écouteur pour gérer les changements de taille de l'écran
+  window.addEventListener('resize', checkScreenSize);
+};
+
+// Small card ressources
+export const animateSmallCardRessource = (): void => {
+  const elements = document.querySelectorAll('.hp_blog_sc-img-container');
+
+  const addHoverEvents = () => {
+    elements.forEach((element) => {
+      const frontImage = element.querySelector('.hp_blog_sc-img-front');
+      const hoverImage = element.querySelector('.hp_blog_sc-img-hover');
+
+      if (frontImage && hoverImage) {
+        element.addEventListener('mouseenter', handleMouseEnter);
+        element.addEventListener('mouseleave', handleMouseLeave);
+      }
+    });
+  };
+
+  const removeHoverEvents = () => {
+    elements.forEach((element) => {
+      const frontImage = element.querySelector('.hp_blog_sc-img-front');
+      const hoverImage = element.querySelector('.hp_blog_sc-img-hover');
+
+      if (frontImage && hoverImage) {
+        element.removeEventListener('mouseenter', handleMouseEnter);
+        element.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    });
+  };
+
+  const handleMouseEnter = (event: Event) => {
+    const element = event.currentTarget as HTMLElement;
+    const frontImage = element.querySelector<HTMLElement>('.hp_blog_sc-img-front');
+    const hoverImage = element.querySelector<HTMLElement>('.hp_blog_sc-img-hover');
+
+    if (frontImage && hoverImage) {
+      gsap.to(element, {
+        duration: 0.3,
+        borderRadius: '2.5rem 0.5rem 2.5rem 0.5rem',
+        ease: 'power2.out',
+      });
+      gsap.to(frontImage, { opacity: 0, duration: 0.3, ease: 'power2.out' });
+      gsap.to(hoverImage, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+    }
+  };
+
+  const handleMouseLeave = (event: Event) => {
+    const element = event.currentTarget as HTMLElement;
+    const frontImage = element.querySelector<HTMLElement>('.hp_blog_sc-img-front');
+    const hoverImage = element.querySelector<HTMLElement>('.hp_blog_sc-img-hover');
+
+    if (frontImage && hoverImage) {
+      gsap.to(element, {
+        duration: 0.3,
+        borderRadius: '0.5rem 2.5rem 0.5rem 2.5rem',
+        ease: 'power2.out',
+      });
+      gsap.to(frontImage, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+      gsap.to(hoverImage, { opacity: 0, duration: 0.3, ease: 'power2.out' });
+    }
+  };
+
+  const checkScreenSize = () => {
+    if (window.innerWidth > 991) {
+      addHoverEvents();
+    } else {
+      removeHoverEvents();
+    }
+  };
+
+  // Initial check and resize listener
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+};
+
+// Last news card
+export const animateLastNewsCard = (): void => {
+  const elements = document.querySelectorAll('.blog_last-posts_img-wrapper');
+
+  const addHoverEvents = () => {
+    elements.forEach((element) => {
+      const overlay = element.querySelector('.blog_last-posts_overlay');
+      if (overlay) {
+        element.addEventListener('mouseenter', handleMouseEnter);
+        element.addEventListener('mouseleave', handleMouseLeave);
+      }
+    });
+  };
+
+  const removeHoverEvents = () => {
+    elements.forEach((element) => {
+      const overlay = element.querySelector('.blog_last-posts_overlay');
+      if (overlay) {
+        element.removeEventListener('mouseenter', handleMouseEnter);
+        element.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    });
+  };
+
+  const handleMouseEnter = (event: Event) => {
+    const element = event.currentTarget as HTMLElement;
+    const overlay = element.querySelector<HTMLElement>('.blog_last-posts_overlay');
+
+    if (overlay) {
+      gsap.to(element, {
+        duration: 0.3,
+        borderRadius: '0.5rem 2.5rem 0.5rem 2.5rem',
+        ease: 'power2.out',
+      });
+      gsap.to(overlay, {
+        duration: 0.3,
+        opacity: 0.2,
+        ease: 'power2.out',
+      });
+    }
+  };
+
+  const handleMouseLeave = (event: Event) => {
+    const element = event.currentTarget as HTMLElement;
+    const overlay = element.querySelector<HTMLElement>('.blog_last-posts_overlay');
+
+    if (overlay) {
+      gsap.to(element, {
+        duration: 0.3,
+        borderRadius: '2.5rem 0.5rem 2.5rem 0.5rem',
+        ease: 'power2.out',
+      });
+      gsap.to(overlay, {
+        duration: 0.3,
+        opacity: 0,
+        ease: 'power2.out',
+      });
+    }
+  };
+
+  const checkScreenSize = () => {
+    if (window.innerWidth > 991) {
+      addHoverEvents();
+    } else {
+      removeHoverEvents();
+    }
+  };
+
+  // Initial check and resize listener
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+};
+
+export const animateSpecialSelectCard = (): void => {
+  const elements = document.querySelectorAll('.blog_last-posts_selection-img-wrapper');
+
+  const addHoverEvents = () => {
+    elements.forEach((element) => {
+      // Initial border style
+      gsap.set(element, {
+        borderRadius: '1rem 0.25rem 1rem 0.25rem',
+        borderColor: '#f4dddc',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+      });
+
+      element.addEventListener('mouseenter', handleMouseEnter);
+      element.addEventListener('mouseleave', handleMouseLeave);
+    });
+  };
+
+  const removeHoverEvents = () => {
+    elements.forEach((element) => {
+      element.removeEventListener('mouseenter', handleMouseEnter);
+      element.removeEventListener('mouseleave', handleMouseLeave);
+    });
+  };
+
+  const handleMouseEnter = (event: Event) => {
+    const element = event.currentTarget as HTMLElement;
+
+    gsap.to(element, {
+      duration: 0.3,
+      borderRadius: '0.25rem 1rem 0.25rem 1rem',
+      borderColor: '#5a1f1b',
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseLeave = (event: Event) => {
+    const element = event.currentTarget as HTMLElement;
+
+    gsap.to(element, {
+      duration: 0.3,
+      borderRadius: '1rem 0.25rem 1rem 0.25rem',
+      borderColor: '#f4dddc',
+      ease: 'power2.out',
+    });
+  };
+
+  const checkScreenSize = () => {
+    if (window.innerWidth > 991) {
+      addHoverEvents();
+    } else {
+      removeHoverEvents();
+    }
+  };
+
+  // Vérifie la taille de l'écran au chargement
+  checkScreenSize();
+
+  // Ajoute un écouteur d'événements pour les changements de taille de la fenêtre
+  window.addEventListener('resize', checkScreenSize);
+};

@@ -95,9 +95,34 @@ export function linkFaqCategoryAnimations() {
   });
 
   //  "sticky" pour faqLeftCol
-  const faqLeftCol = document.querySelector('.faq_left-col') as HTMLElement | null;
+  /*const faqLeftCol = document.querySelector('.faq_left-col') as HTMLElement | null;
   if (faqLeftCol) {
     faqLeftCol.style.position = 'sticky';
     faqLeftCol.style.top = '5rem';
+  }*/
+
+  // "sticky" for faqLeftCol only for screens larger than 991px
+  const faqLeftCol = document.querySelector('.faq_left-col') as HTMLElement | null;
+
+  if (faqLeftCol) {
+    const mediaQuery = window.matchMedia('(min-width: 992px)'); // Only for screens wider than 991px
+
+    const applyStickyPosition = () => {
+      if (mediaQuery.matches) {
+        // Apply sticky styles
+        faqLeftCol.style.position = 'sticky';
+        faqLeftCol.style.top = '5rem';
+      } else {
+        // Reset styles for smaller screens
+        faqLeftCol.style.position = '';
+        faqLeftCol.style.top = '';
+      }
+    };
+
+    // Apply styles on load
+    applyStickyPosition();
+
+    // Listen for changes in screen size
+    mediaQuery.addEventListener('change', applyStickyPosition);
   }
 }
