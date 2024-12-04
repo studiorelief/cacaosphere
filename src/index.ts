@@ -22,7 +22,8 @@ import {
   swiperProduitsAutres,
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
-import { hideSectionIfCmsEmpty } from '$utils/global/tricks';
+import { hideSectionIfCmsEmpty, removeStaticListAProposMobile } from '$utils/global/tricks';
+import { heroVideoScale } from '$utils/home/hero';
 import {
   initProductsHover,
   initSmallTerroirsHover,
@@ -120,6 +121,7 @@ window.Webflow.push(() => {
     hoverOnActionCard();
     animateDownloadCardHover();
     animateHubGalerieCardHover();
+    heroVideoScale();
   }
 
   /* tricks */
@@ -213,6 +215,21 @@ window.Webflow.push(() => {
     swiperProduitsCarousel();
     fixCatalogueCategoriesText();
     hideEmptyLabelsContainer();
+
+    // animation ressources
+    ressourcesHover();
+    initTerroirsHover();
+    initSmallTerroirsHover();
+    initProductsHover();
+    hoverOnActionCard();
+    animateDownloadCardHover();
+    animateHubGalerieCardHover();
+    heroVideoScale();
+  }
+
+  /* A propos */
+  if (window.location.pathname === '/a-propos') {
+    removeStaticListAProposMobile();
   }
 
   if (window.location.pathname === '/contact') {
