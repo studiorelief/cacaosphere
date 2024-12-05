@@ -52,10 +52,10 @@ import {
   mirrorFaqSearch,
 } from '$utils/ressources/faq';
 import {
-  animateDownloadCardHover,
-  animateHubGalerieCardHover,
   applyMarginToHubGalerie,
-  hoverOnActionCard,
+  hoverOnDownloadCard,
+  hoverOnGalerieCard,
+  hoverOnVideoCard,
   showContentTestimonialCard,
   showMoreItems,
 } from '$utils/ressources/hub';
@@ -100,6 +100,11 @@ window.Webflow.push(() => {
   swiperHubMobile('.swiper.is-mobile-hub-page.is-guide', '.coop_hero_pagination.is-guide');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-action', '.coop_hero_pagination.is-action');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-download', '.coop_hero_pagination.is-download');
+  //Product
+  swiperHubMobile(
+    '.swiper.is-mobile-product-page.is-ressources',
+    '.coop_hero_pagination.is-ressources.is-product-page'
+  );
 
   /* gsap */
   animateBigCardRessource();
@@ -117,9 +122,9 @@ window.Webflow.push(() => {
     initTerroirsHover();
     initSmallTerroirsHover();
     initProductsHover();
-    hoverOnActionCard();
-    animateDownloadCardHover();
-    animateHubGalerieCardHover();
+    hoverOnVideoCard();
+    hoverOnDownloadCard();
+    hoverOnGalerieCard();
   }
 
   /* tricks */
@@ -133,11 +138,11 @@ window.Webflow.push(() => {
 
   /* hub */
   if (window.location.href.includes('hub')) {
-    hoverOnActionCard();
+    hoverOnVideoCard();
     showContentTestimonialCard();
-    animateHubGalerieCardHover();
+    hoverOnGalerieCard();
     applyMarginToHubGalerie();
-    animateDownloadCardHover();
+    hoverOnDownloadCard();
     // Fusion des appels showMoreItems
     ['testimonial', 'galerie', 'download', 'action'].forEach((type) =>
       showMoreItems(type as 'testimonial' | 'galerie' | 'download' | 'action')
@@ -213,6 +218,9 @@ window.Webflow.push(() => {
     swiperProduitsCarousel();
     fixCatalogueCategoriesText();
     hideEmptyLabelsContainer();
+    hoverOnGalerieCard();
+    hoverOnVideoCard();
+    hoverOnDownloadCard();
   }
 
   if (window.location.pathname === '/contact') {
