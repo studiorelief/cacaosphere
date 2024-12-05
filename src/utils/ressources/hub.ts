@@ -30,95 +30,6 @@ export function showMoreItems(type: 'testimonial' | 'galerie' | 'download' | 'ac
   });
 }
 
-// Hover animation on ACTION CARD
-export function hoverOnActionCard() {
-  const cards = document.querySelectorAll('.hub_action_card');
-
-  // Fonction pour ajouter les événements de survol
-  const addHoverEvents = () => {
-    cards.forEach((card) => {
-      const overlay = card.querySelector('.hub_action_overlay') as HTMLElement;
-      const textContent = card.querySelector('.hub_action_text-content') as HTMLElement;
-
-      // Vérifie si les éléments existent avant d'ajouter des événements
-      if (overlay && textContent) {
-        card.addEventListener('mouseenter', handleMouseEnter);
-        card.addEventListener('mouseleave', handleMouseLeave);
-      }
-    });
-  };
-
-  // Fonction pour retirer les événements de survol
-  const removeHoverEvents = () => {
-    cards.forEach((card) => {
-      const overlay = card.querySelector('.hub_action_overlay') as HTMLElement;
-      const textContent = card.querySelector('.hub_action_text-content') as HTMLElement;
-
-      if (overlay && textContent) {
-        card.removeEventListener('mouseenter', handleMouseEnter);
-        card.removeEventListener('mouseleave', handleMouseLeave);
-      }
-    });
-  };
-
-  // Gestionnaires d'événements
-  const handleMouseEnter = (event: Event) => {
-    const overlay = (event.currentTarget as HTMLElement).querySelector(
-      '.hub_action_overlay'
-    ) as HTMLElement;
-    const textContent = (event.currentTarget as HTMLElement).querySelector(
-      '.hub_action_text-content'
-    ) as HTMLElement;
-
-    if (overlay && textContent) {
-      overlay.style.opacity = '80%';
-
-      // Animer le texte pour qu'il glisse vers le haut
-      gsap.to(textContent, {
-        duration: 0.3,
-        bottom: '-2rem',
-        ease: 'power3.out',
-      });
-    }
-  };
-
-  const handleMouseLeave = (event: Event) => {
-    const overlay = (event.currentTarget as HTMLElement).querySelector(
-      '.hub_action_overlay'
-    ) as HTMLElement;
-    const textContent = (event.currentTarget as HTMLElement).querySelector(
-      '.hub_action_text-content'
-    ) as HTMLElement;
-
-    if (overlay && textContent) {
-      overlay.style.opacity = '0%';
-
-      // Retour à la position initiale
-      gsap.to(textContent, {
-        duration: 0.3,
-        bottom: '-9rem',
-        ease: 'power3.out',
-      });
-    }
-  };
-
-  // Fonction pour vérifier la taille de l'écran
-  const checkScreenSize = () => {
-    if (window.innerWidth > 991) {
-      // Vérifie si la largeur est supérieure à 991px
-      addHoverEvents(); // Ajoute les événements si la largeur est supérieure à 991px
-    } else {
-      removeHoverEvents(); // Retire les événements si la largeur est inférieure ou égale à 991px
-    }
-  };
-
-  // Vérifie la taille de l'écran au chargement
-  checkScreenSize();
-
-  // Ajoute un écouteur d'événements pour les changements de taille de la fenêtre
-  window.addEventListener('resize', checkScreenSize);
-}
-
 // Shows the text of the testimonial card
 export function showContentTestimonialCard() {
   const moreWrappers = document.querySelectorAll<HTMLElement>('.hub_testimonial_logo-more-wrapper');
@@ -162,16 +73,105 @@ export function showContentTestimonialCard() {
   });
 }
 
-// Hover on Hub card
-export const animateHubGalerieCardHover = (): void => {
+// Hover animation on VIDEO CARD
+export function hoverOnVideoCard() {
+  const cards = document.querySelectorAll('.hub_action_card');
+
+  // Gestionnaires d'événements
+  const handleMouseEnter = (event: Event) => {
+    const target = event.currentTarget as HTMLElement;
+    const overlay = target.querySelector('.hub_action_overlay') as HTMLElement;
+    const textContent = target.querySelector('.hub_action_text-content') as HTMLElement;
+    const playWrapper = target.querySelector('.hub_action_play-wrapper') as HTMLElement;
+
+    if (overlay && textContent) {
+      overlay.style.opacity = '80%';
+
+      // Vérifier si la carte et le texte ont la classe combinée .is-home
+      const isHome =
+        target.classList.contains('is-home') && textContent.classList.contains('is-home');
+      const topPosition = isHome ? '12.2rem' : '17.5rem';
+
+      gsap.to(textContent, {
+        duration: 0.3,
+        top: topPosition,
+        ease: 'power3.out',
+      });
+
+      // Modifier la position de hub_action_play-wrapper si isHome
+      if (isHome && playWrapper) {
+        gsap.to(playWrapper, {
+          duration: 0.3,
+          top: '8rem',
+          ease: 'power3.out',
+        });
+      }
+    }
+  };
+
+  const handleMouseLeave = (event: Event) => {
+    const target = event.currentTarget as HTMLElement;
+    const overlay = target.querySelector('.hub_action_overlay') as HTMLElement;
+    const textContent = target.querySelector('.hub_action_text-content') as HTMLElement;
+    const playWrapper = target.querySelector('.hub_action_play-wrapper') as HTMLElement;
+
+    if (overlay && textContent) {
+      overlay.style.opacity = '0%';
+
+      // Vérifier si la carte et le texte ont la classe combinée .is-home
+      const isHome =
+        target.classList.contains('is-home') && textContent.classList.contains('is-home');
+      const initialTop = isHome ? '16.8rem' : '25.2rem';
+
+      gsap.to(textContent, {
+        duration: 0.3,
+        top: initialTop,
+        ease: 'power3.out',
+      });
+
+      // Réinitialiser la position de hub_action_play-wrapper si isHome
+      if (isHome && playWrapper) {
+        gsap.to(playWrapper, {
+          duration: 0.3,
+          top: 'auto', // Retour à la position initiale auto
+          ease: 'power3.out',
+        });
+      }
+    }
+  };
+
+  // Ajouter ou retirer les événements de survol
+  const toggleHoverEvents = (addEvents: boolean) => {
+    cards.forEach((card) => {
+      const method = addEvents ? 'addEventListener' : 'removeEventListener';
+      card[method]('mouseenter', handleMouseEnter);
+      card[method]('mouseleave', handleMouseLeave);
+    });
+  };
+
+  // Vérifier la taille de l'écran
+  const checkScreenSize = () => {
+    const isDesktop = window.innerWidth > 991;
+    toggleHoverEvents(isDesktop); // Ajoute ou retire les événements selon la taille de l'écran
+  };
+
+  // Initialisation
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+}
+
+export const hoverOnGalerieCard = (): void => {
   const cards = document.querySelectorAll('.hub_galerie_card');
 
   // Applies hover and mouseleave animations to each card
   cards.forEach((card) => {
     const textContent = card.querySelector<HTMLElement>('.hub_galerie_text-content');
 
-    // Checks if the text element exists before continuing
     if (textContent) {
+      // Determine if the card and text have the .is-home class
+      const isHome =
+        card.classList.contains('is-home') && textContent.classList.contains('is-home');
+
       // Set hover animation
       card.addEventListener('mouseenter', () => {
         gsap.to(textContent, {
@@ -185,8 +185,16 @@ export const animateHubGalerieCardHover = (): void => {
       // Sets the animation for the mouseleave
       card.addEventListener('mouseleave', () => {
         const screenWidth = window.innerWidth; // Get the current screen width
-        const initialTop = screenWidth < 480 ? '6.9rem' : '15rem'; // Set top based on screen width
 
+        // Default position for non-home cards
+        let initialTop = screenWidth < 480 ? '6.9rem' : '15rem';
+
+        // Override position for home cards
+        if (isHome) {
+          initialTop = '18.2rem';
+        }
+
+        // Ensure the element returns to its initial position
         gsap.to(textContent, {
           top: initialTop, // Adjusted initial position at mouseleave
           backgroundColor: 'transparent', // Initial background-color
@@ -194,24 +202,16 @@ export const animateHubGalerieCardHover = (): void => {
           ease: 'power3.out',
         });
       });
+
+      // Ensure the initial position is set correctly on load
+      const screenWidth = window.innerWidth; // Get the current screen width
+      const initialTop = isHome ? '18.2rem' : screenWidth < 480 ? '6.9rem' : '15rem';
+      textContent.style.top = initialTop;
     }
   });
 };
-
-//Apply margin at HUB GALERY
-export function applyMarginToHubGalerie() {
-  const cards = document.querySelectorAll('.hub_galerie_card');
-
-  // Applies a margin-top of 2.5rem to every second element
-  cards.forEach((card, index) => {
-    if (index % 2 === 0) {
-      (card as HTMLElement).style.marginTop = '2.5rem';
-    }
-  });
-}
-
 // Hover on DOWNLOAD CARD
-export const animateDownloadCardHover = (): void => {
+export const hoverOnDownloadCard = (): void => {
   const cards = document.querySelectorAll('.hub_donwload_card');
 
   // Add events on mouse enter
@@ -305,3 +305,15 @@ export const animateDownloadCardHover = (): void => {
   // Ajoute un écouteur d'événements pour les changements de taille de la fenêtre
   window.addEventListener('resize', checkScreenSize);
 };
+
+//Apply margin at HUB GALERY
+export function applyMarginToHubGalerie() {
+  const cards = document.querySelectorAll('.hub_galerie_card');
+
+  // Applies a margin-top of 2.5rem to every second element
+  cards.forEach((card, index) => {
+    if (index % 2 === 0) {
+      (card as HTMLElement).style.marginTop = '2.5rem';
+    }
+  });
+}

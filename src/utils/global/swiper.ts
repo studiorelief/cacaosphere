@@ -184,7 +184,6 @@ export function swiperLastPosts() {
 }
 
 /* produits */
-
 export function swiperCoopProduct() {
   const swiperElement = document.querySelector('.swiper.is-slider-coop');
 
@@ -211,6 +210,7 @@ export function swiperHubMobile(selector: string, paginationSelector: string) {
   new Swiper(selector, {
     direction: 'horizontal',
     slidesPerView: 1,
+    spaceBetween: 30,
     /*spaceBetween: 24,*/
     speed: 400,
     loop: true,
