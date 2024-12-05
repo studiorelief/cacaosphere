@@ -20,3 +20,13 @@ export function hideSectionIfCmsEmpty() {
     }
   });
 }
+
+// remove "fs-cmsstatic-element=list" on mobile for page "A propos"
+export function removeStaticListAProposMobile() {
+  if (window.innerWidth < 991) {
+    const list = document.querySelector('[fs-cmsstatic-element="list"]');
+    if (list instanceof HTMLElement) {
+      list.removeAttribute('fs-cmsstatic-element');
+    }
+  }
+}
