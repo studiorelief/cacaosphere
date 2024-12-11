@@ -400,7 +400,7 @@ export const animateBigCardRessource = (): void => {
 
 // Small card ressources
 export const animateSmallCardRessource = (): void => {
-  const elements = document.querySelectorAll('.hp_blog_sc-img-container');
+  const elements = document.querySelectorAll('.hp_blog_small-card.is-coop');
 
   const addHoverEvents = () => {
     elements.forEach((element) => {
