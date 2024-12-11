@@ -89,16 +89,27 @@
   .hub_testimonial_grid {
     grid-template-columns: repeat(1, 1fr); /* 2 at 1 col */
   }
+  .hub_testimonial_hover-card {
+    width: 30rem;
+  }
   .hub_guide_grid {
     grid-template-columns: repeat(2, 1fr) !important; /* 3 at 2 col */
   }
-  .hp_blog_small-card.is-coop {
-    width: 100% !important;
-  }
 }
 
-@media (max-width: 1200px) and (min-width: 992px) {
+@media (max-width: 1348px) and (min-width: 992px) {
   .hub_download_grid {
     grid-template-columns: repeat(3, 1fr); /* 4 at 3 col */
   }
+}
+/* Media query pour passer à 2 colonnes entre 1227px et 991px */
+@media (max-width: 1227px) and (min-width: 991px) {
+  .blog_all-articles_collection-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+  }
+}
+
+.button.is-text.is-icon {
+  display: flex; /* Définit le conteneur comme un flexbox */
+  flex-wrap: nowrap; /* Empêche les éléments enfants de passer à la ligne */
 }
