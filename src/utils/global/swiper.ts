@@ -4,15 +4,29 @@ import 'swiper/css/bundle';
 import Swiper from 'swiper/bundle';
 
 export function swiperHpPicture() {
-  new Swiper('.swiper.is-slider-picture', {
+  const swiper = new Swiper('.swiper.is-slider-picture', {
     direction: 'horizontal',
     slidesPerView: 1,
-    speed: 400,
+    speed: 800,
     loop: true,
     navigation: {
       nextEl: '.slider-picture_button-next',
       prevEl: '.slider-picture_button-prev',
     },
+  });
+
+  swiper.on('slideChangeTransitionStart', () => {
+    const slides = document.querySelectorAll('.swiper-slide.is-slider-picture');
+    slides.forEach((slide) => {
+      slide.classList.add('fade-out'); // Ajouter la classe de fondu
+    });
+  });
+
+  swiper.on('slideChangeTransitionEnd', () => {
+    const slides = document.querySelectorAll('.swiper-slide.is-slider-picture');
+    slides.forEach((slide) => {
+      slide.classList.remove('fade-out'); // Retirer la classe de fondu
+    });
   });
 }
 
@@ -20,7 +34,8 @@ export function swiperHpTestimonial() {
   new Swiper('.swiper.is-hp-testimonials', {
     direction: 'horizontal',
     slidesPerView: 1,
-    speed: 800,
+    autoHeight: true,
+    speed: 600,
     loop: true,
     mousewheel: {
       forceToAxis: true,
@@ -32,7 +47,7 @@ export function swiperHpTestimonial() {
     breakpoints: {
       // When the screen width is greater than 480px
       480: {
-        slidesPerView: 2,
+        slidesPerView: 'auto',
         centerSlide: true,
         spaceBetween: 5 * 16,
       },

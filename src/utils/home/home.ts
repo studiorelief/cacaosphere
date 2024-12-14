@@ -173,3 +173,55 @@ export function initProductsHover(): void {
     }
   });
 }
+
+export function observeSliderText() {
+  const sliders = document.querySelectorAll('.hp_slider_picture');
+
+  const options: IntersectionObserverInit = {
+    root: null, // Utiliser le viewport
+    rootMargin: '0px',
+    threshold: 0.1, // Déclencher lorsque 10% de l'élément est visible
+  };
+
+  const callback = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      if (entry.isIntersecting) {
+        const textContents = entry.target.querySelectorAll(
+          '.hp_slider-picture_text-content'
+        ) as NodeListOf<HTMLElement>;
+        const embedWrappers = entry.target.querySelectorAll(
+          '.hp_slider-picture_embed-wrapper'
+        ) as NodeListOf<HTMLElement>;
+
+        textContents.forEach((textContent) => {
+          textContent.classList.add('visible'); // Ajouter la classe pour l'animation
+        });
+
+        embedWrappers.forEach((embedWrapper) => {
+          embedWrapper.classList.add('visible'); // Ajouter la classe pour l'animation
+        });
+      } else {
+        const textContents = entry.target.querySelectorAll(
+          '.hp_slider-picture_text-content'
+        ) as NodeListOf<HTMLElement>;
+        const embedWrappers = entry.target.querySelectorAll(
+          '.hp_slider-picture_embed-wrapper'
+        ) as NodeListOf<HTMLElement>;
+
+        textContents.forEach((textContent) => {
+          textContent.classList.remove('visible'); // Retirer la classe pour l'animation
+        });
+
+        embedWrappers.forEach((embedWrapper) => {
+          embedWrapper.classList.remove('visible'); // Retirer la classe pour l'animation
+        });
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(callback, options);
+
+  sliders.forEach((slider) => {
+    observer.observe(slider); // Observer chaque slider
+  });
+}

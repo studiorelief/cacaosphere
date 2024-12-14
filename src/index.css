@@ -139,10 +139,26 @@
   }
 }
 
+/* 
+! Testimonial Slider - HP (EJ)
+*/
+
 .hp_testimonials_paragraph {
   display: -webkit-box; /* Utilisé pour créer un conteneur flexible */
   -webkit-box-orient: vertical; /* Définit l'orientation du conteneur */
   -webkit-line-clamp: 9; /* Limite le nombre de lignes visibles à 3 */
   overflow: hidden; /* Cache le texte qui dépasse */
   text-overflow: ellipsis; /* Ajoute des points de suspension (...) à la fin */
+}
+/* 
+! 12/12 HP (EJ)
+*/
+
+.swiper-slide.is-slider-picture {
+  opacity: 1;
+  transition: opacity 0.6s ease-in-out; /* Durée de la transition augmentée */
+}
+
+.swiper-slide.is-slider-picture.fade-out {
+  opacity: 0.9; /* État de fondu */
 }
