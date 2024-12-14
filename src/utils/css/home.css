@@ -69,3 +69,10 @@
     width: 100% !important; /* Définit la largeur à 100% */
   }
 }
+
+@media (max-width: 1373px) and (min-width: 991px) {
+  .hp_ressources_collection-list {
+    grid-template-columns: 1fr; /* Passe à 1 colonne */
+    justify-items: start; /* Aligne les éléments vers la droite */
+  }
+}
