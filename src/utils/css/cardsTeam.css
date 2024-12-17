@@ -40,3 +40,12 @@
   mask-repeat: no-repeat;
   mask-position: 1.5rem 1.5rem;
 }
+
+.team-cards_component:hover .team-cards_overlay {
+  opacity: 0;
+}
+
+.team-cards_component .team-cards_overlay {
+  opacity: 0.3;
+  transition: opacity 0.2s ease-out;
+}
