@@ -1,5 +1,5 @@
 /* 
-! Testimonial Slider - HP (EJ)
+! Testimonial Slider
 */
 
 .hp_testimonials_paragraph {
@@ -11,7 +11,7 @@
 }
 
 /*
-! Product Card | EJ
+! Product Card
 */
 
 @media (max-width: 1200px) and (min-width: 992px) {
@@ -26,7 +26,7 @@
 }
 
 /*
-! HomePage Testimonial | EJ
+! HomePage Testimonial
 */
 
 .swiper.is-hp-testimonials {
@@ -40,7 +40,7 @@
 }
 
 /* 
-  ! Home Slider Picture | EJ
+  ! Home Slider Picture
   */
 .cont.hp_slider-picture_title-image {
   display: -webkit-box; /* Utilisation du modèle de boîte flexible pour WebKit */
@@ -62,7 +62,7 @@
 }
 
 /* 
-! Home - MEDIA QUERY | EJ
+! Home - MEDIA QUERY
 */
 @media (max-width: 1326px) and (min-width: 992px) {
   .hp_terroirs_right-collection-list .hp.w-dyn-item {
@@ -74,5 +74,16 @@
   .hp_ressources_collection-list {
     grid-template-columns: 1fr; /* Passe à 1 colonne */
     justify-items: start; /* Aligne les éléments vers la droite */
+  }
+  @media (max-width: 1373px) and (min-width: 991px) {
+    .hp_ressources_collection-list {
+      grid-template-columns: 1fr;
+      justify-items: start;
+    }
+    /* Cache les éléments 3 et 4 */
+    .hp_ressources_collection-list .w-dyn-item:nth-child(3),
+    .hp_ressources_collection-list .w-dyn-item:nth-child(4) {
+      display: none;
+    }
   }
 }

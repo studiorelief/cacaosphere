@@ -1,31 +1,37 @@
 /*
-! Blog - Search bar | EJ
+! Blog - Search bar
 */
-/* Styles au hover */
+
 .header_v3_blog-field:hover {
-  box-shadow: 0px 0px 0px 1px rgba(204, 94, 86, 0.5); /* Box shadow au hover */
+  box-shadow: 0px 0px 0px 1px rgba(204, 94, 86, 0.5);
 }
 
 .header_v3_blog-field:hover::placeholder {
-  color: #9d362f; /* Couleur du placeholder au hover */
+  color: #9d362f;
 }
 
-/* Styles au focus */
 .header_v3_blog-field:focus {
-  box-shadow: 0px 0px 0px 2px rgba(204, 94, 86, 0.5); /* Box shadow au focus */
+  box-shadow: 0px 0px 0px 2px rgba(204, 94, 86, 0.5);
 }
 
 .header_v3_blog-field:focus::placeholder {
-  color: #cc5e56; /* Couleur du placeholder au focus */
+  color: #cc5e56;
 }
 
-/* Style pour le placeholder avec un poids de 500 */
 .header_v3_blog-field.placeholder-active {
-  font-weight: 500; /* Poids de police modifié lorsque l'utilisateur saisit */
+  font-weight: 500;
 }
-
 /* 
-! BLOG - MEDIA QUERY | EJ
+! BLOG
+*/
+
+.w-row:before,
+.w-row:after {
+  /*Tous les articles | Collection List Grid */
+  content: none; /* Enlève l'élément pseudo */
+}
+/* 
+! BLOG - MEDIA QUERY
 */
 @media (min-width: 991px) and (max-width: 1280px) {
   .ressources_big-card.is-blog {
@@ -63,7 +69,7 @@
 }
 
 /* 
-! HUB | EJ
+! HUB
 */
 
 .hp_blog_sc_descriptive-text {
@@ -75,20 +81,17 @@
 }
 
 /* 
-! HUB - MEDIA QUERY | EJ
+! HUB - MEDIA QUERY
 */
 
 @media (max-width: 390px) {
   .hub_galerie_grid {
-    grid-template-columns: 1fr; /* Une seule colonne */
+    grid-template-columns: 1fr;
     gap: 0 !important;
   }
 }
 
 @media (max-width: 1300px) and (min-width: 992px) {
-  .hub_testimonial_grid {
-    grid-template-columns: repeat(1, 1fr); /* 2 at 1 col */
-  }
   .hub_testimonial_hover-card {
     width: 30rem;
   }
@@ -102,14 +105,31 @@
     grid-template-columns: repeat(3, 1fr); /* 4 at 3 col */
   }
 }
-/* Media query pour passer à 2 colonnes entre 1227px et 991px */
+/* Media query pour passer à 2 col */
 @media (max-width: 1227px) and (min-width: 991px) {
   .blog_all-articles_collection-list {
-    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 .button.is-text.is-icon {
-  display: flex; /* Définit le conteneur comme un flexbox */
+  display: flex;
   flex-wrap: nowrap; /* Empêche les éléments enfants de passer à la ligne */
+}
+
+@media (min-width: 992px) and (max-width: 1250px) {
+  .hub_testimonial_left-col {
+    width: 15rem;
+  }
+  .hub_testimonial_decorative-wrapper {
+    width: 14rem;
+    height: auto;
+  }
+  .hub_testimonial_right-col {
+    width: 11.5rem;
+  }
+
+  .hub_testimonial_hover-card {
+    width: 31rem;
+  }
 }
