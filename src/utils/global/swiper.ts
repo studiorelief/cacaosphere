@@ -72,6 +72,10 @@ export function swiperBlogAutres() {
     breakpoints: {
       // When the screen width is greater than 480px
       480: {
+        slidesPerView: 2,
+      },
+      // When the screen width is greater than 480px
+      1200: {
         slidesPerView: 3,
       },
     },
