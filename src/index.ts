@@ -4,10 +4,11 @@ import { catalogueFilterCount /* , updateCatalogueCount */ } from '$utils/catalo
 import { catalogueCat } from '$utils/catalogue/catalogueFilter';
 // import { catalogueLoader } from '$utils/catalogue/catalogueLoader';
 import { catalogueOpenFilter } from '$utils/catalogue/catalogueMobile';
-import { fixCatalogueCategoriesText } from '$utils/catalogue/catalogueQuickFix';
-import { hideEmptyLabelsContainer } from '$utils/catalogue/catalogueQuickFix';
-import { formInputLabels } from '$utils/contact/formInput';
-import { showSiret } from '$utils/contact/formInput';
+import {
+  fixCatalogueCategoriesText,
+  hideEmptyLabelsContainer,
+} from '$utils/catalogue/catalogueQuickFix';
+import { formInputLabels, showSiret } from '$utils/contact/formInput';
 import { loadScript } from '$utils/global/loadScript';
 import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils/global/navbar';
 import {
@@ -30,6 +31,7 @@ import {
   initTerroirsHover,
   ressourcesHover,
 } from '$utils/home/home';
+import { catalogueCategoriesTrad } from '$utils/localization/catalogueCategoriesTrad';
 import { initializeMap } from '$utils/map/map';
 import { catalogueFormTrigger } from '$utils/produits/catalogueFormTrigger';
 import { catalogueSameCat } from '$utils/produits/catalogueSameCat';
@@ -89,18 +91,23 @@ window.Webflow.push(() => {
   }
   /* swiper */
   swiperChronologie();
+
   //Home
   swiperHpPicture();
   swiperHpTestimonial();
+
   //Blog
   swiperBlogAutres();
+
   //coop
   swiperCoopHero();
+
   // Hub
   swiperHubMobile('.swiper.is-mobile-hub-page.is-testimonial', '.coop_hero_pagination.is-testi');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-guide', '.coop_hero_pagination.is-guide');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-action', '.coop_hero_pagination.is-action');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-download', '.coop_hero_pagination.is-download');
+
   //Product
   swiperHubMobile(
     '.swiper.is-mobile-product-page.is-ressources',
@@ -113,12 +120,16 @@ window.Webflow.push(() => {
   animateLastNewsCard();
   animateSpecialSelectCard();
 
+  /* Localization */
+  catalogueCategoriesTrad();
+
   /* cache 
   -> produit to contact form
   */
   catalogueFormTrigger();
+
   /* homepage */
-  if (window.location.pathname === '/') {
+  if (window.location.pathname === '/fr' || window.location.pathname === '/en') {
     ressourcesHover();
     initTerroirsHover();
     initSmallTerroirsHover();
@@ -202,7 +213,10 @@ window.Webflow.push(() => {
     }, 3500);
   }
 
-  if (window.location.pathname.startsWith('/catalogue-produit')) {
+  if (
+    window.location.pathname.startsWith('/fr/catalogue-produit') ||
+    window.location.pathname.startsWith('/en/catalogue-produit')
+  ) {
     /*
     TODO: recheck this logic -> remove setTimeout
     ?: Local code break on other pages than noir 65 -> alert for checking -> Trouver la source -> Sûrement swiper & nb item mais pourquoi ?

@@ -21,7 +21,7 @@ export function catalogueFormTrigger() {
   }
 
   // Check if we're on contact page
-  if (window.location.pathname === '/contact') {
+  if (window.location.pathname === '/fr/contact' || window.location.pathname === '/en/contact') {
     // Get stored product name
     const storedProduct = localStorage.getItem('selectedProduct');
 

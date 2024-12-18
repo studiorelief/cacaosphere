@@ -5,7 +5,7 @@
 @import './utils/css/ressources.css';
 @import './utils/css/home.css';
 @import './utils/css/coop.css';
-
+@import './utils/css/catalogue.css';
 /*
 ! Navbar
 */
@@ -147,6 +147,7 @@
   display: -webkit-box; /* Utilisé pour créer un conteneur flexible */
   -webkit-box-orient: vertical; /* Définit l'orientation du conteneur */
   -webkit-line-clamp: 9; /* Limite le nombre de lignes visibles à 3 */
+  line-clamp: 9;
   overflow: hidden; /* Cache le texte qui dépasse */
   text-overflow: ellipsis; /* Ajoute des points de suspension (...) à la fin */
 }
