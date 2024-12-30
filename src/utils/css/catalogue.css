@@ -2,3 +2,7 @@
   display: none !important;
   opacity: 0 !important;
 }
+
+.produit_arome_coop-item:last-child .produit_arome_list-sep {
+  display: none;
+}
