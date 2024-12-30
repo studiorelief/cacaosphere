@@ -185,7 +185,7 @@ window.Webflow.push(() => {
   formInputLabels();
 
   /* Catalogue */
-  if (window.location.pathname === '/catalogue') {
+  if (window.location.pathname.includes('/catalogue')) {
     // main category logic
 
     catalogueCat();
@@ -213,10 +213,7 @@ window.Webflow.push(() => {
     }, 3500);
   }
 
-  if (
-    window.location.pathname.startsWith('/fr/catalogue-produit') ||
-    window.location.pathname.startsWith('/en/catalogue-produit')
-  ) {
+  if (window.location.pathname.includes('/catalogue-produit')) {
     /*
     TODO: recheck this logic -> remove setTimeout
     ?: Local code break on other pages than noir 65 -> alert for checking -> Trouver la source -> Sûrement swiper & nb item mais pourquoi ?
@@ -247,11 +244,11 @@ window.Webflow.push(() => {
   }
 
   /* A propos */
-  if (window.location.pathname === '/a-propos') {
+  if (window.location.pathname.includes('/a-propos')) {
     removeStaticListAProposMobile();
   }
 
-  if (window.location.pathname === '/contact') {
+  if (window.location.pathname.includes('/contact')) {
     showSiret();
   }
 });
