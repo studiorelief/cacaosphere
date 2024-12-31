@@ -9,6 +9,7 @@ import {
   hideEmptyLabelsContainer,
 } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels, showSiret } from '$utils/contact/formInput';
+import { filterCooperativesByCountry } from '$utils/coop/coop';
 import { loadScript } from '$utils/global/loadScript';
 import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils/global/navbar';
 import {
@@ -91,6 +92,9 @@ window.Webflow.push(() => {
   }
   /* swiper */
   swiperChronologie();
+
+  /* TEST COOP */
+  filterCooperativesByCountry();
 
   //Home
   swiperHpPicture();
