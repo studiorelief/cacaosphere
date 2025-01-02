@@ -163,3 +163,29 @@
 .swiper-slide.is-slider-picture.fade-out {
   opacity: 0.9; /* État de fondu */
 }
+
+/* 
+! Coop TEST
+*/
+#pays-src {
+  opacity: 0;
+  position: absolute;
+}
+
+.w-dyn-list {
+  display: block;
+}
+
+.w-dyn-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.w-dyn-item {
+  display: none; /* État initial */
+}
+
+.coop_origin_same-country {
+  display: none; /* État initial */
+}
