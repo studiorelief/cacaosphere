@@ -85,3 +85,36 @@ export function catalogueFilterCount() {
   countAndUpdate('agro-e');
   countAndUpdate('transfo');
 }
+
+export function catalogueCalcFilterNumber() {
+  // Get all category numbers from side filter
+  const sideFilterNumbers = document.querySelectorAll('.catalogue_side-filter_cat-number');
+  const topFilterAllNumber = document.querySelector('.catalogue_top-filter_all-number');
+
+  if (!topFilterAllNumber) return;
+
+  // Calculate total
+  const total = Array.from(sideFilterNumbers).reduce((sum, element) => {
+    const number = parseInt(element.textContent || '0', 10);
+    return sum + number;
+  }, 0);
+
+  // Update total in top filter and handle display
+  topFilterAllNumber.textContent = total.toString();
+
+  if (total === 0) {
+    (topFilterAllNumber as HTMLElement).style.display = 'none';
+  } else {
+    (topFilterAllNumber as HTMLElement).style.display = 'inline-block';
+  }
+}
+
+// Add event listener for filter changes
+document.addEventListener('change', (event) => {
+  const target = event.target as Element;
+  if (target && target.closest('.catalogue_side-filter_accordion-item')) {
+    setTimeout(() => {
+      catalogueCalcFilterNumber();
+    }, 100); // Small delay to ensure counts are updated
+  }
+});
