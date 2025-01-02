@@ -1,6 +1,9 @@
 import './index.css';
 
-import { catalogueFilterCount /* , updateCatalogueCount */ } from '$utils/catalogue/catalogueCount';
+import {
+  catalogueCalcFilterNumber,
+  /* , updateCatalogueCount */ catalogueFilterCount,
+} from '$utils/catalogue/catalogueCount';
 import { catalogueCat } from '$utils/catalogue/catalogueFilter';
 // import { catalogueLoader } from '$utils/catalogue/catalogueLoader';
 import { catalogueOpenFilter } from '$utils/catalogue/catalogueMobile';
@@ -34,6 +37,7 @@ import {
 } from '$utils/home/home';
 import { catalogueCategoriesTrad } from '$utils/localization/catalogueCategoriesTrad';
 import { initializeMap } from '$utils/map/map';
+import { catalogueArianeCatLink } from '$utils/produits/catalogueArianeCatLink';
 import { catalogueFormTrigger } from '$utils/produits/catalogueFormTrigger';
 import { catalogueSameCat } from '$utils/produits/catalogueSameCat';
 import { hideEmptyWrapper } from '$utils/produits/produitQuickFix';
@@ -193,6 +197,7 @@ window.Webflow.push(() => {
     // main category logic
 
     catalogueCat();
+    catalogueCalcFilterNumber();
 
     // mobile filter
     if (window.innerWidth < 991) {
@@ -225,6 +230,8 @@ window.Webflow.push(() => {
     */
 
     catalogueSameCat();
+    catalogueArianeCatLink();
+
     if (
       (document.querySelector('.section_produit_slider-coop') as HTMLElement).style.display !==
       'none'
@@ -244,7 +251,6 @@ window.Webflow.push(() => {
     hoverOnGalerieCard();
     hoverOnVideoCard();
     hoverOnDownloadCard();
-    heroVideoScale();
   }
 
   /* A propos */

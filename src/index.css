@@ -122,7 +122,7 @@
 */
 
 .w-richtext em {
-  background-color: red;
+  background-color: rgba(66, 97, 45, 0.3);
 }
 
 .fil-ariane_link w--current {
