@@ -176,15 +176,15 @@
   display: block;
 }
 
-.w-dyn-items {
+/* .w-dyn-items {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-}
+} */
 
-.w-dyn-item {
-  display: none; /* État initial */
-}
+/* .w-dyn-item {
+  display: none; 
+} */
 
 .coop_origin_same-country {
   display: none; /* État initial */
