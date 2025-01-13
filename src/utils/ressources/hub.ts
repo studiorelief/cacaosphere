@@ -305,15 +305,3 @@ export const hoverOnDownloadCard = (): void => {
   // Ajoute un écouteur d'événements pour les changements de taille de la fenêtre
   window.addEventListener('resize', checkScreenSize);
 };
-
-//Apply margin at HUB GALERY
-export function applyMarginToHubGalerie() {
-  const cards = document.querySelectorAll('.hub_galerie_card');
-
-  // Applies a margin-top of 2.5rem to every second element
-  cards.forEach((card, index) => {
-    if (index % 2 === 0) {
-      (card as HTMLElement).style.marginTop = '2.5rem';
-    }
-  });
-}

@@ -1,6 +1,14 @@
+import { config } from 'dotenv';
 import * as esbuild from 'esbuild';
 import { readdirSync } from 'fs';
 import { join, sep } from 'path';
+
+// Charger et vérifier les variables d'environnement
+config();
+if (!process.env.VITE_MAPBOX_API_KEY) {
+  console.error('❌ VITE_MAPBOX_API_KEY is missing in .env file');
+  process.exit(1);
+}
 
 // Config output
 const BUILD_DIRECTORY = 'dist';
@@ -22,8 +30,12 @@ const context = await esbuild.context({
   minify: PRODUCTION,
   sourcemap: !PRODUCTION,
   target: PRODUCTION ? 'es2020' : 'esnext',
+  format: 'esm', // Ajout du format ESM
   inject: LIVE_RELOAD ? ['./bin/live-reload.js'] : undefined,
   define: {
+    'import.meta.env': JSON.stringify({
+      VITE_MAPBOX_API_KEY: process.env.VITE_MAPBOX_API_KEY,
+    }),
     SERVE_ORIGIN: JSON.stringify(SERVE_ORIGIN),
   },
 });

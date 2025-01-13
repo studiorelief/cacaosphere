@@ -165,26 +165,12 @@
 }
 
 /* 
-! Coop TEST
+! Partners Coop in Focus Pays
 */
 #pays-src {
   opacity: 0;
   position: absolute;
 }
-
-.w-dyn-list {
-  display: block;
-}
-
-/* .w-dyn-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-} */
-
-/* .w-dyn-item {
-  display: none; 
-} */
 
 .coop_origin_same-country {
   display: none; /* État initial */
