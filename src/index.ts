@@ -60,7 +60,6 @@ import {
   mirrorFaqSearch,
 } from '$utils/ressources/faq';
 import {
-  applyMarginToHubGalerie,
   hoverOnDownloadCard,
   hoverOnGalerieCard,
   hoverOnVideoCard,
@@ -162,7 +161,6 @@ window.Webflow.push(() => {
     hoverOnVideoCard();
     showContentTestimonialCard();
     hoverOnGalerieCard();
-    applyMarginToHubGalerie();
     hoverOnDownloadCard();
     // Fusion des appels showMoreItems
     ['testimonial', 'galerie', 'download', 'action'].forEach((type) =>

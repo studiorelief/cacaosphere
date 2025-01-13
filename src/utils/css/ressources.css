@@ -72,6 +72,11 @@
 ! HUB
 */
 
+/* Apply margin top nth-child(even) Galerie Grid */
+.hub_galerie_list-wrapper .w-dyn-list .w-dyn-items .w-dyn-item:nth-child(even) .hub_galerie_card {
+  margin-top: 2.5rem;
+}
+
 .hp_blog_sc_descriptive-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;

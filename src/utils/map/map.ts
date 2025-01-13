@@ -1,16 +1,18 @@
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken =
-  'pk.eyJ1IjoiY2FjYW9zcGhlcmUiLCJhIjoiY20yYWw5YXlvMGZ2dDJqczdsYm13bzA4aSJ9.cO_ViZ1EjIMOCjXv17TtQA';
+import MapboxService from '../../services/mapbox.service';
+
+const mapboxService = MapboxService.getInstance();
+mapboxgl.accessToken = mapboxService.getApiKey();
 
 export function initializeMap() {
-  const monument: [number, number] = [-58.443832, -14.235004]; // Amérique du Sud (Brésil)
+  const { defaultCenter, defaultZoom } = mapboxService.getConfig();
 
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/cacaosphere/cm2d1jo0100ut01pe2m9de4am',
-    center: monument,
-    zoom: 3,
+    center: defaultCenter,
+    zoom: defaultZoom,
     projection: 'globe',
   });
 
