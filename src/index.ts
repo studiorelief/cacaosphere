@@ -207,10 +207,6 @@ window.Webflow.push(() => {
     hideEmptyLabelsContainer();
 
     // filter system
-    /*
-    TODO: réduire le load jQuery des nested collection 
-    TODO: setTimout ne marche pas toujours -> Souvent au second load -> Prévoir pass - Check le setTimout du script attribut en // 
-    */
     setTimeout(() => {
       catalogueFilterCount();
       // updateCatalogueCount();
