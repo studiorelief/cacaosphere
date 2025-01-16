@@ -87,34 +87,34 @@ export function catalogueFilterCount() {
 }
 
 export function catalogueCalcFilterNumber() {
-  // Get all category numbers from side filter
-  const sideFilterNumbers = document.querySelectorAll('.catalogue_side-filter_cat-number');
+  // Get the container and count tag templates
+  const tagContainer = document.querySelector('.catalogue_top-filter_tag-flex-w');
   const topFilterAllNumber = document.querySelector('.catalogue_top-filter_all-number');
 
-  if (!topFilterAllNumber) return;
+  if (!topFilterAllNumber || !tagContainer) return;
 
-  // Calculate total
-  const total = Array.from(sideFilterNumbers).reduce((sum, element) => {
-    const number = parseInt(element.textContent || '0', 10);
-    return sum + number;
-  }, 0);
+  // Count tag template elements
+  const tagCount = tagContainer.querySelectorAll('[fs-cmsfilter-element="tag-template"]').length;
 
   // Update total in top filter and handle display
-  topFilterAllNumber.textContent = total.toString();
+  topFilterAllNumber.textContent = tagCount.toString();
 
-  if (total === 0) {
+  if (tagCount === 0) {
     (topFilterAllNumber as HTMLElement).style.display = 'none';
   } else {
     (topFilterAllNumber as HTMLElement).style.display = 'inline-block';
   }
 }
 
-// Add event listener for filter changes
-document.addEventListener('change', (event) => {
-  const target = event.target as Element;
-  if (target && target.closest('.catalogue_side-filter_accordion-item')) {
-    setTimeout(() => {
-      catalogueCalcFilterNumber();
-    }, 100); // Small delay to ensure counts are updated
-  }
-});
+// Create mutation observer to watch for changes in tag container
+const tagContainer = document.querySelector('.catalogue_top-filter_tag-flex-w');
+if (tagContainer) {
+  const observer = new MutationObserver(() => {
+    catalogueCalcFilterNumber();
+  });
+
+  observer.observe(tagContainer, {
+    childList: true, // Watch for changes to child elements
+    subtree: true, // Watch nested elements too
+  });
+}
