@@ -4,7 +4,10 @@ import 'swiper/css/bundle';
 import Swiper from 'swiper/bundle';
 
 export function swiperHpPicture() {
-  const swiper = new Swiper('.swiper.is-slider-picture', {
+  const swiperElement = document.querySelector('.swiper.is-slider-picture');
+  if (!swiperElement) return;
+
+  return new Swiper('.swiper.is-slider-picture', {
     direction: 'horizontal',
     slidesPerView: 1,
     speed: 800,
@@ -13,20 +16,6 @@ export function swiperHpPicture() {
       nextEl: '.slider-picture_button-next',
       prevEl: '.slider-picture_button-prev',
     },
-  });
-
-  swiper.on('slideChangeTransitionStart', () => {
-    const slides = document.querySelectorAll('.swiper-slide.is-slider-picture');
-    slides.forEach((slide) => {
-      slide.classList.add('fade-out'); // Ajouter la classe de fondu
-    });
-  });
-
-  swiper.on('slideChangeTransitionEnd', () => {
-    const slides = document.querySelectorAll('.swiper-slide.is-slider-picture');
-    slides.forEach((slide) => {
-      slide.classList.remove('fade-out'); // Retirer la classe de fondu
-    });
   });
 }
 
@@ -68,6 +57,12 @@ export function swiperBlogAutres() {
     navigation: {
       nextEl: '.hp_blog_btn-next',
       prevEl: '.hp_blog_btn-prev',
+    },
+    pagination: {
+      el: '.coop_hero_pagination.is-hp',
+      clickable: true,
+      bulletClass: 'swiper-pagination-bullet',
+      bulletActiveClass: 'swiper-pagination-bullet-active',
     },
     breakpoints: {
       // When the screen width is greater than 480px

@@ -30,6 +30,14 @@
   /*Tous les articles | Collection List Grid */
   content: none; /* Enlève l'élément pseudo */
 }
+
+/* 
+! BLOG POST
+*/
+
+.text-rich-text h2 {
+  font-size: 2rem;
+}
 /* 
 ! BLOG - MEDIA QUERY
 */
@@ -101,12 +109,12 @@
 ! HUB - MEDIA QUERY
 */
 
-@media (max-width: 390px) {
+/*@media (max-width: 390px) {
   .hub_galerie_grid {
     grid-template-columns: 1fr;
     gap: 0 !important;
   }
-}
+}*/
 
 @media (max-width: 1300px) and (min-width: 992px) {
   .hub_testimonial_hover-card {
@@ -149,4 +157,12 @@
   .hub_testimonial_hover-card {
     width: 31rem;
   }
+}
+
+/* 
+! FAQ
+*/
+
+.faq_cat-link:hover {
+  color: #42612d !important;
 }

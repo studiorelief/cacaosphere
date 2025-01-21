@@ -76,88 +76,50 @@ export function showContentTestimonialCard() {
 // Hover animation on VIDEO CARD
 export function hoverOnVideoCard() {
   const cards = document.querySelectorAll('.hub_action_card');
+  if (!cards.length) return;
 
-  // Gestionnaires d'événements
-  const handleMouseEnter = (event: Event) => {
+  const handleHover = (event: Event, isEnter: boolean) => {
     const target = event.currentTarget as HTMLElement;
     const overlay = target.querySelector('.hub_action_overlay') as HTMLElement;
     const textContent = target.querySelector('.hub_action_text-content') as HTMLElement;
     const playWrapper = target.querySelector('.hub_action_play-wrapper') as HTMLElement;
 
-    if (overlay && textContent) {
-      overlay.style.opacity = '80%';
+    if (!overlay || !textContent) return;
 
-      // Vérifier si la carte et le texte ont la classe combinée .is-home
-      const isHome =
-        target.classList.contains('is-home') && textContent.classList.contains('is-home');
-      const topPosition = isHome ? '12.2rem' : '17.5rem';
+    const isHome =
+      target.classList.contains('is-home') && textContent.classList.contains('is-home');
 
-      gsap.to(textContent, {
+    overlay.style.opacity = isEnter ? '80%' : '0%';
+
+    gsap.to(textContent, {
+      duration: 0.3,
+      top: isEnter ? (isHome ? '2rem' : '17.5rem') : isHome ? '16.8rem' : '25.2rem',
+      ease: 'power3.out',
+    });
+
+    if (isHome && playWrapper) {
+      gsap.to(playWrapper, {
         duration: 0.3,
-        top: topPosition,
+        top: isEnter ? '8rem' : 'auto',
         ease: 'power3.out',
       });
-
-      // Modifier la position de hub_action_play-wrapper si isHome
-      if (isHome && playWrapper) {
-        gsap.to(playWrapper, {
-          duration: 0.3,
-          top: '8rem',
-          ease: 'power3.out',
-        });
-      }
     }
   };
 
-  const handleMouseLeave = (event: Event) => {
-    const target = event.currentTarget as HTMLElement;
-    const overlay = target.querySelector('.hub_action_overlay') as HTMLElement;
-    const textContent = target.querySelector('.hub_action_text-content') as HTMLElement;
-    const playWrapper = target.querySelector('.hub_action_play-wrapper') as HTMLElement;
-
-    if (overlay && textContent) {
-      overlay.style.opacity = '0%';
-
-      // Vérifier si la carte et le texte ont la classe combinée .is-home
-      const isHome =
-        target.classList.contains('is-home') && textContent.classList.contains('is-home');
-      const initialTop = isHome ? '16.8rem' : '25.2rem';
-
-      gsap.to(textContent, {
-        duration: 0.3,
-        top: initialTop,
-        ease: 'power3.out',
-      });
-
-      // Réinitialiser la position de hub_action_play-wrapper si isHome
-      if (isHome && playWrapper) {
-        gsap.to(playWrapper, {
-          duration: 0.3,
-          top: 'auto', // Retour à la position initiale auto
-          ease: 'power3.out',
-        });
-      }
-    }
-  };
-
-  // Ajouter ou retirer les événements de survol
-  const toggleHoverEvents = (addEvents: boolean) => {
+  const updateListeners = () => {
+    const isDesktop = window.innerWidth > 991;
     cards.forEach((card) => {
-      const method = addEvents ? 'addEventListener' : 'removeEventListener';
-      card[method]('mouseenter', handleMouseEnter);
-      card[method]('mouseleave', handleMouseLeave);
+      ['mouseenter', 'mouseleave'].forEach((event) => {
+        card.removeEventListener(event, (e) => handleHover(e, event === 'mouseenter'));
+        if (isDesktop) {
+          card.addEventListener(event, (e) => handleHover(e, event === 'mouseenter'));
+        }
+      });
     });
   };
 
-  // Vérifier la taille de l'écran
-  const checkScreenSize = () => {
-    const isDesktop = window.innerWidth > 991;
-    toggleHoverEvents(isDesktop); // Ajoute ou retire les événements selon la taille de l'écran
-  };
-
-  // Initialisation
-  checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
+  updateListeners();
+  window.addEventListener('resize', updateListeners);
 }
 
 export const hoverOnGalerieCard = (): void => {
