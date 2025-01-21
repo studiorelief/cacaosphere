@@ -42,7 +42,7 @@ export function filterFAQCategories() {
   }
 }
 
-//Function to transcribe the search bar
+//Transcribe the search bar
 export function mirrorFaqSearch() {
   const faqField = document.querySelector<HTMLElement>('#faq-field');
   const searchMirror = document.getElementById('faq_search-mirror');
@@ -58,7 +58,7 @@ export function mirrorFaqSearch() {
   });
 }
 
-//Function to see the progress in FAQ Categories
+//See the progress in FAQ Categories
 export function linkFaqCategoryAnimations() {
   const linksAndTriggers = [
     { link: '#link-cat1', trigger: '#faq-cat1', icon: '.faq_cat-row:nth-child(1) .faq_cat-icon' },
@@ -125,4 +125,43 @@ export function linkFaqCategoryAnimations() {
     // Listen for changes in screen size
     mediaQuery.addEventListener('change', applyStickyPosition);
   }
+}
+
+//Hide faq categories empty
+export function toggleFaqCategoryVisibility() {
+  // Sélectionner les éléments
+  const faqCategories = document.querySelectorAll<HTMLElement>('.faq_categorie');
+
+  faqCategories.forEach((category) => {
+    // Trouver la liste dans cette catégorie
+    const faqList = category.querySelector<HTMLElement>('.faq_category-list.w-dyn-items');
+
+    if (!faqList) return;
+
+    // Fonction pour vérifier si la liste est vide ou cachée
+    const checkVisibility = () => {
+      // Vérifier le display et si des éléments sont visibles
+      const hasVisibleItems = faqList.querySelector('.w-dyn-item');
+      const isHidden = faqList.style.display === 'none';
+
+      // Cacher/montrer la catégorie entière
+      category.style.display = !hasVisibleItems || isHidden ? 'none' : 'block';
+    };
+
+    // Observer les changements dans la liste
+    const observer = new MutationObserver(() => {
+      setTimeout(checkVisibility, 100); // Petit délai pour laisser Webflow finir ses modifications
+    });
+
+    // Observer les changements de style et de contenu
+    observer.observe(faqList, {
+      childList: true,
+      attributes: true,
+      subtree: true,
+      attributeFilter: ['style'],
+    });
+
+    // Vérification initiale
+    checkVisibility();
+  });
 }
