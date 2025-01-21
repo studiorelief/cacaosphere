@@ -8,7 +8,7 @@
     },
     "types": [
       "@finsweet/ts-utils",
-      "node" 
+      "node"
     ]
   }
 }
