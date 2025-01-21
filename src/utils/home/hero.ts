@@ -14,11 +14,11 @@ export function heroVideoScale() {
   function expandVideoWrapper() {
     // Positionnement fixe et centré sur l'écran
     videoWrapper.style.position = 'fixed';
-    videoWrapper.style.top = 'calc(50% + 7rem)';
+    videoWrapper.style.top = window.innerWidth <= 768 ? '50%' : 'calc(50% + 7rem)';
     videoWrapper.style.left = '50%';
     videoWrapper.style.transform = 'translate(-50%, -50%)'; // Centrage parfait
     videoWrapper.style.width = '100vw';
-    videoWrapper.style.height = '100vh';
+    videoWrapper.style.height = '100svh';
     videoWrapper.style.zIndex = '9999';
     videoWrapper.style.padding = '1rem';
     // Assure que l'élément soit au-dessus des autres
