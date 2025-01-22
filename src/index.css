@@ -66,17 +66,17 @@
   pointer-events: none;
 }
 
-/* problème sur coop page - A VOIR */
-.swiper-button-lock {
-  display: block !important;
-  display: flex !important;
-  justify-content: center;
-}
-
 /* Coop hero slider pagination position */
 .coop_hero_pagination {
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .coop_hero_pagination.is-hp {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 /* Bullet Pagination Coopératives hero*/
