@@ -179,7 +179,7 @@ export function swiperCoopHero() {
 export function swiperLastPosts() {
   new Swiper('.swiper.is-post', {
     direction: 'horizontal',
-    slidesPerView: 2,
+    slidesPerView: 1,
     spaceBetween: 16,
     autoplay: {
       delay: 3000, // Ajouter un délai
@@ -198,7 +198,12 @@ export function swiperLastPosts() {
       bulletActiveClass: 'swiper-pagination-bullet-active',
     },
     breakpoints: {
-      // When the screen width is greater than 480px
+      // When the screen width is greater than 500px
+      500: {
+        slidesPerView: 2,
+        /*centerSlide: true,
+        spaceBetween: 5 * 16,*/
+      },
       750: {
         slidesPerView: 3,
         /*centerSlide: true,
