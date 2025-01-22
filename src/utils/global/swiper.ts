@@ -23,6 +23,8 @@ export function swiperHpTestimonial() {
   new Swiper('.swiper.is-hp-testimonials', {
     direction: 'horizontal',
     slidesPerView: 1,
+    centerSlide: true,
+    spaceBetween: 5 * 16,
     autoHeight: true,
     speed: 600,
     loop: true,
@@ -37,8 +39,8 @@ export function swiperHpTestimonial() {
       // When the screen width is greater than 480px
       480: {
         slidesPerView: 'auto',
-        centerSlide: true,
-        spaceBetween: 5 * 16,
+        /*centerSlide: true,
+        spaceBetween: 5 * 16,*/
       },
     },
   });
@@ -177,7 +179,8 @@ export function swiperCoopHero() {
 export function swiperLastPosts() {
   new Swiper('.swiper.is-post', {
     direction: 'horizontal',
-    slidesPerView: 3,
+    slidesPerView: 2,
+    spaceBetween: 16,
     autoplay: {
       delay: 3000, // Ajouter un délai
       disableOnInteraction: false, // Continuer l'autoplay après interaction
@@ -193,6 +196,19 @@ export function swiperLastPosts() {
       clickable: true,
       bulletClass: 'swiper-pagination-bullet',
       bulletActiveClass: 'swiper-pagination-bullet-active',
+    },
+    breakpoints: {
+      // When the screen width is greater than 480px
+      750: {
+        slidesPerView: 3,
+        /*centerSlide: true,
+        spaceBetween: 5 * 16,*/
+      },
+      1300: {
+        slidesPerView: 4,
+        /*centerSlide: true,
+        spaceBetween: 5 * 16,*/
+      },
     },
   });
 }

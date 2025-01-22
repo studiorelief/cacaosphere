@@ -238,7 +238,7 @@ export const hoverOnDownloadCard = (): void => {
 
     if (textContent && logoWrapper) {
       gsap.to(textContent, {
-        top: '17rem', // Initial position at mouseleave
+        top: '16rem', // Initial position at mouseleave
         backgroundColor: 'transparent', // Initial background color
         duration: 0.5,
         ease: 'power3.out',
