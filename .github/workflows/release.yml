@@ -9,5 +9,8 @@ on:
 jobs:
   release:
     uses: finsweet/workflow-release/.github/workflows/release.yml@main
+        with:
+      env: |
+        VITE_MAPBOX_API_KEY: ${{ secrets.VITE_MAPBOX_API_KEY }}
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
