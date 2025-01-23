@@ -121,9 +121,11 @@
 ! Quick fix
 */
 
-.w-richtext em {
+/* Remove for product -> voir pour changer en sub ??? */
+
+/* .w-richtext em {
   background-color: rgba(66, 97, 45, 0.3);
-}
+} */
 
 .fil-ariane_link w--current {
   color: var(--text-color--text-alternate) !important;
