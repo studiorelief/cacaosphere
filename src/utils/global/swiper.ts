@@ -114,7 +114,7 @@ export function swiperProduitsAutres() {
     },
     breakpoints: {
       320: {
-        slidesPerView: 'auto',
+        slidesPerView: 1,
         spaceBetween: 16,
       },
       568: {
@@ -149,6 +149,16 @@ export function swiperChronologie() {
     navigation: {
       nextEl: '.a-propos_chronologie_navigation.is-right',
       prevEl: '.a-propos_chronologie_navigation.is-left',
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+      },
+      568: {
+        slidesPerView: 3,
+        spaceBetween: 32,
+      },
     },
   });
 }
