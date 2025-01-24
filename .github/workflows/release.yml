@@ -6,9 +6,11 @@ on:
       - master
       - main
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     uses: finsweet/workflow-release/.github/workflows/release.yml@main
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      VITE_MAPBOX_API_KEY: ${{ secrets.VITE_MAPBOX_API_KEY }}
+    secrets: inherit

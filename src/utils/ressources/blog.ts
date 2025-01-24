@@ -3,65 +3,48 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Function to check if `?tous-les-articles` in the URL
-export function checkURLParameter() {
-  const sectionState1 = document.querySelector<HTMLElement>('.section_state1');
-  const sectionState2 = document.querySelector<HTMLElement>('.section_state2');
-  const sectionGuideEtude = document.querySelector<HTMLElement>('.section_blog_guide');
-  const sectionState3 = document.querySelector<HTMLElement>('.section_state3');
-
-  if (!sectionState1 || !sectionState2 || !sectionState3 || !sectionGuideEtude) {
-    return;
-  }
-
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has('tous-les-articles')) {
-    sectionState1.style.display = 'none';
-    sectionState2.style.display = 'block';
-    sectionGuideEtude.style.display = 'none';
-    sectionState3.style.display = 'none';
-  }
-}
-
-// Function to init view
-export function initBlogSections() {
+// Initialize blog sections visibility based on search field state
+export function initBlogSections(): void {
+  // Get DOM elements
   const sectionState1 = document.querySelector<HTMLElement>('.section_state1');
   const sectionState2 = document.querySelector<HTMLElement>('.section_state2');
   const sectionState3 = document.querySelector<HTMLElement>('.section_state3');
-  const blogField = document.querySelector<HTMLElement>('#blog-field');
+  const blogField = document.querySelector<HTMLInputElement>('#blog-field');
 
+  // Exit if any element is missing
   if (!sectionState1 || !sectionState2 || !sectionState3 || !blogField) {
     return;
   }
 
-  // Initial display state
-  sectionState1.style.display = 'block';
-  sectionState2.style.display = 'none';
-  sectionState3.style.display = 'none';
+  const updateSections = (isClicked: boolean = false): void => {
+    const isEmpty = blogField.value.trim() === '';
 
-  // Check URL parameter on page load
-  checkURLParameter();
-
-  // Event listener for clicking on the input field
-  blogField.addEventListener('click', () => {
-    sectionState1.style.display = 'none';
-    sectionState2.style.display = 'block';
-    sectionState3.style.display = 'none';
-  });
-
-  // Event listener for typing in the input field
-  blogField.addEventListener('input', () => {
-    const inputValue = (blogField as HTMLInputElement).value;
-
-    if (inputValue === '') {
+    if (isEmpty && !isClicked) {
+      // Empty state - show initial view
+      sectionState1.style.display = 'block';
+      sectionState2.style.display = 'none';
+      sectionState3.style.display = 'none';
+    } else if (isEmpty && isClicked) {
+      // Clicked but empty - show section 2
       sectionState1.style.display = 'none';
       sectionState2.style.display = 'block';
       sectionState3.style.display = 'none';
     } else {
+      // Has value - show section 3
       sectionState1.style.display = 'none';
       sectionState2.style.display = 'none';
       sectionState3.style.display = 'block';
     }
+  };
+
+  // Initial display state
+  updateSections();
+
+  // Event listeners
+  blogField.addEventListener('click', () => updateSections(true));
+  blogField.addEventListener('input', () => updateSections(false));
+  blogField.addEventListener('blur', () => {
+    setTimeout(() => updateSections(false), 200);
   });
 }
 
@@ -447,3 +430,32 @@ export const animateSpecialSelectCard = (): void => {
   // Ajoute un écouteur d'événements pour les changements de taille de la fenêtre
   window.addEventListener('resize', checkScreenSize);
 };
+
+/**
+ * Sets up click handlers for blog menu buttons to update search field
+ */
+export function setBlogMenuFilters(): void {
+  // Define filter buttons and their corresponding search values
+  const filters = [
+    { id: 'blog_menu-guide', value: 'Guide' },
+    { id: 'blog_menu-etudes', value: 'Étude' },
+    { id: 'blog_menu-chocolaterie', value: 'Chocolaterie' },
+    { id: 'blog_menu-interview', value: 'Interview' },
+  ];
+
+  // Get search field element
+  const searchField = document.getElementById('blog-field') as HTMLInputElement;
+  if (!searchField) return;
+
+  // Set up click handlers for each filter button
+  filters.forEach(({ id, value }) => {
+    const button = document.getElementById(id);
+    if (!button) return;
+
+    button.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      searchField.value = value;
+      searchField.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  });
+}

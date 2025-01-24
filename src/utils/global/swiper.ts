@@ -24,7 +24,7 @@ export function swiperHpTestimonial() {
     direction: 'horizontal',
     slidesPerView: 1,
     centerSlide: true,
-    spaceBetween: 5 * 16,
+    spaceBetween: 80, // Valeur de base en pixels
     autoHeight: true,
     speed: 600,
     loop: true,
@@ -36,11 +36,15 @@ export function swiperHpTestimonial() {
       prevEl: '.hp_testimonials_btn-prev',
     },
     breakpoints: {
-      // When the screen width is greater than 480px
+      // mobile - < 480px
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 80,
+      },
+      // >= 480px
       480: {
-        slidesPerView: 'auto',
-        /*centerSlide: true,
-        spaceBetween: 5 * 16,*/
+        slidesPerView: 2,
+        spaceBetween: 80,
       },
     },
   });
