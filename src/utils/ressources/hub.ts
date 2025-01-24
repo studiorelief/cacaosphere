@@ -82,44 +82,31 @@ export function hoverOnVideoCard() {
     const target = event.currentTarget as HTMLElement;
     const overlay = target.querySelector('.hub_action_overlay') as HTMLElement;
     const textContent = target.querySelector('.hub_action_text-content') as HTMLElement;
-    const playWrapper = target.querySelector('.hub_action_play-wrapper') as HTMLElement;
 
     if (!overlay || !textContent) return;
 
     const isHome =
       target.classList.contains('is-home') && textContent.classList.contains('is-home');
 
-    overlay.style.opacity = isEnter ? '80%' : '0%';
+    // Animation de l'overlay
+    overlay.style.opacity = isEnter ? '1' : '0';
+    overlay.style.backgroundColor = isEnter ? 'rgba(90, 31, 27, 0.8)' : 'initial';
 
+    // Animation du texte
     gsap.to(textContent, {
       duration: 0.3,
       top: isEnter ? (isHome ? '2rem' : '17.5rem') : isHome ? '16.8rem' : '25.2rem',
       ease: 'power3.out',
     });
-
-    if (isHome && playWrapper) {
-      gsap.to(playWrapper, {
-        duration: 0.3,
-        top: isEnter ? '8rem' : 'auto',
-        ease: 'power3.out',
-      });
-    }
   };
 
-  const updateListeners = () => {
-    const isDesktop = window.innerWidth > 991;
+  // Gestion des événements sur desktop uniquement
+  if (window.innerWidth > 991) {
     cards.forEach((card) => {
-      ['mouseenter', 'mouseleave'].forEach((event) => {
-        card.removeEventListener(event, (e) => handleHover(e, event === 'mouseenter'));
-        if (isDesktop) {
-          card.addEventListener(event, (e) => handleHover(e, event === 'mouseenter'));
-        }
-      });
+      card.addEventListener('mouseenter', (e) => handleHover(e, true));
+      card.addEventListener('mouseleave', (e) => handleHover(e, false));
     });
-  };
-
-  updateListeners();
-  window.addEventListener('resize', updateListeners);
+  }
 }
 
 export const hoverOnGalerieCard = (): void => {

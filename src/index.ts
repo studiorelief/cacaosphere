@@ -47,12 +47,12 @@ import {
   animateSmallCardRessource,
   animateSpecialSelectCard,
   blogMenuVisibility,
-  checkURLParameter,
   handleGuideFilter,
   initBlogSections,
   mirrorBlogSearch,
   observeTocLinks,
   searchBarPlaceholderStyling,
+  setBlogMenuFilters,
 } from '$utils/ressources/blog';
 import {
   filterFAQCategories,
@@ -178,11 +178,11 @@ window.Webflow.push(() => {
   /* blog */
   initBlogSections();
   mirrorBlogSearch();
-  checkURLParameter();
   searchBarPlaceholderStyling();
   handleGuideFilter();
   swiperLastPosts();
   observeTocLinks();
+  setBlogMenuFilters();
   if (window.location.pathname.includes('/blog')) {
     blogMenuVisibility();
   }
