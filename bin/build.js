@@ -1,19 +1,6 @@
-import { config } from 'dotenv';
 import * as esbuild from 'esbuild';
 import { readdirSync } from 'fs';
 import { join, sep } from 'path';
-
-// Charger les variables d'environnement
-config();
-
-// Récupérer la clé API avec fallback pour CI
-const MAPBOX_API_KEY = process.env.VITE_MAPBOX_API_KEY || 'placeholder_for_build';
-
-// Si pas de clé en dev, avertir mais continuer
-if (!process.env.VITE_MAPBOX_API_KEY && process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line no-console
-  console.warn('⚠️ Warning: VITE_MAPBOX_API_KEY not found in .env file');
-}
 
 // Config output
 const BUILD_DIRECTORY = 'dist';
@@ -35,12 +22,8 @@ const context = await esbuild.context({
   minify: PRODUCTION,
   sourcemap: !PRODUCTION,
   target: PRODUCTION ? 'es2020' : 'esnext',
-  format: 'esm',
   inject: LIVE_RELOAD ? ['./bin/live-reload.js'] : undefined,
   define: {
-    'import.meta.env': JSON.stringify({
-      VITE_MAPBOX_API_KEY: MAPBOX_API_KEY,
-    }),
     SERVE_ORIGIN: JSON.stringify(SERVE_ORIGIN),
   },
 });
