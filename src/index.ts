@@ -152,12 +152,12 @@ window.Webflow.push(() => {
   hideEmptyWrapper();
 
   /* map */
-  if (window.location.href.includes('cooperatives')) {
+  if (window.location.href.includes('cooperatives') || window.location.href.includes('origines')) {
     initializeMap();
   }
 
   /* hub */
-  if (window.location.href.includes('hub')) {
+  if (window.location.href.includes('hub') || window.location.href.includes('nos-ressources')) {
     hoverOnVideoCard();
     showContentTestimonialCard();
     hoverOnGalerieCard();
@@ -191,7 +191,7 @@ window.Webflow.push(() => {
   formInputLabels();
 
   /* Catalogue */
-  if (window.location.pathname.includes('/catalogue')) {
+  if (window.location.pathname.includes('/produits')) {
     // main category logic
 
     catalogueCat();
