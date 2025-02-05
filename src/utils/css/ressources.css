@@ -36,7 +36,7 @@
 */
 
 .text-rich-text h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 .text-rich-text h3 {
   font-size: 1.85rem;
@@ -107,7 +107,7 @@
 
 /* 
 ! HUB - Testimonial hover => remplace <p> by ...
-*/
+
 .hub_testimonial_hover-bottom p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -116,7 +116,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+*/
 /* 
 ! HUB - MEDIA QUERY
 */

@@ -61,21 +61,49 @@ export function initializeMap() {
 
     // MARKER EVENTS
     el.addEventListener('click', () => {
-      popup.addTo(map);
+      const popupElement = popup.getElement();
+      const popupHeight = popupElement?.offsetHeight || 0;
+
+      const offset = {
+        x: 0,
+        y: -popupHeight / 2,
+      };
+
+      const coordinates: [number, number] = [parseFloat(lon), parseFloat(lat)];
+
       if (currentMarker) {
         currentItem?.classList.remove('active');
         currentMarker.classList.remove('show');
         currentPopup?.remove();
       }
+
+      map.flyTo({
+        center: [
+          coordinates[0] + offset.x / (map.getZoom() * 100),
+          coordinates[1] + offset.y / (map.getZoom() * 100),
+        ] as [number, number],
+        zoom: 8,
+        essential: true,
+        padding: {
+          top: 100,
+          bottom: 100,
+          left: 100,
+          right: 100,
+        },
+      });
+
+      setTimeout(() => {
+        popup.addTo(map);
+        const popupCoordinates = popup.getLngLat();
+        if (popupCoordinates) {
+          popup.setLngLat(coordinates);
+        }
+      }, 500);
+
       currentItem = cmsItem;
       currentItem.classList.add('active');
       currentMarker = el;
       currentMarker.classList.add('show');
-      map.flyTo({
-        center: [parseFloat(lon), parseFloat(lat)],
-        zoom: 8,
-        essential: true,
-      });
     });
 
     el.addEventListener('mouseover', () => {
@@ -92,18 +120,45 @@ export function initializeMap() {
 
     // LIST ITEMS EVENTS
     cmsItem.addEventListener('click', () => {
-      map.flyTo({
-        center: [parseFloat(lon), parseFloat(lat)],
-        zoom: 8,
-        essential: true,
-      });
+      const popupElement = popup.getElement();
+      const popupHeight = popupElement?.offsetHeight || 0;
+
+      const offset = {
+        x: 0,
+        y: -popupHeight / 2,
+      };
+
+      const coordinates: [number, number] = [parseFloat(lon), parseFloat(lat)];
 
       if (currentMarker) {
         currentItem?.classList.remove('active');
         currentMarker.classList.remove('show');
         currentPopup?.remove();
       }
-      popup.addTo(map);
+
+      map.flyTo({
+        center: [
+          coordinates[0] + offset.x / (map.getZoom() * 100),
+          coordinates[1] + offset.y / (map.getZoom() * 100),
+        ] as [number, number],
+        zoom: 8,
+        essential: true,
+        padding: {
+          top: 100,
+          bottom: 100,
+          left: 100,
+          right: 100,
+        },
+      });
+
+      setTimeout(() => {
+        popup.addTo(map);
+        const popupCoordinates = popup.getLngLat();
+        if (popupCoordinates) {
+          popup.setLngLat(coordinates);
+        }
+      }, 500);
+
       el.classList.add('show');
       currentMarker = el;
       currentPopup = popup;

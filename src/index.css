@@ -7,6 +7,12 @@
 @import './utils/css/coop.css';
 @import './utils/css/catalogue.css';
 /*
+! Global
+*/
+.hide {
+  display: none !important;
+}
+/*
 ! Navbar
 */
 
