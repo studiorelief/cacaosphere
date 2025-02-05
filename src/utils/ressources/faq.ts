@@ -60,6 +60,8 @@ export function mirrorFaqSearch() {
 
 //See the progress in FAQ Categories
 export function linkFaqCategoryAnimations() {
+  // Supprimons la gestion du scroll personnalisée et laissons le CSS s'en occuper
+
   const linksAndTriggers = [
     { link: '#link-cat1', trigger: '#faq-cat1', icon: '.faq_cat-row:nth-child(1) .faq_cat-icon' },
     { link: '#link-cat2', trigger: '#faq-cat2', icon: '.faq_cat-row:nth-child(2) .faq_cat-icon' },
@@ -71,58 +73,47 @@ export function linkFaqCategoryAnimations() {
   linksAndTriggers.forEach(({ link, trigger, icon }) => {
     const linkElement = document.querySelector(link);
     const iconElement = document.querySelector(icon);
+    const triggerElement = document.querySelector(trigger);
+
+    if (!linkElement || !iconElement || !triggerElement) return;
 
     // Initial settings
     gsap.set(iconElement, { opacity: 0 });
     gsap.set(linkElement, { color: 'rgb(90, 31, 27)' });
 
     // ScrollTrigger animation
-    gsap.to(linkElement, {
-      scrollTrigger: {
-        trigger: trigger,
-        start: 'top center',
-        end: 'bottom center',
-        onEnter: () => {
-          gsap.to(iconElement, { opacity: 1, duration: 0.3, ease: 'power2.out' });
-          gsap.to(linkElement, { color: '#42612d', duration: 0.3, ease: 'power2.out' });
-        },
-        onLeaveBack: () => {
-          gsap.to(iconElement, { opacity: 0, duration: 0.3, ease: 'power2.out' });
-          gsap.to(linkElement, { color: 'rgb(90, 31, 27)', duration: 0.3, ease: 'power2.out' });
-        },
+    ScrollTrigger.create({
+      trigger: triggerElement,
+      start: 'top center',
+      end: 'bottom center',
+      onEnter: () => {
+        gsap.to(iconElement, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+        gsap.to(linkElement, { color: '#42612d', duration: 0.3, ease: 'power2.out' });
+      },
+      onLeaveBack: () => {
+        gsap.to(iconElement, { opacity: 0, duration: 0.3, ease: 'power2.out' });
+        gsap.to(linkElement, { color: 'rgb(90, 31, 27)', duration: 0.3, ease: 'power2.out' });
       },
     });
   });
-
-  //  "sticky" pour faqLeftCol
-  /*const faqLeftCol = document.querySelector('.faq_left-col') as HTMLElement | null;
-  if (faqLeftCol) {
-    faqLeftCol.style.position = 'sticky';
-    faqLeftCol.style.top = '5rem';
-  }*/
 
   // "sticky" for faqLeftCol only for screens larger than 991px
   const faqLeftCol = document.querySelector('.faq_left-col') as HTMLElement | null;
 
   if (faqLeftCol) {
-    const mediaQuery = window.matchMedia('(min-width: 992px)'); // Only for screens wider than 991px
+    const mediaQuery = window.matchMedia('(min-width: 992px)');
 
     const applyStickyPosition = () => {
       if (mediaQuery.matches) {
-        // Apply sticky styles
         faqLeftCol.style.position = 'sticky';
         faqLeftCol.style.top = '5rem';
       } else {
-        // Reset styles for smaller screens
         faqLeftCol.style.position = '';
         faqLeftCol.style.top = '';
       }
     };
 
-    // Apply styles on load
     applyStickyPosition();
-
-    // Listen for changes in screen size
     mediaQuery.addEventListener('change', applyStickyPosition);
   }
 }
@@ -163,5 +154,37 @@ export function toggleFaqCategoryVisibility() {
 
     // Vérification initiale
     checkVisibility();
+  });
+}
+
+export function initFaqScroll() {
+  const links = document.querySelectorAll('a[href^="#faq-cat"]');
+  const offset = 80 + window.innerHeight * 0.1;
+
+  // Garder une référence de la dernière section modifiée
+  let lastModifiedSection: HTMLElement | null = null;
+
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+      if (!href) return;
+
+      const targetSection = document.querySelector(href) as HTMLElement;
+      if (!targetSection) return;
+
+      // Retirer le padding de la section précédente si elle existe
+      if (lastModifiedSection && lastModifiedSection !== targetSection) {
+        lastModifiedSection.style.paddingTop = '';
+      }
+
+      // Appliquer le padding à la nouvelle section cible
+      targetSection.style.paddingTop = `${offset}px`;
+      lastModifiedSection = targetSection;
+
+      // Scroll vers la section
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 }

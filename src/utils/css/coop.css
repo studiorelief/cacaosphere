@@ -1,3 +1,16 @@
+/* 
+! Swiper mobile
+*/
+
+/* Hide all paging points after the 6th */
+.coop_hero_pagination.is-ressources.is-product-page .swiper-pagination-bullet:nth-child(n + 7) {
+  display: none;
+}
+
+.coop_hero_pagination.is-ressources.is-product-page.swiper-pagination-horizontal {
+  bottom: auto !important;
+}
+
 @media (max-width: 838px) and (min-width: 768px) {
   .hp_blog_collection-item {
     width: 100% !important;

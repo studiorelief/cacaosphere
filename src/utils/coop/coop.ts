@@ -28,3 +28,25 @@ export function filterCooperativesByCountry() {
     }
   });
 }
+
+export function initCoopFilterLinks() {
+  const links = document.querySelectorAll('[data-terroir]');
+
+  links.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Récupérer le terroir depuis l'attribut data-terroir
+      const terroir = (e.currentTarget as HTMLElement).getAttribute('data-terroir');
+      if (!terroir) return;
+
+      // Construire l'URL avec le paramètre de filtre
+      // Utiliser encodeURIComponent mais remplacer %20 par + pour l'espace
+      const encodedTerroir = encodeURIComponent(terroir).replace(/%20/g, '+');
+      const catalogueURL = `/fr/produits?terroirs=${encodedTerroir}`;
+
+      // Rediriger vers la page catalogue
+      window.location.href = catalogueURL;
+    });
+  });
+}

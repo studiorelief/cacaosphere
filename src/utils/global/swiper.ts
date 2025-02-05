@@ -16,6 +16,7 @@ export function swiperHpPicture() {
       nextEl: '.slider-picture_button-next',
       prevEl: '.slider-picture_button-prev',
     },
+    watchOverflow: false,
   });
 }
 
@@ -32,8 +33,8 @@ export function swiperHpTestimonial() {
       forceToAxis: true,
     },
     navigation: {
-      nextEl: '.hp_testimonials_btn-next',
-      prevEl: '.hp_testimonials_btn-prev',
+      nextEl: '.ressources_btn-next',
+      prevEl: '.ressources_btn-prev',
     },
     breakpoints: {
       // mobile - < 480px
@@ -54,30 +55,33 @@ export function swiperBlogAutres() {
   new Swiper('.swiper.is-blog', {
     direction: 'horizontal',
     slidesPerView: 1,
-    spaceBetween: 3.5 * 16,
-    speed: 400,
+    centerSlide: true,
+    spaceBetween: 56, // 3.5 * 16
+    autoHeight: true,
+    speed: 600,
     loop: true,
     mousewheel: {
       forceToAxis: true,
     },
     navigation: {
-      nextEl: '.hp_blog_btn-next',
-      prevEl: '.hp_blog_btn-prev',
-    },
-    pagination: {
-      el: '.coop_hero_pagination.is-hp',
-      clickable: true,
-      bulletClass: 'swiper-pagination-bullet',
-      bulletActiveClass: 'swiper-pagination-bullet-active',
+      nextEl: '.ressources_btn-next',
+      prevEl: '.ressources_btn-prev',
     },
     breakpoints: {
-      // When the screen width is greater than 480px
+      // mobile - < 480px
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 56,
+      },
+      // >= 480px
       480: {
         slidesPerView: 2,
+        spaceBetween: 56,
       },
-      // When the screen width is greater than 480px
+      // >= 1200px
       1200: {
         slidesPerView: 3,
+        spaceBetween: 56,
       },
     },
   });
@@ -194,13 +198,15 @@ export function swiperLastPosts() {
   new Swiper('.swiper.is-post', {
     direction: 'horizontal',
     slidesPerView: 1,
+    centerSlide: true,
     spaceBetween: 16,
-    autoplay: {
-      delay: 3000, // Ajouter un délai
-      disableOnInteraction: false, // Continuer l'autoplay après interaction
-    },
-    speed: 400,
+    autoHeight: true,
+    speed: 600,
     loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
     navigation: {
       nextEl: '.hp_testimonials_btn-next',
       prevEl: '.hp_testimonials_btn-prev',
@@ -212,21 +218,25 @@ export function swiperLastPosts() {
       bulletActiveClass: 'swiper-pagination-bullet-active',
     },
     breakpoints: {
-      // When the screen width is greater than 500px
+      // mobile - < 500px
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 16,
+      },
+      // >= 500px
       500: {
         slidesPerView: 2,
-        /*centerSlide: true,
-        spaceBetween: 5 * 16,*/
+        spaceBetween: 16,
       },
+      // >= 750px
       750: {
         slidesPerView: 3,
-        /*centerSlide: true,
-        spaceBetween: 5 * 16,*/
+        spaceBetween: 16,
       },
+      // >= 1300px
       1300: {
         slidesPerView: 4,
-        /*centerSlide: true,
-        spaceBetween: 5 * 16,*/
+        spaceBetween: 16,
       },
     },
   });

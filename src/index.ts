@@ -12,7 +12,7 @@ import {
   hideEmptyLabelsContainer,
 } from '$utils/catalogue/catalogueQuickFix';
 import { formInputLabels, showSiret } from '$utils/contact/formInput';
-import { filterCooperativesByCountry } from '$utils/coop/coop';
+import { filterCooperativesByCountry, initCoopFilterLinks } from '$utils/coop/coop';
 import { loadScript } from '$utils/global/loadScript';
 import { navScroll, setCurrentDropdownState, setCurrentRowFromURL } from '$utils/global/navbar';
 import {
@@ -56,6 +56,7 @@ import {
 } from '$utils/ressources/blog';
 import {
   filterFAQCategories,
+  initFaqScroll,
   linkFaqCategoryAnimations,
   mirrorFaqSearch,
 } from '$utils/ressources/faq';
@@ -98,6 +99,7 @@ window.Webflow.push(() => {
 
   /* TEST COOP */
   filterCooperativesByCountry();
+  initCoopFilterLinks();
 
   //Home
   swiperHpPicture();
@@ -114,6 +116,7 @@ window.Webflow.push(() => {
   swiperHubMobile('.swiper.is-mobile-hub-page.is-guide', '.coop_hero_pagination.is-guide');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-action', '.coop_hero_pagination.is-action');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-download', '.coop_hero_pagination.is-download');
+  swiperHubMobile('.swiper.is-mobile-hub-page.is-galerie', '.coop_hero_pagination.is-galerie');
 
   //Product
   swiperHubMobile(
@@ -173,6 +176,7 @@ window.Webflow.push(() => {
     filterFAQCategories();
     mirrorFaqSearch();
     linkFaqCategoryAnimations();
+    initFaqScroll();
   }
 
   /* blog */
