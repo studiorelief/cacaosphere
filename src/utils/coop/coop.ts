@@ -50,3 +50,25 @@ export function initCoopFilterLinks() {
     });
   });
 }
+
+export function initDynamicCoopLinks() {
+  const buttons = document.querySelectorAll('.dynamic-link-coop');
+
+  buttons.forEach((button) => {
+    // Récupérer et nettoyer les données des attributs
+    const country = (button.getAttribute('data-country') || '').trim();
+    let terroir = (button.getAttribute('data-terroir') || '').trim();
+
+    // Supprimer le nom du pays au début de la coopérative s'il est répété
+    if (terroir.startsWith(country)) {
+      terroir = terroir.replace(country, '').trim();
+    }
+
+    // Générer le lien
+    const baseUrl = '/fr/catalogue'; // Modifié pour correspondre à votre structure
+    const formattedLink = `${baseUrl}?terroirs=${encodeURIComponent(country)}+${encodeURIComponent(terroir)}`;
+
+    // Assigner le lien au bouton
+    (button as HTMLAnchorElement).href = formattedLink;
+  });
+}

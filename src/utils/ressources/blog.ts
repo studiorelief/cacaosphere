@@ -1,7 +1,63 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
+import { loadScript } from '../global/loadScript';
+
 gsap.registerPlugin(ScrollTrigger);
+
+// utils/initCmsFilter.ts
+/*export async function initCmsFilter() {
+  // Vérifie si l'URL contient 'blog'
+  if (!window.location.pathname.includes('blog')) return;
+
+  try {
+    // Charge le script CMS Filter
+    await loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js');
+  } catch (error) {
+    console.error('Erreur lors du chargement de CMS Filter:', error);
+  }
+}*/
+
+// Ajoutez cette nouvelle fonction
+export async function initTocScript() {
+  if (!window.location.pathname.includes('blog')) return;
+
+  try {
+    await loadScript('https://cdn.jsdelivr.net/npm/@finsweet/attributes-toc@1/toc.js');
+  } catch (error) {
+    console.error('Erreur lors du chargement du TOC:', error);
+  }
+}
+
+// Dans blog.ts
+
+// Fonction pour charger le script de partage social
+export async function initSocialShare() {
+  if (!window.location.pathname.includes('blog')) return;
+
+  // Charger le script de Refokus
+  await loadScript('https://tools.refokus.com/social-share/bundle.v1.0.0.js');
+
+  // Initialiser le bouton de partage
+  const shareButton = document.getElementById('share-button');
+  if (!shareButton) return;
+
+  shareButton.addEventListener('click', async () => {
+    // Récupérer l'URL et le titre
+    const articleUrl = window.location.href;
+    const articleTitle = shareButton.getAttribute('data-title') || '';
+
+    // Vérifier si l'API Web Share est supportée
+    if (navigator.share) {
+      await navigator.share({
+        title: articleTitle,
+        url: articleUrl,
+      });
+    } else {
+      alert("Le partage via navigateur n'est pas supporté sur cet appareil.");
+    }
+  });
+}
 
 // Initialize blog sections visibility based on search field state
 export function initBlogSections(): void {
@@ -431,9 +487,7 @@ export const animateSpecialSelectCard = (): void => {
   window.addEventListener('resize', checkScreenSize);
 };
 
-/**
- * Sets up click handlers for blog menu buttons to update search field
- */
+//Sets up click handlers for blog menu buttons to update search field
 export function setBlogMenuFilters(): void {
   // Define filter buttons and their corresponding search values
   const filters = [
