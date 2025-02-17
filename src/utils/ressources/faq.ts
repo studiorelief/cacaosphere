@@ -5,7 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function filterFAQCategories() {
   // Sélectionnez l'élément de saisie et les éléments à masquer
-  const inputField = document.querySelector<HTMLInputElement>('.header_v3_blog-field');
+  const inputField = document.querySelector<HTMLInputElement>('.header_v4_blog-field');
   const faqCategories = document.querySelectorAll<HTMLElement>('.faq_header-cat');
   const mirrorSearchContent = document.querySelector<HTMLElement>('.faq_mirror-search-content');
 
@@ -44,7 +44,7 @@ export function filterFAQCategories() {
 
 //Transcribe the search bar
 export function mirrorFaqSearch() {
-  const faqField = document.querySelector<HTMLElement>('#faq-field');
+  const faqField = document.querySelector<HTMLInputElement>('.header_v4_blog-field');
   const searchMirror = document.getElementById('faq_search-mirror');
 
   if (!faqField || !searchMirror) {
@@ -53,15 +53,13 @@ export function mirrorFaqSearch() {
 
   // Add event listener for input field
   faqField.addEventListener('input', () => {
-    const inputText = (faqField as HTMLInputElement).value; // Retrieve input value
-    searchMirror.innerHTML = `&nbsp;${inputText}`; // Add space
+    const inputText = faqField.value.trim(); // Retrieve input value and trim whitespace
+    searchMirror.innerHTML = inputText ? `&nbsp;${inputText}` : ''; // Add space only if there's text
   });
 }
 
 //See the progress in FAQ Categories
 export function linkFaqCategoryAnimations() {
-  // Supprimons la gestion du scroll personnalisée et laissons le CSS s'en occuper
-
   const linksAndTriggers = [
     { link: '#link-cat1', trigger: '#faq-cat1', icon: '.faq_cat-row:nth-child(1) .faq_cat-icon' },
     { link: '#link-cat2', trigger: '#faq-cat2', icon: '.faq_cat-row:nth-child(2) .faq_cat-icon' },
@@ -70,7 +68,21 @@ export function linkFaqCategoryAnimations() {
     { link: '#link-cat5', trigger: '#faq-cat5', icon: '.faq_cat-row:nth-child(5) .faq_cat-icon' },
   ];
 
-  linksAndTriggers.forEach(({ link, trigger, icon }) => {
+  // Function to handle animations
+  const animateCategory = (linkElement: Element, iconElement: Element, isActive: boolean) => {
+    gsap.to(iconElement, {
+      opacity: isActive ? 1 : 0,
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+    gsap.to(linkElement, {
+      color: isActive ? '#42612d' : 'rgb(90, 31, 27)',
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  };
+
+  linksAndTriggers.forEach(({ link, trigger, icon }, index) => {
     const linkElement = document.querySelector(link);
     const iconElement = document.querySelector(icon);
     const triggerElement = document.querySelector(trigger);
@@ -87,13 +99,32 @@ export function linkFaqCategoryAnimations() {
       start: 'top center',
       end: 'bottom center',
       onEnter: () => {
-        gsap.to(iconElement, { opacity: 1, duration: 0.3, ease: 'power2.out' });
-        gsap.to(linkElement, { color: '#42612d', duration: 0.3, ease: 'power2.out' });
+        // Animate current and previous categories
+        for (let i = 0; i <= index; i++) {
+          const prevLink = document.querySelector(linksAndTriggers[i].link);
+          const prevIcon = document.querySelector(linksAndTriggers[i].icon);
+          if (prevLink && prevIcon) {
+            animateCategory(prevLink, prevIcon, true);
+          }
+        }
       },
       onLeaveBack: () => {
-        gsap.to(iconElement, { opacity: 0, duration: 0.3, ease: 'power2.out' });
-        gsap.to(linkElement, { color: 'rgb(90, 31, 27)', duration: 0.3, ease: 'power2.out' });
+        // When scrolling back up, deactivate current category
+        animateCategory(linkElement, iconElement, false);
       },
+    });
+
+    // Click handler
+    linkElement.addEventListener('click', () => {
+      linksAndTriggers.forEach(({ link: l, icon: i }, i_index) => {
+        const otherLink = document.querySelector(l);
+        const otherIcon = document.querySelector(i);
+        if (otherLink && otherIcon) {
+          // Activate all categories up to and including the clicked one
+          const shouldBeActive = i_index <= index;
+          animateCategory(otherLink, otherIcon, shouldBeActive);
+        }
+      });
     });
   });
 
@@ -187,4 +218,78 @@ export function initFaqScroll() {
       targetSection.scrollIntoView({ behavior: 'smooth' });
     });
   });
+}
+
+export function handleEmptyFaqCategory() {
+  // Select all FAQ categories and UI elements
+  const faqCategories = document.querySelectorAll('[id^="faq-cat"]');
+  const faqEmpty = document.querySelector('.faq_empty');
+  const faqCta = document.querySelector('.section_faq_cta');
+
+  // Function to check and handle visibility of individual category headers
+  const checkContent = (category: Element) => {
+    const faqHeaderCat = category.querySelector('.faq_header-cat');
+    const faqList = category.querySelector('.faq_category-list');
+
+    if (!faqHeaderCat || !faqList) return;
+
+    // Check if the list is empty or hidden by Finsweet filtering
+    const isListEmpty = faqList.getAttribute('style')?.includes('display: none');
+
+    // Toggle header visibility based on list content
+    if (isListEmpty) {
+      (faqHeaderCat as HTMLElement).style.display = 'none';
+    } else {
+      (faqHeaderCat as HTMLElement).style.display = 'flex';
+    }
+  };
+
+  // Function to check if all FAQ lists are empty and handle UI accordingly
+  const checkAllEmpty = () => {
+    const allLists = document.querySelectorAll('.faq_category-list');
+    // Check if every list is hidden (filtered out)
+    const allEmpty = Array.from(allLists).every((list) =>
+      list.getAttribute('style')?.includes('display: none')
+    );
+
+    // Toggle "no results" message visibility
+    if (faqEmpty) {
+      (faqEmpty as HTMLElement).style.display = allEmpty ? 'block' : 'none';
+    }
+
+    // Toggle CTA section visibility based on search results
+    if (faqCta) {
+      (faqCta as HTMLElement).style.display = allEmpty ? 'none' : 'block';
+    }
+  };
+
+  // Set up mutation observer to watch for Finsweet filtering changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      const category = (mutation.target as Element).closest('[id^="faq-cat"]');
+      if (category) {
+        checkContent(category);
+      }
+    });
+    checkAllEmpty();
+  });
+
+  // Initialize observation for each category
+  faqCategories.forEach((category) => {
+    // Initial check of category content
+    checkContent(category);
+
+    // Start observing the FAQ list for changes
+    const faqList = category.querySelector('.faq_category-list');
+    if (faqList) {
+      observer.observe(faqList, {
+        attributes: true, // Watch for style changes
+        childList: true, // Watch for content changes
+        subtree: true, // Watch for nested changes
+      });
+    }
+  });
+
+  // Initial check of global state
+  checkAllEmpty();
 }
