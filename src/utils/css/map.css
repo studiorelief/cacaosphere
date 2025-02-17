@@ -18,7 +18,13 @@
   border-radius: 50%;
   cursor: pointer;
 }
+.mapboxgl-popup {
+  pointer-events: auto !important;
+}
 
+.mapboxgl-popup-content {
+  pointer-events: auto !important;
+}
 /*
 ! Popup
 */
@@ -33,6 +39,7 @@
 
 .mapboxgl-popup-content {
   padding: 0 !important;
+  border-radius: 1.5rem 0.25rem !important;
 }
 
 .mapboxgl-popup-content {

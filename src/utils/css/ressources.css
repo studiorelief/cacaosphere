@@ -34,6 +34,9 @@
 /* 
 ! BLOG POST
 */
+.sticky_left-col.is-bg-transparent .fs-toc_link-wrapper [fs-toc-element='link']:hover {
+  color: #42612d;
+}
 
 .text-rich-text h2 {
   font-size: 2.5rem;
@@ -49,6 +52,15 @@
 }
 .text-rich-text h6 {
   font-size: 1.25rem;
+}
+
+.text-rich-text img {
+  width: 80% !important;
+}
+
+.post_quote-content .quote_asset {
+  width: 2rem !important;
+  height: 2rem !important;
 }
 /* 
 ! BLOG - MEDIA QUERY
@@ -176,15 +188,25 @@
 ! SUMMARY - POST + FAQ
 */
 
-.sticky_left-col.is-bg-transparent .fs-toc_link-wrapper [fs-toc-element='link'] {
-  color: #181818;
-  font-weight: 500; /* Poids de police normal */
-  transition:
-    color 0.3s ease-out,
-    font-weight 0.3s ease-out; /* Ajout de la transition pour font-weight */
+/* Styles pour les écrans < 768px */
+@media screen and (max-width: 768px) {
+  .sticky_left-col.is-bg-transparent .fs-toc_link-wrapper [fs-toc-element='link'] {
+    color: #9d362f !important;
+    font-weight: 600;
+  }
 }
 
-.sticky_left-col.is-bg-transparent .fs-toc_link-wrapper [fs-toc-element='link'].w--current {
-  color: #42612d;
-  font-weight: 700; /* Poids de police en gras */
+@media screen and (min-width: 768px) {
+  .sticky_left-col.is-bg-transparent .fs-toc_link-wrapper [fs-toc-element='link'] {
+    color: #181818;
+    font-weight: 500;
+    transition:
+      color 0.3s ease-out,
+      font-weight 0.3s ease-out;
+  }
+
+  .sticky_left-col.is-bg-transparent .fs-toc_link-wrapper [fs-toc-element='link'].w--current {
+    color: #42612d;
+    font-weight: 700;
+  }
 }

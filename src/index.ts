@@ -62,6 +62,7 @@ import {
 } from '$utils/ressources/blog';
 import {
   filterFAQCategories,
+  handleEmptyFaqCategory,
   initFaqScroll,
   linkFaqCategoryAnimations,
   mirrorFaqSearch,
@@ -186,6 +187,7 @@ window.Webflow.push(() => {
     mirrorFaqSearch();
     linkFaqCategoryAnimations();
     initFaqScroll();
+    handleEmptyFaqCategory();
   }
 
   /* blog */
