@@ -120,12 +120,6 @@ window.Webflow.push(() => {
   swiperHubMobile('.swiper.is-mobile-hub-page.is-download', '.coop_hero_pagination.is-download');
   swiperHubMobile('.swiper.is-mobile-hub-page.is-galerie', '.coop_hero_pagination.is-galerie');
 
-  //Product
-  swiperHubMobile(
-    '.swiper.is-mobile-product-page.is-ressources',
-    '.coop_hero_pagination.is-ressources.is-product-page'
-  );
-
   /* gsap */
   animateBigCardRessource();
   animateSmallCardRessource();
@@ -260,6 +254,14 @@ window.Webflow.push(() => {
     hoverOnGalerieCard();
     hoverOnVideoCard();
     hoverOnDownloadCard();
+
+    //Product mobile slider
+    if (window.innerWidth < 991) {
+      swiperHubMobile(
+        '.swiper.is-mobile-product-page.is-ressources',
+        '.coop_hero_pagination.is-ressources.is-product-page'
+      );
+    }
   }
 
   /* A propos */

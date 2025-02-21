@@ -164,7 +164,7 @@ export function swiperChronologie() {
         spaceBetween: 16,
       },
       568: {
-        slidesPerView: 3,
+        slidesPerView: 5,
         spaceBetween: 32,
       },
     },
