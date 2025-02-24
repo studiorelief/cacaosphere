@@ -112,50 +112,61 @@ export function hoverOnVideoCard() {
 export const hoverOnGalerieCard = (): void => {
   const cards = document.querySelectorAll('.hub_galerie_card');
 
-  // Applies hover and mouseleave animations to each card
+  // Vérifier d'abord si l'écran est assez large
+  if (window.innerWidth <= 767) return;
+
   cards.forEach((card) => {
     const textContent = card.querySelector<HTMLElement>('.hub_galerie_text-content');
 
     if (textContent) {
-      // Determine if the card and text have the .is-home class
       const isHome =
         card.classList.contains('is-home') && textContent.classList.contains('is-home');
 
-      // Set hover animation
       card.addEventListener('mouseenter', () => {
         gsap.to(textContent, {
-          top: '0rem', // Final Position hover
-          backgroundColor: 'rgba(90, 31, 27, 0.8)', // background with 80% opacity
+          top: '0rem',
+          backgroundColor: 'rgba(90, 31, 27, 0.8)',
           duration: 0.5,
           ease: 'power3.out',
         });
       });
 
-      // Sets the animation for the mouseleave
       card.addEventListener('mouseleave', () => {
-        const screenWidth = window.innerWidth; // Get the current screen width
+        const screenWidth = window.innerWidth;
 
-        // Default position for non-home cards
+        // Ajuster les positions en fonction de la taille d'écran
         let initialTop = screenWidth < 480 ? '6.9rem' : '15rem';
-
-        // Override position for home cards
         if (isHome) {
           initialTop = '18.2rem';
         }
 
-        // Ensure the element returns to its initial position
         gsap.to(textContent, {
-          top: initialTop, // Adjusted initial position at mouseleave
-          backgroundColor: 'transparent', // Initial background-color
+          top: initialTop,
+          backgroundColor: 'transparent',
           duration: 0.5,
           ease: 'power3.out',
         });
       });
 
-      // Ensure the initial position is set correctly on load
-      const screenWidth = window.innerWidth; // Get the current screen width
+      // Position initiale
+      const screenWidth = window.innerWidth;
       const initialTop = isHome ? '18.2rem' : screenWidth < 480 ? '6.9rem' : '15rem';
       textContent.style.top = initialTop;
+    }
+  });
+
+  // Optionnel : gérer le redimensionnement de la fenêtre
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 767) {
+      // Réinitialiser les styles si nécessaire
+      cards.forEach((card) => {
+        const textContent = card.querySelector<HTMLElement>('.hub_galerie_text-content');
+        if (textContent) {
+          textContent.style.backgroundColor = 'transparent';
+          const isHome = card.classList.contains('is-home');
+          textContent.style.top = isHome ? '18.2rem' : '6.9rem';
+        }
+      });
     }
   });
 };
