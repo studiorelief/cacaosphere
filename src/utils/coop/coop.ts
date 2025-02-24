@@ -1,4 +1,4 @@
-export function filterCooperativesByCountry() {
+/*export function filterCooperativesByCountry() {
   const paysSource = document.querySelector<HTMLElement>('#pays-src');
   if (!paysSource) return;
 
@@ -27,6 +27,44 @@ export function filterCooperativesByCountry() {
       item.style.display = 'none';
     }
   });
+}*/
+
+/**
+ * Filter cooperatives by country and hide current cooperative
+ */
+export function filterCooperativesByCountry() {
+  const paysSource = document.querySelector<HTMLElement>('#pays-src');
+  if (!paysSource) return;
+
+  const paysReference = paysSource.textContent?.trim();
+  const coopItems = document.querySelectorAll<HTMLElement>('.coop_origin_same-country');
+  const dynList = document.querySelector<HTMLElement>('.w-dyn-list');
+
+  // Hide current cooperative
+  const currentCoop = document.querySelector('.w--current')?.closest('.w-dyn-item') as HTMLElement;
+  if (currentCoop) {
+    currentCoop.style.display = 'none';
+  }
+
+  // Filter other cooperatives by country
+  coopItems.forEach((item) => {
+    const paysCoop = item.getAttribute('data-pays');
+    const parentItem = item.closest('.w-dyn-item') as HTMLElement;
+
+    if (paysCoop === paysReference && parentItem !== currentCoop) {
+      if (parentItem) parentItem.style.display = 'block';
+      item.style.display = 'flex';
+    } else {
+      if (parentItem) parentItem.style.display = 'none';
+      item.style.display = 'none';
+    }
+  });
+
+  // Hide list if no cooperatives are visible
+  if (dynList) {
+    const visibleCoops = document.querySelectorAll('.w-dyn-item[style*="display: block"]');
+    dynList.style.display = visibleCoops.length > 0 ? 'block' : 'none';
+  }
 }
 
 export function initCoopFilterLinks() {
