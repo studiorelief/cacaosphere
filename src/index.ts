@@ -200,7 +200,7 @@ window.Webflow.push(() => {
   formInputLabels();
 
   /* Catalogue */
-  if (window.location.pathname.includes('/produits')) {
+  if (window.location.pathname.includes('/nos-produits')) {
     // main category logic
 
     catalogueCat();
@@ -225,7 +225,8 @@ window.Webflow.push(() => {
     }, 3500);
   }
 
-  if (window.location.pathname.includes('/catalogue-produit')) {
+  /* Fiche produit */
+  if (window.location.pathname.includes('/nos-produits')) {
     /*
     TODO: recheck this logic -> remove setTimeout
     ?: Local code break on other pages than noir 65 -> alert for checking -> Trouver la source -> Sûrement swiper & nb item mais pourquoi ?
