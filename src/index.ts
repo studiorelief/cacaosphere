@@ -1,5 +1,6 @@
 import './index.css';
 
+import { removeStaticListAProposMobile } from '$utils/a-propos/staticItem';
 import {
   catalogueCalcFilterNumber,
   /* , updateCatalogueCount */ catalogueFilterCount,
@@ -31,7 +32,7 @@ import {
   swiperProduitsAutres,
   swiperProduitsCarousel,
 } from '$utils/global/swiper';
-import { hideSectionIfCmsEmpty, removeStaticListAProposMobile } from '$utils/global/tricks';
+import { hideSectionIfCmsEmpty } from '$utils/global/tricks';
 import { heroVideoScale } from '$utils/home/hero';
 import {
   initProductsHover,
@@ -73,7 +74,6 @@ import {
   showContentTestimonialCard,
   showMoreItems,
 } from '$utils/ressources/hub';
-
 window.Webflow ||= [];
 window.Webflow.push(() => {
   /* global */
@@ -107,9 +107,6 @@ window.Webflow.push(() => {
   swiperHpPicture();
   swiperHpTestimonial();
 
-  //Blog
-  swiperBlogAutres();
-
   //coop
   swiperCoopHero();
 
@@ -133,6 +130,10 @@ window.Webflow.push(() => {
   -> produit to contact form
   */
   catalogueFormTrigger();
+
+  if (window.location.pathname.includes('/a-propos')) {
+    removeStaticListAProposMobile();
+  }
 
   /* homepage */
   if (window.location.pathname === '/fr' || window.location.pathname === '/en') {
@@ -256,13 +257,18 @@ window.Webflow.push(() => {
     hoverOnVideoCard();
     hoverOnDownloadCard();
 
-    //Product mobile slider
+    //Product mobile slider -> Keep this at the end of the script to avoid product page error
     if (window.innerWidth < 991) {
       swiperHubMobile(
         '.swiper.is-mobile-product-page.is-ressources',
         '.coop_hero_pagination.is-ressources.is-product-page'
       );
     }
+  }
+
+  //Blog -> Keep this at the end of the script to avoid product page error
+  if (document.querySelector('.swiper.is-blog')) {
+    swiperBlogAutres();
   }
 
   /* A propos */
