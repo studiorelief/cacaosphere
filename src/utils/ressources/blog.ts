@@ -170,7 +170,7 @@ export function handleGuideFilter() {
   }
 }
 
-export function observeTocLinks() {
+/*export function observeTocLinks() {
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'attributes' && mutation.target instanceof HTMLElement) {
@@ -199,7 +199,7 @@ export function observeTocLinks() {
   links.forEach((link) => {
     observer.observe(link, { attributes: true });
   });
-}
+}*/
 
 export function blogMenuVisibility() {
   const blogMenus = document.querySelectorAll('.section_blog_menu'); // Sélectionne tous les éléments

@@ -57,7 +57,6 @@ import {
   initSocialShare,
   initTocScript,
   mirrorBlogSearch,
-  observeTocLinks,
   searchBarPlaceholderStyling,
   setBlogMenuFilters,
 } from '$utils/ressources/blog';
@@ -189,7 +188,6 @@ window.Webflow.push(() => {
   searchBarPlaceholderStyling();
   handleGuideFilter();
   swiperLastPosts();
-  observeTocLinks();
   setBlogMenuFilters();
   initTocScript();
   initSocialShare();
