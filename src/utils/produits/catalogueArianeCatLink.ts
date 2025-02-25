@@ -4,10 +4,10 @@ export function catalogueArianeCatLink() {
 
   // Map of IDs to their corresponding URLs
   const categoryUrlMap: { [key: string]: string } = {
-    ingrédients: '/catalogue?categorie=Ingr%C3%A9dients',
-    'couvertures pure origine': '/catalogue?categorie=Couvertures+pure+origine',
-    "chocolats d'atelier": '/catalogue?categorie=Chocolats+d%27atelier',
-    fèves: '/catalogue?categorie=F%C3%A8ves',
+    ingrédients: '/nos-produits?categorie=Ingr%C3%A9dients',
+    'couvertures pure origine': '/nos-produits?categorie=Couvertures+pure+origine',
+    "chocolats d'atelier": '/nos-produits?categorie=Chocolats+d%27atelier',
+    fèves: '/nos-produits?categorie=F%C3%A8ves',
   };
 
   // Update each category link based on ID
