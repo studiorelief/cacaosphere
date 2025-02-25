@@ -50,6 +50,13 @@
 .text-rich-text h6 {
   font-size: 1.25rem;
 }
+
+@media screen and (max-width: 991px) {
+  .text-rich-text .w-embed a {
+    color: white !important;
+    text-decoration: none;
+  }
+}
 /* 
 ! BLOG - MEDIA QUERY
 */
@@ -187,4 +194,15 @@
 .sticky_left-col.is-bg-transparent .fs-toc_link-wrapper [fs-toc-element='link'].w--current {
   color: #42612d;
   font-weight: 700; /* Poids de police en gras */
+}
+
+.sticky_left-col.is-bg-transparent .fs-toc_link-wrapper .w-inline-block:hover {
+  color: #42612d !important;
+}
+
+@media screen and (max-width: 767px) {
+  .sticky_left-col.is-bg-transparent .fs-toc_link-wrapper .fs-toc_link {
+    color: #5a1f1b;
+    font-weight: 600;
+  }
 }
