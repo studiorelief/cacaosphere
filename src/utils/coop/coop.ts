@@ -1,57 +1,48 @@
-/*export function filterCooperativesByCountry() {
-  const paysSource = document.querySelector<HTMLElement>('#pays-src');
-  if (!paysSource) return;
-
-  const paysReference = paysSource.textContent?.trim();
-  const coopItems = document.querySelectorAll<HTMLElement>('.coop_origin_same-country');
-
-  const dynList = document.querySelector<HTMLElement>('.w-dyn-list');
-  if (dynList) {
-    dynList.style.display = 'block';
-  }
-
-  coopItems.forEach((item) => {
-    const paysCoop = item.getAttribute('data-pays');
-
-    if (paysCoop === paysReference) {
-      const parentItem = item.closest('.w-dyn-item') as HTMLElement;
-      if (parentItem) {
-        parentItem.style.display = 'block';
-      }
-      item.style.display = 'flex';
-    } else {
-      const parentItem = item.closest('.w-dyn-item') as HTMLElement;
-      if (parentItem) {
-        parentItem.style.display = 'none';
-      }
-      item.style.display = 'none';
-    }
-  });
-}*/
-
 /**
- * Filter cooperatives by country and hide current cooperative
+ * Filters cooperatives by country and manages their display.
+ * If only one cooperative exists for a country, hides the entire section including arrows.
+ * If multiple cooperatives exist for a country, shows them all.
  */
 export function filterCooperativesByCountry() {
+  // Get the source element containing the reference country
   const paysSource = document.querySelector<HTMLElement>('#pays-src');
   if (!paysSource) return;
 
+  // Get the country name from the source element
   const paysReference = paysSource.textContent?.trim();
-  const coopItems = document.querySelectorAll<HTMLElement>('.coop_origin_same-country');
-  const dynList = document.querySelector<HTMLElement>('.w-dyn-list');
 
-  // Hide current cooperative
-  const currentCoop = document.querySelector('.w--current')?.closest('.w-dyn-item') as HTMLElement;
-  if (currentCoop) {
-    currentCoop.style.display = 'none';
+  // Get all cooperatives
+  const coopItems = document.querySelectorAll<HTMLElement>('.coop_origin_same-country');
+
+  // Count cooperatives from the same country
+  const coopsFromSameCountry = Array.from(coopItems).filter((item) => {
+    const paysCoop = item.getAttribute('data-pays');
+    return paysCoop === paysReference;
+  });
+
+  // If only one cooperative from the country, hide everything
+  if (coopsFromSameCountry.length <= 1) {
+    // Hide the dynamic list
+    const dynList = document.querySelector<HTMLElement>('.w-dyn-list');
+    if (dynList) {
+      dynList.style.display = 'none';
+    }
+
+    // Hide all arrows
+    const arrows = document.querySelectorAll<HTMLElement>('.coop_origin_arrow-wrap');
+    arrows.forEach((arrow) => {
+      arrow.style.display = 'none';
+    });
+
+    return;
   }
 
-  // Filter other cooperatives by country
+  // If multiple cooperatives, show all from the same country
   coopItems.forEach((item) => {
     const paysCoop = item.getAttribute('data-pays');
     const parentItem = item.closest('.w-dyn-item') as HTMLElement;
 
-    if (paysCoop === paysReference && parentItem !== currentCoop) {
+    if (paysCoop === paysReference) {
       if (parentItem) parentItem.style.display = 'block';
       item.style.display = 'flex';
     } else {
@@ -59,15 +50,9 @@ export function filterCooperativesByCountry() {
       item.style.display = 'none';
     }
   });
-
-  // Hide list if no cooperatives are visible
-  if (dynList) {
-    const visibleCoops = document.querySelectorAll('.w-dyn-item[style*="display: block"]');
-    dynList.style.display = visibleCoops.length > 0 ? 'block' : 'none';
-  }
 }
 
-export function initCoopFilterLinks() {
+/*export function initCoopFilterLinks() {
   const links = document.querySelectorAll('[data-terroir]');
 
   links.forEach((button) => {
@@ -87,26 +72,26 @@ export function initCoopFilterLinks() {
       window.location.href = catalogueURL;
     });
   });
-}
+}*/
 
 export function initDynamicCoopLinks() {
   const buttons = document.querySelectorAll('.dynamic-link-coop');
 
   buttons.forEach((button) => {
-    // Récupérer et nettoyer les données des attributs
-    const country = (button.getAttribute('data-country') || '').trim();
-    let terroir = (button.getAttribute('data-terroir') || '').trim();
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
 
-    // Supprimer le nom du pays au début de la coopérative s'il est répété
-    if (terroir.startsWith(country)) {
-      terroir = terroir.replace(country, '').trim();
-    }
+      // Récupérer uniquement le terroir qui contient déjà le pays
+      const terroir = (button.getAttribute('data-terroir') || '').trim();
 
-    // Générer le lien
-    const baseUrl = '/fr/catalogue'; // Modifié pour correspondre à votre structure
-    const formattedLink = `${baseUrl}?terroirs=${encodeURIComponent(country)}+${encodeURIComponent(terroir)}`;
+      // Générer le lien avec encodage UTF-8 standard
+      const baseUrl = '/fr/nos-produits';
+      const params = new URLSearchParams();
+      // Utiliser la forme composée (NFC) pour assurer un encodage UTF-8 cohérent
+      params.append('terroirs', terroir.normalize('NFC'));
 
-    // Assigner le lien au bouton
-    (button as HTMLAnchorElement).href = formattedLink;
+      // Forcer la navigation
+      window.location.href = `${baseUrl}?${params.toString()}`;
+    });
   });
 }
