@@ -23,7 +23,7 @@ export function filterCooperativesByCountry() {
   // If only one cooperative from the country, hide everything
   if (coopsFromSameCountry.length <= 1) {
     // Hide the dynamic list
-    const dynList = document.querySelector<HTMLElement>('.w-dyn-list');
+    const dynList = document.querySelector<HTMLElement>('.coop_origin_list .w-dyn-item');
     if (dynList) {
       dynList.style.display = 'none';
     }
@@ -40,7 +40,7 @@ export function filterCooperativesByCountry() {
   // If multiple cooperatives, show all from the same country
   coopItems.forEach((item) => {
     const paysCoop = item.getAttribute('data-pays');
-    const parentItem = item.closest('.w-dyn-item') as HTMLElement;
+    const parentItem = item.closest('.coop_origin_list .w-dyn-item') as HTMLElement;
 
     if (paysCoop === paysReference) {
       if (parentItem) parentItem.style.display = 'block';
@@ -51,28 +51,6 @@ export function filterCooperativesByCountry() {
     }
   });
 }
-
-/*export function initCoopFilterLinks() {
-  const links = document.querySelectorAll('[data-terroir]');
-
-  links.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      // Récupérer le terroir depuis l'attribut data-terroir
-      const terroir = (e.currentTarget as HTMLElement).getAttribute('data-terroir');
-      if (!terroir) return;
-
-      // Construire l'URL avec le paramètre de filtre
-      // Utiliser encodeURIComponent mais remplacer %20 par + pour l'espace
-      const encodedTerroir = encodeURIComponent(terroir).replace(/%20/g, '+');
-      const catalogueURL = `/fr/produits?terroirs=${encodedTerroir}`;
-
-      // Rediriger vers la page catalogue
-      window.location.href = catalogueURL;
-    });
-  });
-}*/
 
 export function initDynamicCoopLinks() {
   const buttons = document.querySelectorAll('.dynamic-link-coop');
