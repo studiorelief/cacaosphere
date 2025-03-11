@@ -67,6 +67,7 @@ import {
 import {
   hoverOnDownloadCard,
   hoverOnGalerieCard,
+  hoverOnVideoBigCard,
   hoverOnVideoCard,
   showContentTestimonialCard,
   showMoreItems,
@@ -138,10 +139,10 @@ window.Webflow.push(() => {
     initTerroirsHover();
     initSmallTerroirsHover();
     initProductsHover();
-    hoverOnVideoCard();
     hoverOnDownloadCard();
     hoverOnGalerieCard();
     heroVideoScale();
+    hoverOnVideoBigCard();
   }
 
   /* tricks */

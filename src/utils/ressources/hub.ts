@@ -85,9 +85,6 @@ export function hoverOnVideoCard() {
 
     if (!overlay || !textContent) return;
 
-    const isHome =
-      target.classList.contains('is-home') && textContent.classList.contains('is-home');
-
     // Animation de l'overlay
     overlay.style.opacity = isEnter ? '1' : '0';
     overlay.style.backgroundColor = isEnter ? 'rgba(90, 31, 27, 0.8)' : 'initial';
@@ -95,7 +92,6 @@ export function hoverOnVideoCard() {
     // Animation du texte
     gsap.to(textContent, {
       duration: 0.3,
-      top: isEnter ? (isHome ? '2rem' : '17.5rem') : isHome ? '16.8rem' : '25.2rem',
       ease: 'power3.out',
     });
   };
@@ -265,3 +261,35 @@ export const hoverOnDownloadCard = (): void => {
   // Ajoute un écouteur d'événements pour les changements de taille de la fenêtre
   window.addEventListener('resize', checkScreenSize);
 };
+
+export function hoverOnVideoBigCard() {
+  const cards = document.querySelectorAll('.hub_action_card.is-home');
+  if (!cards.length) return;
+
+  const handleHover = (event: Event, isEnter: boolean) => {
+    const target = event.currentTarget as HTMLElement;
+    const overlay = target.querySelector('.hub_action_overlay') as HTMLElement;
+    const textContent = target.querySelector('.hub_action_text-content.is-home') as HTMLElement;
+
+    if (!overlay || !textContent) return;
+
+    // Animation de l'overlay
+    overlay.style.opacity = isEnter ? '1' : '0';
+    overlay.style.backgroundColor = isEnter ? 'rgba(90, 31, 27, 0.8)' : 'initial';
+
+    // Animation du texte
+    gsap.to(textContent, {
+      duration: 0.5, // Augmentez la durée pour une animation plus fluide
+      top: isEnter ? '0' : 'auto', // Utilisez uniquement 'top' ou 'bottom', pas les deux
+      ease: 'power3.out',
+    });
+  };
+
+  // Gestion des événements sur desktop uniquement
+  if (window.innerWidth > 991) {
+    cards.forEach((card) => {
+      card.addEventListener('mouseenter', (e) => handleHover(e, true));
+      card.addEventListener('mouseleave', (e) => handleHover(e, false));
+    });
+  }
+}

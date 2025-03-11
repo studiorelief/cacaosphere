@@ -81,7 +81,7 @@ export function linkFaqCategoryAnimations() {
 
 export function initFaqScroll() {
   const links = document.querySelectorAll('a[href^="#faq-cat"]');
-  const offset = 80 + window.innerHeight * 0.1;
+  const offset = 20 + window.innerHeight * 0.1;
 
   // Garder une référence de la dernière section modifiée
   let lastModifiedSection: HTMLElement | null = null;
