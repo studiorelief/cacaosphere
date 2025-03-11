@@ -5,8 +5,7 @@ import { loadScript } from '../global/loadScript';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// utils/initCmsFilter.ts
-/*export async function initCmsFilter() {
+export async function initCmsFilter() {
   // Vérifie si l'URL contient 'blog'
   if (!window.location.pathname.includes('blog')) return;
 
@@ -16,9 +15,8 @@ gsap.registerPlugin(ScrollTrigger);
   } catch (error) {
     console.error('Erreur lors du chargement de CMS Filter:', error);
   }
-}*/
+}
 
-// Ajoutez cette nouvelle fonction
 export async function initTocScript() {
   if (!window.location.pathname.includes('blog')) return;
 
@@ -28,8 +26,6 @@ export async function initTocScript() {
     console.error('Erreur lors du chargement du TOC:', error);
   }
 }
-
-// Dans blog.ts
 
 // Fonction pour charger le script de partage social
 export async function initSocialShare() {
@@ -122,7 +118,7 @@ export function mirrorBlogSearch() {
 
 // Function to handle placeholder styling during input
 export function searchBarPlaceholderStyling() {
-  const inputField = document.querySelector<HTMLInputElement>('.header_v3_blog-field');
+  const inputField = document.querySelector<HTMLInputElement>('.header_v4_blog-field');
 
   if (!inputField) {
     return;

@@ -50,6 +50,7 @@ import {
   blogMenuVisibility,
   handleGuideFilter,
   initBlogSections,
+  initCmsFilter,
   initSocialShare,
   initTocScript,
   mirrorBlogSearch,
@@ -57,10 +58,11 @@ import {
   setBlogMenuFilters,
 } from '$utils/ressources/blog';
 import {
-  filterFAQCategories,
+  checkAndHideEmptyCategories,
   initFaqScroll,
   linkFaqCategoryAnimations,
   mirrorFaqSearch,
+  toggleFaqEmptyVisibility,
 } from '$utils/ressources/faq';
 import {
   hoverOnDownloadCard,
@@ -172,10 +174,12 @@ window.Webflow.push(() => {
 
   /* faq */
   if (window.location.href.includes('faq')) {
-    filterFAQCategories();
+    /*filterFAQCategories();*/
     mirrorFaqSearch();
     linkFaqCategoryAnimations();
     initFaqScroll();
+    checkAndHideEmptyCategories();
+    toggleFaqEmptyVisibility();
   }
 
   /* blog */
@@ -187,6 +191,7 @@ window.Webflow.push(() => {
   setBlogMenuFilters();
   initTocScript();
   initSocialShare();
+  initCmsFilter();
   if (window.location.pathname.includes('/blog')) {
     blogMenuVisibility();
   }

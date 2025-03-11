@@ -51,12 +51,6 @@
   font-size: 1.25rem;
 }
 
-@media screen and (max-width: 991px) {
-  .text-rich-text .w-embed a {
-    color: white !important;
-    text-decoration: none;
-  }
-}
 /* 
 ! BLOG - MEDIA QUERY
 */
