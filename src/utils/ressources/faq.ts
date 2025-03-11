@@ -3,48 +3,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function filterFAQCategories() {
-  // Sélectionnez l'élément de saisie et les éléments à masquer
-  const inputField = document.querySelector<HTMLInputElement>('.header_v3_blog-field');
-  const faqCategories = document.querySelectorAll<HTMLElement>('.faq_header-cat');
-  const mirrorSearchContent = document.querySelector<HTMLElement>('.faq_mirror-search-content');
-
-  // Fonction pour filtrer les catégories FAQ
-  const handleInput = () => {
-    if (!inputField || !mirrorSearchContent) return; // Vérifiez si inputField et mirrorSearchContent existent
-
-    const inputValue = inputField.value.trim(); // Récupère la valeur saisie et supprime les espaces autour
-
-    // Si le champ de saisie n'est pas vide, masque les catégories et affiche le contenu
-    if (inputValue) {
-      faqCategories.forEach((category) => {
-        category.style.display = 'none'; // Masque la catégorie
-      });
-
-      // Affiche le contenu de recherche avec les styles flex
-      mirrorSearchContent.style.display = 'flex'; // Change le display en flex
-      mirrorSearchContent.style.flexDirection = 'row'; // Définit la direction de flex en row
-      mirrorSearchContent.style.gap = '0.25rem'; // Définit le gap de 0.25rem
-    } else {
-      // Si le champ de saisie est vide, rétablit l'affichage des catégories et cache le contenu
-      faqCategories.forEach((category) => {
-        category.style.display = ''; // Réinitialise le style d'affichage
-      });
-
-      // Cache le contenu de recherche
-      mirrorSearchContent.style.display = 'none'; // Masque le contenu
-    }
-  };
-
-  // Ajoute un écouteur d'événements sur le champ de saisie
-  if (inputField) {
-    inputField.addEventListener('input', handleInput);
-  }
-}
-
 //Transcribe the search bar
 export function mirrorFaqSearch() {
-  const faqField = document.querySelector<HTMLElement>('#faq-field');
+  const faqField = document.querySelector<HTMLElement>('#blog-field');
   const searchMirror = document.getElementById('faq_search-mirror');
 
   if (!faqField || !searchMirror) {
@@ -118,45 +79,6 @@ export function linkFaqCategoryAnimations() {
   }
 }
 
-//Hide faq categories empty
-export function toggleFaqCategoryVisibility() {
-  // Sélectionner les éléments
-  const faqCategories = document.querySelectorAll<HTMLElement>('.faq_categorie');
-
-  faqCategories.forEach((category) => {
-    // Trouver la liste dans cette catégorie
-    const faqList = category.querySelector<HTMLElement>('.faq_category-list.w-dyn-items');
-
-    if (!faqList) return;
-
-    // Fonction pour vérifier si la liste est vide ou cachée
-    const checkVisibility = () => {
-      // Vérifier le display et si des éléments sont visibles
-      const hasVisibleItems = faqList.querySelector('.w-dyn-item');
-      const isHidden = faqList.style.display === 'none';
-
-      // Cacher/montrer la catégorie entière
-      category.style.display = !hasVisibleItems || isHidden ? 'none' : 'block';
-    };
-
-    // Observer les changements dans la liste
-    const observer = new MutationObserver(() => {
-      setTimeout(checkVisibility, 100); // Petit délai pour laisser Webflow finir ses modifications
-    });
-
-    // Observer les changements de style et de contenu
-    observer.observe(faqList, {
-      childList: true,
-      attributes: true,
-      subtree: true,
-      attributeFilter: ['style'],
-    });
-
-    // Vérification initiale
-    checkVisibility();
-  });
-}
-
 export function initFaqScroll() {
   const links = document.querySelectorAll('a[href^="#faq-cat"]');
   const offset = 80 + window.innerHeight * 0.1;
@@ -187,4 +109,78 @@ export function initFaqScroll() {
       targetSection.scrollIntoView({ behavior: 'smooth' });
     });
   });
+}
+
+export function checkAndHideEmptyCategories() {
+  // Sélectionnez tous les éléments .faq_categorie
+  const faqCategories = document.querySelectorAll<HTMLElement>('.faq_categorie');
+
+  faqCategories.forEach((category) => {
+    // Trouver la liste dans cette catégorie
+    const faqList = category.querySelector<HTMLElement>('[fs-cmsfilter-element="list"]');
+
+    if (!faqList) return;
+
+    // Fonction pour vérifier et ajuster la visibilité de la catégorie
+    const adjustCategoryVisibility = () => {
+      const isHidden = window.getComputedStyle(faqList).display === 'none';
+      category.style.display = isHidden ? 'none' : 'block';
+    };
+
+    // Observer les changements de style
+    const observer = new MutationObserver(adjustCategoryVisibility);
+
+    observer.observe(faqList, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+
+    // Vérification initiale
+    adjustCategoryVisibility();
+  });
+  // Appeler la fonction après le chargement du DOM ou après l'application des filtres
+  document.addEventListener('DOMContentLoaded', () => {
+    checkAndHideEmptyCategories();
+  });
+}
+
+export function toggleFaqEmptyVisibility() {
+  // Sélectionnez les éléments .faq_empty et .section_faq_cta
+  const faqEmpty = document.querySelector<HTMLElement>('.faq_empty');
+  const sectionFaqCta = document.querySelector<HTMLElement>('.section_faq_cta');
+
+  if (!faqEmpty || !sectionFaqCta) return;
+
+  // Fonction pour vérifier l'état des catégories FAQ
+  const checkFaqCategories = () => {
+    // Sélectionnez toutes les catégories FAQ
+    const faqCategories = document.querySelectorAll<HTMLElement>('.faq_categorie');
+
+    // Vérifiez si toutes les catégories sont masquées
+    const allHidden = Array.from(faqCategories).every(
+      (category) => category.style.display === 'none'
+    );
+
+    // Ajustez l'affichage de .faq_empty et .section_faq_cta en fonction de l'état des catégories
+    if (allHidden) {
+      faqEmpty.style.display = 'block';
+      sectionFaqCta.style.display = 'none';
+    } else {
+      faqEmpty.style.display = 'none';
+      sectionFaqCta.style.display = 'block';
+    }
+  };
+
+  // Observer les changements de style sur chaque catégorie FAQ
+  const faqCategories = document.querySelectorAll<HTMLElement>('.faq_categorie');
+  faqCategories.forEach((category) => {
+    const observer = new MutationObserver(checkFaqCategories);
+    observer.observe(category, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+  });
+
+  // Vérification initiale
+  checkFaqCategories();
 }
