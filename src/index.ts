@@ -189,11 +189,16 @@ window.Webflow.push(() => {
   searchBarPlaceholderStyling();
   handleGuideFilter();
   swiperLastPosts();
-  setBlogMenuFilters();
   initTocScript();
   initSocialShare();
   initCmsFilter();
-  if (window.location.pathname.includes('/blog')) {
+
+  // Vérification du pathname uniquement pour les fonctions qui en ont besoin
+  if (window.location.pathname.includes('/fr/techniques-pour-professionnel/blog')) {
+    setBlogMenuFilters('fr');
+    blogMenuVisibility();
+  } else if (window.location.pathname.includes('/en/techniques-pour-professionnel/blog')) {
+    setBlogMenuFilters('en');
     blogMenuVisibility();
   }
 

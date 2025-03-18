@@ -452,16 +452,25 @@ export const animateSpecialSelectCard = (): void => {
   window.addEventListener('resize', checkScreenSize);
 };
 
-//Sets up click handlers for blog menu buttons to update search field
-export function setBlogMenuFilters(): void {
-  // Define filter buttons and their corresponding search values
-  const filters = [
-    { id: 'blog_menu-guide', value: 'Guide pratique' },
-    { id: 'blog_menu-etudes', value: 'Chez les producteurs' },
-    { id: 'blog_menu-chocolaterie', value: 'Chocolaterie' },
-    { id: 'blog_menu-expertise', value: 'Expertise Cacao' },
-    { id: 'blog_menu-commerce', value: 'Commerce équitable' },
-  ];
+// Fonction générique pour gérer les filtres du menu blog
+export function setBlogMenuFilters(language: 'fr' | 'en'): void {
+  // Définir les valeurs de filtres selon la langue
+  const filters = {
+    fr: [
+      { id: 'blog_menu-guide', value: 'Guide pratique' },
+      { id: 'blog_menu-etudes', value: 'Chez les producteurs' },
+      { id: 'blog_menu-chocolaterie', value: 'Chocolaterie' },
+      { id: 'blog_menu-expertise', value: 'Expertise Cacao' },
+      { id: 'blog_menu-commerce', value: 'Commerce équitable' },
+    ],
+    en: [
+      { id: 'blog_menu-guide', value: 'how-to guide' },
+      { id: 'blog_menu-etudes', value: 'With producers' },
+      { id: 'blog_menu-chocolaterie', value: 'Chocolate Factory' },
+      { id: 'blog_menu-expertise', value: 'cocoa expertise' },
+      { id: 'blog_menu-commerce', value: 'Fair Trade' },
+    ],
+  }[language];
 
   // Get search field element
   const searchField = document.getElementById('blog-field') as HTMLInputElement;
@@ -479,3 +488,7 @@ export function setBlogMenuFilters(): void {
     });
   });
 }
+
+// Fonctions d'initialisation spécifiques pour chaque langue
+export const initFrenchBlogMenu = () => setBlogMenuFilters('fr');
+export const initEnglishBlogMenu = () => setBlogMenuFilters('en');
