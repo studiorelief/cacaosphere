@@ -89,10 +89,10 @@ export function hoverOnVideoCard() {
     overlay.style.opacity = isEnter ? '1' : '0';
     overlay.style.backgroundColor = isEnter ? 'rgba(90, 31, 27, 0.8)' : 'initial';
 
-    // Animation du texte
     gsap.to(textContent, {
       duration: 0.3,
       ease: 'power3.out',
+      top: isEnter ? '18rem' : '25rem',
     });
   };
 
@@ -166,6 +166,7 @@ export const hoverOnGalerieCard = (): void => {
     }
   });
 };
+
 // Hover on DOWNLOAD CARD
 export const hoverOnDownloadCard = (): void => {
   const cards = document.querySelectorAll('.hub_donwload_card');
