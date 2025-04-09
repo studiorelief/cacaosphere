@@ -150,7 +150,7 @@ window.Webflow.push(() => {
   hideEmptyWrapper();
 
   /* map */
-  if (window.location.href.includes('origines')) {
+  if (window.location.href.includes('/terroir-cacao')) {
     initializeMap();
   }
 
